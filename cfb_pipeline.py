@@ -23,7 +23,7 @@ import grade
 import ledger
 from margin_dist import ScoreDist
 from model import fit_models, predict_models, usable
-from pricing import add_model_only, estimate_beta, fair_view, fit_platt, picks
+from pricing import add_model_only, add_tested_hit_rates, estimate_beta, fair_view, fit_hit_rates, fit_platt, picks
 
 OUT = Path("output/cfb")
 
@@ -63,6 +63,7 @@ def train(games: pd.DataFrame) -> dict:
     summary = json.loads((OUT / "backtest_summary.json").read_text())
     meta = {"margin_dist": mdist.to_dict(), "total_dist": tdist.to_dict(), "beta_margin": bm["beta"], "beta_total": btt["beta"],
             "beta_detail": {"margin": bm, "total": btt}, "win_calib": calib, "live_games_in_evidence": n_live,
+            "mo_hit_rates": fit_hit_rates(pd.read_csv(oos_file)),
             "training_games": int(len(tr)), "trained_through": f"{int(last.season)} week {int(last.week)}",
             "trained_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "verdict": summary.get("verdict", ""),
             "backtest_records": summary.get("records", {}),
@@ -119,6 +120,7 @@ def predict(games: pd.DataFrame, season=None, week=None) -> pd.DataFrame:
     wk = fair_view(wk, mdist, tdist, meta["beta_margin"], meta["beta_total"], win_calib=tuple(meta["win_calib"]))
     wk = picks(wk)
     wk = add_model_only(wk, mdist, tdist, win_calib=tuple(meta["win_calib"]))
+    wk = add_tested_hit_rates(wk, meta.get("mo_hit_rates", {}))
 
     info = cfb_data.teams(season).set_index("team")
     tv, ranks = _extras(season, week)

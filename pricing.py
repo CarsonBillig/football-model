@@ -231,3 +231,81 @@ def add_model_only(df: pd.DataFrame, mdist: ScoreDist, tdist: ScoreDist, win_cal
     for c in MODEL_ONLY_COLS:
         out[f"mo_{c}"] = mo[c].values
     return out
+
+
+# ------------------------------------------------------------------------------------------- tested hit rates
+HIT_MARKETS = {"su": ("mo_su_prob", "mo_su_out"), "ats": ("mo_ats_prob_np", "mo_ats_out"), "tot": ("mo_tot_prob_np", "mo_tot_out")}
+
+
+def fit_hit_rates(oos: pd.DataFrame) -> dict:
+    """For each model-only market, map 'confidence the model stated' -> 'how often picks like that actually hit'
+    (isotonic fit on out-of-sample games, pushes excluded). Stored in model_meta.json."""
+    from sklearn.isotonic import IsotonicRegression
+    out = {}
+    for m, (pc, oc) in HIT_MARKETS.items():
+        if pc not in oos or oc not in oos:
+            continue
+        x = oos[[pc, oc]].dropna()
+        x = x[x[oc] != 0]
+        if len(x) < 200:
+            continue
+        # bins of >= ~250 picks, each shrunk toward the overall hit rate (a lucky handful can't create confidence),
+        # then forced to rise with stated confidence
+        hit = (x[oc] > 0).astype(float)
+        overall = hit.mean()
+        n_bins = int(np.clip(len(x) // 250, 2, 12))
+        b = pd.qcut(x[pc], n_bins, duplicates="drop")
+        g = pd.DataFrame({"p": x[pc], "hit": hit, "b": b}).groupby("b", observed=True).agg(p=("p", "mean"), hits=("hit", "sum"), n=("hit", "size"))
+        k = 200.0
+        # spreads/totals: no evidence of skill -> shrink toward the overall hit rate (about 50%).
+        # moneyline: the stated chance was already close to right -> shrink toward the stated chance itself.
+        prior = g["p"] if m == "su" else overall
+        g["rate"] = (g["hits"] + k * prior) / (g["n"] + k)
+        iso = IsotonicRegression(increasing=True, out_of_bounds="clip", y_min=0.0, y_max=1.0)
+        iso.fit(g["p"].to_numpy(float), g["rate"].to_numpy(float), sample_weight=g["n"].to_numpy(float))
+        out[m] = {"x": [float(v) for v in iso.X_thresholds_], "y": [float(v) for v in iso.y_thresholds_]}
+    # Moneyline when a price exists: learn the hit rate from BOTH the model-only chance and the sportsbook's chance.
+    # In testing, when the two disagreed, results followed the sportsbook, so this keeps the model from crying wolf.
+    need = {"mo_su_pick", "mo_su_prob", "home_team", "home_moneyline", "away_moneyline", "result"}
+    if need <= set(oos.columns):
+        x = oos.dropna(subset=list(need))
+        x = x[x["result"] != 0]
+        if len(x) >= 300:
+            from sklearn.linear_model import LogisticRegression
+            ph, _ = devig_two_way(x["home_moneyline"].to_numpy(float), x["away_moneyline"].to_numpy(float))
+            home = (x["mo_su_pick"] == x["home_team"]).to_numpy()
+            mkt = np.where(home, ph, 1 - ph)
+            won = np.where(home, x["result"] > 0, x["result"] < 0).astype(int)
+            Z = np.column_stack([_logit(mkt), _logit(x["mo_su_prob"].to_numpy(float))])
+            lr = LogisticRegression(C=1.0).fit(Z, won)
+            out["su_vs_market"] = {"coef": [float(c) for c in lr.coef_[0]], "intercept": float(lr.intercept_[0])}
+    return out
+
+
+def tested_hit_rate(table: dict, market: str, p) -> np.ndarray:
+    """Apply fit_hit_rates' mapping; returns NaN where no mapping exists."""
+    p = np.asarray(p, float)
+    t = (table or {}).get(market)
+    if not t:
+        return np.full(p.shape, np.nan)
+    return np.where(np.isnan(p), np.nan, np.interp(p, t["x"], t["y"]))
+
+
+def add_tested_hit_rates(df: pd.DataFrame, table: dict, home_ml: str = "home_moneyline",
+                         away_ml: str = "away_moneyline") -> pd.DataFrame:
+    out = df.copy()
+    for m, (pc, _) in HIT_MARKETS.items():
+        if pc in out:
+            out[f"mo_{m}_hit"] = tested_hit_rate(table, m, out[pc].to_numpy(float))
+    sv = (table or {}).get("su_vs_market")
+    if sv and {home_ml, away_ml, "mo_su_pick", "mo_su_prob"} <= set(out.columns):
+        h, a = out[home_ml].to_numpy(float), out[away_ml].to_numpy(float)
+        ok = ~(np.isnan(h) | np.isnan(a))
+        if ok.any():
+            ph = np.full(len(out), np.nan)
+            ph[ok], _ = devig_two_way(h[ok], a[ok])
+            home = (out["mo_su_pick"] == out["home_team"]).to_numpy()
+            mkt = np.where(home, ph, 1 - ph)
+            z = sv["coef"][0] * _logit(mkt) + sv["coef"][1] * _logit(out["mo_su_prob"].to_numpy(float)) + sv["intercept"]
+            out["mo_su_hit"] = np.where(ok, 1 / (1 + np.exp(-z)), out["mo_su_hit"])
+    return out

@@ -23,7 +23,7 @@ from features import build_game_features
 from margin_dist import ScoreDist
 from model import predict_models
 from nfl_data import current_season
-from pricing import add_model_only, fair_view, picks
+from pricing import add_model_only, add_tested_hit_rates, fair_view, picks
 
 OUT = Path("output")
 LINE_MAP = {  # unified column <- (ESPN current, nflverse fallback)
@@ -91,6 +91,7 @@ def run(season=None, week=None, build_site=True):
                         home_odds=L["home_spread_odds"], away_odds=L["away_spread_odds"], total=L["total_line"],
                         over_odds=L["over_odds"], under_odds=L["under_odds"], home_ml=L["home_ml"],
                         away_ml=L["away_ml"]).sort_values(["kickoff", "game_id"])
+    wk = add_tested_hit_rates(wk, meta.get("mo_hit_rates", {}), L["home_ml"], L["away_ml"])
 
     now = pd.Timestamp.now(tz="UTC")
     log = wk.rename(columns={L["spread"]: "spread", L["home_spread_odds"]: "home_spread_odds",

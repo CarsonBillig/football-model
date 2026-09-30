@@ -26,6 +26,7 @@ COLUMNS = [
     # model-only leans (pure model, no market input)
     "mo_proj_home", "mo_proj_away", "mo_fair_spread", "mo_fair_total_line", "mo_p_home_win", "mo_su_pick", "mo_su_prob",
     "mo_ats_pick", "mo_ats_line", "mo_ats_prob_np", "mo_tot_pick", "mo_tot_prob_np",
+    "mo_su_hit", "mo_ats_hit", "mo_tot_hit",
     # grading
     "home_score", "away_score", "su_out", "ats_out", "tot_out", "ml_out", "mo_su_out", "mo_ats_out", "mo_tot_out",
     "ats_profit", "tot_profit", "ml_profit", "close_spread", "close_total", "ats_clv", "tot_clv",

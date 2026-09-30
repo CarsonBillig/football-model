@@ -235,30 +235,43 @@ def breakeven(o) -> float | None:
     return 100 / (o + 100) if o > 0 else -o / (-o + 100)
 
 
-def confidence(r) -> list[dict]:
-    """Moneyline, spread and total picks (market-adjusted numbers) with hit chance, break-even and cushion."""
+def confidence(r, pre: str = "") -> list[dict]:
+    """Moneyline, spread and total picks with hit chance, break-even and cushion.
+
+    pre='' uses the market-adjusted numbers. pre='mo_' uses the model-only picks; their hit chance is the TESTED rate
+    (how often picks at that stated confidence actually hit in the backtest), and the model's own claim is kept as 'said'."""
+    lean = pre == "mo_"
+    g = lambda c: r.get(f"{pre}{c}")
+    hit = (lambda m, raw: _num(r.get(f"mo_{m}_hit")) if _num(r.get(f"mo_{m}_hit")) is not None else None) if lean else (lambda m, raw: _num(raw))
     out = []
-    su = r.get("su_pick")
+    su = g("su_pick")
     if _has(su):
         price = r.get("home_ml") if su == r["home_team"] else r.get("away_ml")
-        out.append({"bet": "Moneyline", "pick": f"{short(r, su)} {odds(price)}".strip(), "p": _num(r.get("su_prob")),
-                    "be": breakeven(price), "value": truthy(r.get("value_ml")) and r.get("ml_pick") == su})
-    if _has(r.get("ats_pick")):
-        out.append({"bet": "Spread", "pick": team_line(short(r, r["ats_pick"]), r.get("ats_line")),
-                    "p": _num(r.get("ats_prob_np")), "be": breakeven(r.get("ats_odds")) or breakeven(-110),
-                    "value": truthy(r.get("value_ats"))})
+        out.append({"bet": "Moneyline", "pick": f"{short(r, su)} {odds(price)}".strip(), "p": hit("su", g("su_prob")),
+                    "said": _num(g("su_prob")), "be": breakeven(price),
+                    "value": (not lean) and truthy(r.get("value_ml")) and r.get("ml_pick") == su})
+    if _has(g("ats_pick")):
+        out.append({"bet": "Spread", "pick": team_line(short(r, g("ats_pick")), g("ats_line")),
+                    "p": hit("ats", g("ats_prob_np")), "said": _num(g("ats_prob_np")),
+                    "be": breakeven(r.get("home_spread_odds" if g("ats_pick") == r["home_team"] else "away_spread_odds")) or breakeven(-110),
+                    "value": (not lean) and truthy(r.get("value_ats"))})
     tl = _num(r.get("total_line"))
-    if _has(r.get("tot_pick")) and tl is not None:
-        out.append({"bet": "Total", "pick": f"{'Over' if r['tot_pick'] == 'OVER' else 'Under'} {tl:.1f}",
-                    "p": _num(r.get("tot_prob_np")), "be": breakeven(r.get("tot_odds")) or breakeven(-110),
-                    "value": truthy(r.get("value_tot"))})
+    if _has(g("tot_pick")) and tl is not None:
+        out.append({"bet": "Total", "pick": f"{'Over' if g('tot_pick') == 'OVER' else 'Under'} {tl:.1f}",
+                    "p": hit("tot", g("tot_prob_np")), "said": _num(g("tot_prob_np")),
+                    "be": breakeven(r.get("over_odds" if g("tot_pick") == "OVER" else "under_odds")) or breakeven(-110),
+                    "value": (not lean) and truthy(r.get("value_tot"))})
+    if lean:
+        for b in out:
+            b["value"] = b["p"] is not None and b["be"] is not None and b["p"] - b["be"] >= 0.02
     for b in out:
         b["cushion"] = None if b["p"] is None or b["be"] is None else b["p"] - b["be"]
     return [b for b in out if b["p"] is not None]
 
 
-def confidence_html(r) -> str:
-    bets = confidence(r)
+def confidence_html(r, pre: str = "") -> str:
+    lean = pre == "mo_"
+    bets = confidence(r, pre)
     if not bets:
         return ""
     likely = max(bets, key=lambda b: b["p"])
@@ -273,7 +286,8 @@ def confidence_html(r) -> str:
         need = "—" if b["be"] is None else pct(b["be"], 1)
         tags = ("<em>likeliest</em>" if b is likely else "") + ("<em class=best>best bet</em>" if b is best else "")
         tick = "" if b["be"] is None else f'<s style="left:{b["be"] * 100:.1f}%"></s>'     # break-even marker
-        rows.append(f'<div class="cf"><span class="cb">{b["bet"]}</span><span class="cp">{escape(b["pick"])}{tags}</span>'
+        said = (f'<span class="said">model said {pct(b["said"])}</span>' if lean and b["said"] is not None else "")
+        rows.append(f'<div class="cf"><span class="cb">{b["bet"]}</span><span class="cp">{escape(b["pick"])}{tags}{said}</span>'
                     f'<span class="cm"><span class="meter"><i style="width:{b["p"] * 100:.0f}%"></i>{tick}</span>'
                     f'<b>{pct(b["p"])}</b></span><span class="cn">needs {need}</span>{cush}</div>')
     if best is not None:
@@ -283,9 +297,13 @@ def confidence_html(r) -> str:
                    "too thin to beat the sportsbook's margin reliably: a lean.")
     else:
         verdict = "No value bet: every pick is below break-even at these prices, so treat them as leans."
-    return (f'<div class="conf v-mktonly"><div class="conf-h"><span class="lbl">Confidence</span>'
-            f'<span class="lbl">hit chance · needs to break even · cushion</span></div>{"".join(rows)}'
-            f'<p class="verdict">{verdict}</p></div>')
+    head = "tested hit chance · needs to break even · cushion" if lean else "hit chance · needs to break even · cushion"
+    note = ('<p class="verdict">Tested hit chance = how often picks like this actually won in the backtest. The pure model&#39;s '
+            'own percentages ("model said") ran far too high on spreads and totals, and when it disagreed with the '
+            'sportsbook on a moneyline, results followed the sportsbook.</p>') if lean else ""
+    return (f'<div class="conf"><div class="conf-h"><span class="lbl">Confidence{" (model only)" if lean else ""}</span>'
+            f'<span class="lbl">{head}</span></div>{"".join(rows)}'
+            f'<p class="verdict">{verdict}</p>{note}</div>')
 
 
 def cell(label, value, cls="") -> str:
@@ -398,7 +416,7 @@ def game_row(r) -> str:
     <div class="pickrow"><span class="lbl">Total pick</span><span class="val">{both(pick('', 'tot'), pick('mo_', 'tot'))}</span></div>
     {ml_value}
   </div>
-  {confidence_html(r)}
+  {both(confidence_html(r), confidence_html(r, "mo_"))}
   {detail}
 </article>"""
 
@@ -616,7 +634,9 @@ $spotlight
       <div><h4>Confidence</h4><p>For the moneyline, spread and total picks: the model's <b>hit chance</b> (the dark bar), the win rate the price
       <b>needs</b> just to break even (the orange tick), and the <b>cushion</b> between them. <b>Likeliest</b> marks the bet most likely to
       win, usually the moneyline, which pays least. <b>Best bet</b> marks the pick with the biggest cushion, but only when it
-      clears the value bar (+2% expected profit). A tiny cushion is within noise, so that game says it's a lean. In testing these percentages were honest: 65% moneyline picks won 65%, 75% won 75%.</p></div></div>
+      clears the value bar (+2% expected profit). A tiny cushion is within noise, so that game says it's a lean. In testing these percentages were honest: 65% moneyline picks won 65%, 75% won 75%.
+      In <b>Model only</b> view the pure model's own claim is shown as "model said" and the bar is its <b>tested</b> hit chance:
+      how often picks like that actually won in the backtest.</p></div></div>
     <div class="lg"><div class="ex"><span><span class="mk win">✓</span> won &nbsp;<span class="mk loss">✗</span> lost &nbsp;<span class="mk push">P</span> push</span></div>
       <div><h4>Results</h4><p>After games are graded, each pick is marked. A push means the final margin landed exactly on the line, so the bet is refunded.</p></div></div>
     <div class="lg"><div class="ex"><span class="chip">in 2h 10m</span><span class="chip locked">Locked</span><span class="chip final">Final</span></div>
@@ -755,6 +775,7 @@ body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,trans
 .meter i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--ink)}
 .meter s{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--accent);text-decoration:none}
 .cn{color:var(--muted);font-size:11px}
+.said{display:block;font-family:Inter,sans-serif;font-size:10px;color:var(--muted)}
 .cu{font-size:11.5px;text-align:right} .cu.up{color:var(--win)} .cu.dn{color:var(--loss)}
 .verdict{margin:2px 0 0;font-size:12.5px;color:var(--muted)} .verdict b{color:var(--ink)}
 .pickrow{display:flex;justify-content:space-between;align-items:center;gap:10px}

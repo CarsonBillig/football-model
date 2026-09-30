@@ -63,6 +63,9 @@ def week_table(wk: pd.DataFrame, names: dict) -> pd.DataFrame:
         "mlConfidence": (num("su_prob") * 100).round(1),
         "spreadConfidence": (num("ats_prob_np") * 100).round(1),
         "totalConfidence": (num("tot_prob_np") * 100).round(1),
+        "modelOnlyMlTested": (num("mo_su_hit") * 100).round(1),
+        "modelOnlySpreadTested": (num("mo_ats_hit") * 100).round(1),
+        "modelOnlyTotalTested": (num("mo_tot_hit") * 100).round(1),
         "closingLineValue": num("ats_clv").round(1),
         "kickoff": wk["kickoff"],
     })

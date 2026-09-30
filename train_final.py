@@ -23,7 +23,7 @@ from features import build_game_features
 from margin_dist import ScoreDist
 from model import fit_models, usable
 from nfl_data import current_season
-from pricing import estimate_beta, fit_platt
+from pricing import estimate_beta, fit_hit_rates, fit_platt
 
 OUT = Path("output")
 
@@ -68,6 +68,7 @@ def main():
         "margin_dist": mdist.to_dict(), "total_dist": tdist.to_dict(),
         "beta_margin": bm["beta"], "beta_total": bt["beta"], "beta_detail": {"margin": bm, "total": bt},
         "win_calib": calib, "live_games_in_evidence": n_live,
+        "mo_hit_rates": fit_hit_rates(pd.read_csv(OUT / "oos_predictions.csv")),
         "training_games": int(len(train)), "trained_through": f"{int(last.season)} week {int(last.week)}",
         "trained_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "verdict": summary.get("verdict", ""), "backtest_records": summary.get("records", {}),
