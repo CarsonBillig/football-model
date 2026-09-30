@@ -21,7 +21,7 @@ button{font:inherit;color:inherit}
 .brand i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
 .top .sp{flex:1}
 .seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;background:var(--card)}
-.seg button{background:none;border:0;border-radius:999px;padding:5px 12px;font-size:13px;white-space:nowrap;color:var(--muted);cursor:pointer;transition:background .2s,color .2s}
+.seg button{background:none;border:0;border-radius:999px;padding:5px 12px;font-size:13px;color:var(--muted);cursor:pointer;transition:background .2s,color .2s}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .icon{background:none;border:1px solid var(--rule);border-radius:999px;width:34px;height:34px;cursor:pointer;color:var(--muted)}
 .mast{padding:56px 0 30px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:end}
@@ -129,11 +129,6 @@ footer{margin:70px 0 0;padding:22px 0 44px;border-top:1px solid var(--rule);colo
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:460px){.cell{padding:9px 10px}.cell .val{font-size:12px;white-space:normal}.tn .name{font-size:15px}.sc{font-size:24px}}
-@media (max-width:640px){
-  .top .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:8px;row-gap:8px}
-  .top .sp{display:none} #viewsw{order:3;flex:1;justify-content:center} #viewsw button{flex:1;padding:6px 8px}
-  .icon{margin-left:auto}
-}
 @media (max-width:860px){
   .mast{grid-template-columns:1fr;gap:18px;padding-top:36px} .kick{justify-self:start;text-align:left}
   .spots .v-mkt,.spots .v-mod{grid-template-columns:1fr!important}
@@ -159,7 +154,7 @@ footer{margin:70px 0 0;padding:22px 0 44px;border-top:1px solid var(--rule);colo
   <h1><small class="lg-label">NFL</small>Week <em>4</em></h1>
   <div class="kick"><span>2026 season · Oct 1 – Oct 5 · 16 games</span>
     <span class="count">—</span><span class="countlbl">until next kickoff</span>
-    <span>Updated Wed Sep 30, 11:28 AM ET · trained through 2026 week 3</span></div>
+    <span>Updated Wed Sep 30, 11:19 AM ET · trained through 2026 week 3</span></div>
 </section>
 <div class="ribbon v-mkt"><span class="lbl">Backtest 2018-2026</span><div class="ri"><span>Winners</span><b>1443–724–8</b><em>66.6%</em></div><div class="ri"><span>Spread</span><b>1092–1028–55</b><em>51.5%</em></div><div class="ri"><span>Totals</span><b>1091–1064–20</b><em>50.6%</em></div></div><p class="note v-mkt">Out-of-sample test on every game at closing lines. Live tracking starts with this week's picks.</p><div class="ribbon v-mod"><span class="lbl">Backtest 2018-2026</span><div class="ri"><span>Winners</span><b>1403–764–8</b><em>64.7%</em></div><div class="ri"><span>Spread</span><b>1084–1036–55</b><em>51.1%</em></div><div class="ri"><span>Totals</span><b>1082–1073–20</b><em>50.2%</em></div></div><p class="note v-mod">Pure model, no sportsbook input: leans, not bets. Out-of-sample test on every game at closing lines. Live tracking starts with this week's picks.</p>
 <section class="spots"><span class="vw v-mkt"><div class="spot"><span class="k">Surest winner</span><b>BAL</b><span>84% to win</span><em>TEN @ BAL</em></div><div class="spot"><span class="k">Biggest spread lean</span><b>GB −3.5</b><span>model 0.6 pts off the line</span><em>GB @ TB</em></div><div class="spot"><span class="k">Biggest total lean</span><b>Under 43.5</b><span>model 0.6 pts off the line</span><em>LA @ PHI</em></div></span><span class="vw v-mod"><div class="spot"><span class="k">Surest winner</span><b>BAL</b><span>83% to win</span><em>TEN @ BAL</em></div><div class="spot"><span class="k">Biggest spread lean</span><b>NYG +2.5</b><span>model 5.6 pts off the line</span><em>ARI @ NYG</em></div><div class="spot"><span class="k">Biggest total lean</span><b>Over 39.5</b><span>model 7.0 pts off the line</span><em>GB @ TB</em></div></span></section>
@@ -708,7 +703,7 @@ footer{margin:70px 0 0;padding:22px 0 44px;border-top:1px solid var(--rule);colo
   <h1><small class="lg-label">College</small>Week <em>5</em></h1>
   <div class="kick"><span>2026 season · Oct 1 – Oct 3 · 59 games</span>
     <span class="count">—</span><span class="countlbl">until next kickoff</span>
-    <span>Updated Wed Sep 30, 11:28 AM ET · trained through 2026 week 4</span></div>
+    <span>Updated Wed Sep 30, 11:19 AM ET · trained through 2026 week 4</span></div>
 </section>
 <div class="ribbon v-mkt"><span class="lbl">Backtest 2016-2026</span><div class="ri"><span>Winners</span><b>6337–1960</b><em>76.4%</em></div><div class="ri"><span>Spread</span><b>4090–4054–153</b><em>50.2%</em></div><div class="ri"><span>Totals</span><b>4123–4090–84</b><em>50.2%</em></div></div><p class="note v-mkt">Out-of-sample test on every game at closing lines. Live tracking starts with this week's picks.</p><div class="ribbon v-mod"><span class="lbl">Backtest 2016-2026</span><div class="ri"><span>Winners</span><b>6249–2048</b><em>75.3%</em></div><div class="ri"><span>Spread</span><b>4093–4051–153</b><em>50.3%</em></div><div class="ri"><span>Totals</span><b>4153–4060–84</b><em>50.6%</em></div></div><p class="note v-mod">Pure model, no sportsbook input: leans, not bets. Out-of-sample test on every game at closing lines. Live tracking starts with this week's picks.</p>
 <section class="spots"><span class="vw v-mkt"><div class="spot"><span class="k">Surest winner</span><b>LSU</b><span>100% to win</span><em>McNeese @ LSU</em></div><div class="spot"><span class="k">Biggest spread lean</span><b>New Mexico −22.5</b><span>model 0.6 pts off the line</span><em>UTEP @ New Mexico</em></div><div class="spot"><span class="k">Biggest total lean</span><b>Over 46.5</b><span>model 1.2 pts off the line</span><em>Navy @ Air Force</em></div></span><span class="vw v-mod"><div class="spot"><span class="k">Surest winner</span><b>LSU</b><span>100% to win</span><em>McNeese @ LSU</em></div><div class="spot"><span class="k">Biggest spread lean</span><b>NC State +4.0</b><span>model 10.1 pts off the line</span><em>Louisville @ NC State</em></div><div class="spot"><span class="k">Biggest total lean</span><b>Over 46.5</b><span>model 6.7 pts off the line</span><em>Navy @ Air Force</em></div></span></section>
