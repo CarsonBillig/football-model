@@ -1,0 +1,11 @@
+# private: your CollegeFootballData API key never leaves this computer
+cfbd_key.txt
+
+# local Python install (setup.bat recreates it)
+.venv/
+__pycache__/
+*.pyc
+
+# old v2 copy and share bundles
+_v2_backup/
+*.zip
