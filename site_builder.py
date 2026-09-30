@@ -114,7 +114,7 @@ def _pick(primary, alt, dark: bool):
     p, a = _rgb(primary), _rgb(alt)
     if p is None:
         return None
-    bad = (lambda c: _lum(c) < 0.12) if dark else (lambda c: _lum(c) > 0.82)
+    bad = (lambda c: _lum(c) < 0.22) if dark else (lambda c: _lum(c) > 0.82)
     if bad(p) and a is not None and not bad(a):
         return a
     if bad(p):                                   # no usable alternate: nudge lightness
@@ -962,7 +962,7 @@ body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,trans
 .bf-r i{position:absolute;left:0;top:0;bottom:0;background:var(--ch);border-radius:6px}
 .bf-l::after,.bf-r::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--muted);opacity:.5}
 .bf-l::after{right:50%} .bf-r::after{left:50%}
-.bf i.lose{opacity:.35} .bf i.win{box-shadow:0 0 0 1px var(--ink) inset}
+.bf i.lose{opacity:.3}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bf-l i{background:var(--ca-d)}:root:not([data-theme="light"]) .bf-r i{background:var(--ch-d)}}
 :root[data-theme="dark"] .bf-l i{background:var(--ca-d)} :root[data-theme="dark"] .bf-r i{background:var(--ch-d)}
 @media (max-width:600px){.modal{padding:0}.m-panel{border-radius:0;min-height:100%;padding:18px 14px}
