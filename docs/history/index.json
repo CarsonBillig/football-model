@@ -1,0 +1,20 @@
+[
+ {
+  "sport": "College",
+  "season": 2026,
+  "week": 5,
+  "file": "cfb_2026_week_05.csv",
+  "tab": "College 2026 Wk 5",
+  "games": 56,
+  "graded": 0
+ },
+ {
+  "sport": "NFL",
+  "season": 2026,
+  "week": 4,
+  "file": "nfl_2026_week_04.csv",
+  "tab": "NFL 2026 Wk 4",
+  "games": 16,
+  "graded": 0
+ }
+]

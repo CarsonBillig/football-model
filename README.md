@@ -15,6 +15,16 @@ opens the updated page, and (once connected) publishes it to GitHub Pages. Run i
 before kickoff to refresh lines. From a terminal you can add options: `run_weekly.bat --backtest` (monthly refresh of
 the backtests) or `run_weekly.bat --nfl-only`.
 
+## Google Sheets model history
+
+Every run also publishes the pick history as CSV files (`docs/history/`): one per sport per week, with
+homeTeam, awayTeam, predicted, side, sideLine, homeScore, awayScore, margin, atsWin, plus the winner, total and model-only picks.
+To mirror it in a Google Sheet with one tab per week that refreshes daily:
+1. Create a blank Google Sheet (sheets.new).
+2. **Extensions > Apps Script**, delete what's there, paste all of `google_sheets_sync.gs`, click **Save**.
+3. Pick **installDailyTrigger** in the function dropdown, click **Run**, and approve the permissions.
+4. Reload the sheet. Tabs appear (Summary, NFL 2026 Wk 4, College 2026 Wk 5, ...) and a **Model > Update now** menu.
+
 ## Every week: one command
 
 ```

@@ -31,6 +31,8 @@ def main(run_backtest=False, season=None, week=None, college=True):
             print("\n### College backtest"); cfb_model.main()
         print("\n### College: grade, train, predict"); cfb_pipeline.run()
     print("\n### website"); print(f"site: {site_builder.build().resolve()}")
+    import sheets_export
+    print(f"pick history for Google Sheets: {sheets_export.export().resolve()}")
 
 
 if __name__ == "__main__":
