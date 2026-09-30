@@ -211,7 +211,7 @@
   "live_games_in_evidence": 0,
   "training_games": 3199,
   "trained_through": "2026 week 3",
-  "trained_at": "2026-09-30T15:19:01+00:00",
+  "trained_at": "2026-09-30T15:31:35+00:00",
   "verdict": "Backtest 2018-2026: straight up 1443-724 (66.6%), ATS 1092-1028-55 (51.5%). ATS is below the 52.4% needed to profit at -110. Model-vs-closing-line information: t=0.6 (no reliable signal). Lines move toward the model (22% of its gap with ESPN's opener, t=6.6), but holdout picks at the open went 140-174 ATS, so that is not yet a proven, bettable edge. Picks stay market-anchored; track live CLV.",
   "backtest_records": {
     "su": {

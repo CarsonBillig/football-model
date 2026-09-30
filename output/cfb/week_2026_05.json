@@ -1,6 +1,6 @@
 [
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401871049,
@@ -89,7 +89,7 @@
   "away_conf":"Conference USA"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401862786,
@@ -178,7 +178,7 @@
   "away_conf":"American Athletic"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858245,
@@ -267,7 +267,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401871050,
@@ -356,7 +356,7 @@
   "away_conf":"Conference USA"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858476,
@@ -445,7 +445,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856707,
@@ -534,7 +534,7 @@
   "away_conf":"SEC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856807,
@@ -553,7 +553,7 @@
   "mkt_total":49.8093770931,
   "p_home_win":0.8940995687,
   "p_home_win_raw":0.8756119167,
-  "mkt_p_home_win":0.8933823529,
+  "mkt_p_home_win":0.8869565217,
   "open_spread":21.5,
   "spread":18.5,
   "home_spread_odds":null,
@@ -562,8 +562,8 @@
   "total_line":49.5,
   "over_odds":null,
   "under_odds":null,
-  "home_ml":-1350.0,
-  "away_ml":800.0,
+  "home_ml":-1200.0,
+  "away_ml":750.0,
   "su_pick":"Kansas",
   "su_prob":0.8940995687,
   "ats_pick":"Middle Tennessee",
@@ -582,9 +582,9 @@
   "tot_stake":0.0,
   "value_tot":false,
   "ml_pick":"Kansas",
-  "ml_odds":-1350.0,
-  "ml_prob":0.893741494,
-  "ml_ev":-0.0400554324,
+  "ml_odds":-1200.0,
+  "ml_prob":0.8905791609,
+  "ml_ev":-0.035205909,
   "ml_stake":0.0,
   "value_ml":false,
   "mo_proj_home":32.7410979318,
@@ -623,7 +623,7 @@
   "away_conf":"Conference USA"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856819,
@@ -712,7 +712,7 @@
   "away_conf":"Big 12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856822,
@@ -801,7 +801,7 @@
   "away_conf":"Big 12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858246,
@@ -890,7 +890,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858250,
@@ -979,7 +979,7 @@
   "away_conf":"FBS Independents"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858251,
@@ -1068,7 +1068,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858252,
@@ -1157,7 +1157,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858474,
@@ -1246,7 +1246,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401862791,
@@ -1335,7 +1335,7 @@
   "away_conf":"American Athletic"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858479,
@@ -1424,7 +1424,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856705,
@@ -1513,7 +1513,7 @@
   "away_conf":"SEC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401866432,
@@ -1602,7 +1602,7 @@
   "away_conf":"Mid-American"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401866431,
@@ -1691,7 +1691,7 @@
   "away_conf":"Mid-American"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856708,
@@ -1780,7 +1780,7 @@
   "away_conf":"SEC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856710,
@@ -1869,7 +1869,7 @@
   "away_conf":"SEC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858247,
@@ -1958,7 +1958,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858248,
@@ -2047,7 +2047,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858253,
@@ -2136,7 +2136,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858473,
@@ -2225,7 +2225,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401862787,
@@ -2314,7 +2314,7 @@
   "away_conf":"American Athletic"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401862793,
@@ -2403,7 +2403,7 @@
   "away_conf":"Southern"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401864515,
@@ -2492,7 +2492,7 @@
   "away_conf":"Mountain West"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401866430,
@@ -2581,7 +2581,7 @@
   "away_conf":"Mid-American"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401866433,
@@ -2670,7 +2670,7 @@
   "away_conf":"Mid-American"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401866434,
@@ -2759,7 +2759,7 @@
   "away_conf":"Mid-American"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401866477,
@@ -2848,7 +2848,7 @@
   "away_conf":"Mid-American"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401869956,
@@ -2937,7 +2937,7 @@
   "away_conf":"Sun Belt"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401869962,
@@ -3026,7 +3026,7 @@
   "away_conf":"Sun Belt"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858475,
@@ -3115,7 +3115,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401864514,
@@ -3204,7 +3204,7 @@
   "away_conf":"Mountain West"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856709,
@@ -3293,7 +3293,7 @@
   "away_conf":"SEC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858472,
@@ -3382,7 +3382,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401860899,
@@ -3471,7 +3471,7 @@
   "away_conf":"Pac-12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401862790,
@@ -3560,7 +3560,7 @@
   "away_conf":"SWAC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856711,
@@ -3649,7 +3649,7 @@
   "away_conf":"SEC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856818,
@@ -3668,7 +3668,7 @@
   "mkt_total":47.4030650858,
   "p_home_win":0.3335774416,
   "p_home_win_raw":0.3349442905,
-  "mkt_p_home_win":0.3146067416,
+  "mkt_p_home_win":0.324968753,
   "open_spread":-5.5,
   "spread":-6.5,
   "home_spread_odds":null,
@@ -3677,8 +3677,8 @@
   "total_line":47.5,
   "over_odds":null,
   "under_odds":null,
-  "home_ml":205.0,
-  "away_ml":-250.0,
+  "home_ml":195.0,
+  "away_ml":-238.0,
   "su_pick":"BYU",
   "su_prob":0.6664225584,
   "ats_pick":"TCU",
@@ -3697,9 +3697,9 @@
   "tot_stake":0.0,
   "value_tot":false,
   "ml_pick":"TCU",
-  "ml_odds":205.0,
-  "ml_prob":0.324019808,
-  "ml_ev":-0.0117395856,
+  "ml_odds":195.0,
+  "ml_prob":0.3292587736,
+  "ml_ev":-0.0286866179,
   "ml_stake":0.0,
   "value_ml":false,
   "mo_proj_home":24.5669015787,
@@ -3738,7 +3738,7 @@
   "away_conf":"Big 12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401862788,
@@ -3827,7 +3827,7 @@
   "away_conf":"American Athletic"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401869942,
@@ -3916,7 +3916,7 @@
   "away_conf":"Sun Belt"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401871089,
@@ -4005,7 +4005,7 @@
   "away_conf":"Sun Belt"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856821,
@@ -4094,7 +4094,7 @@
   "away_conf":"Big 12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858249,
@@ -4183,7 +4183,7 @@
   "away_conf":"ACC"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858478,
@@ -4272,7 +4272,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401860898,
@@ -4361,7 +4361,7 @@
   "away_conf":"Pac-12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401862792,
@@ -4450,7 +4450,7 @@
   "away_conf":"American Athletic"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401869842,
@@ -4539,7 +4539,7 @@
   "away_conf":"American Athletic"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856706,
@@ -4628,7 +4628,7 @@
   "away_conf":"Southland"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401858477,
@@ -4717,7 +4717,7 @@
   "away_conf":"Big Ten"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401869932,
@@ -4806,7 +4806,7 @@
   "away_conf":"Sun Belt"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401860921,
@@ -4895,7 +4895,7 @@
   "away_conf":"Pac-12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856817,
@@ -4984,7 +4984,7 @@
   "away_conf":"Big 12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401860900,
@@ -5073,7 +5073,7 @@
   "away_conf":"Pac-12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401856820,
@@ -5162,7 +5162,7 @@
   "away_conf":"Big 12"
  },
  {
-  "logged_at":"2026-09-30T15:19:33+00:00",
+  "logged_at":"2026-09-30T15:32:40+00:00",
   "season":2026,
   "week":5,
   "game_id":401864513,
