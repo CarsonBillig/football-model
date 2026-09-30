@@ -2,7 +2,8 @@
 
 One file per sport per week, in the same layout as a classic model-tracking sheet:
     homeTeam, awayTeam, predicted, side, sideLine, homeScore, awayScore, margin, atsWin,
-followed by the winner pick, the total pick and the model-only lean with their results.
+followed by the winner pick, the total pick and the model-only lean with their results, and the confidence % for
+the moneyline, spread and total picks (market-adjusted; spread/total ignore pushes).
 predicted = projected home margin (positive = home wins). sideLine = the picked team's own spread (-3.5 = laying 3.5).
 
 Also writes summary.csv (record per week and season) and index.json (list of weekly files), which
@@ -59,6 +60,9 @@ def week_table(wk: pd.DataFrame, names: dict) -> pd.DataFrame:
         "modelOnlySide": wk["mo_ats_pick"].map(n),
         "modelOnlyLine": num("mo_ats_line"),
         "modelOnlyAtsWin": wk["mo_ats_out"].map(_res),
+        "mlConfidence": (num("su_prob") * 100).round(1),
+        "spreadConfidence": (num("ats_prob_np") * 100).round(1),
+        "totalConfidence": (num("tot_prob_np") * 100).round(1),
         "closingLineValue": num("ats_clv").round(1),
         "kickoff": wk["kickoff"],
     })

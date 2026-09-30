@@ -227,6 +227,67 @@ def ml_text(r) -> str:
     return f"{first[0]} {odds(first[1])} · {second[0]} {odds(second[1])}"
 
 
+def breakeven(o) -> float | None:
+    """Win rate a bet at American odds `o` needs just to break even (-110 -> 52.4%)."""
+    o = _num(o)
+    if o is None:
+        return None
+    return 100 / (o + 100) if o > 0 else -o / (-o + 100)
+
+
+def confidence(r) -> list[dict]:
+    """Moneyline, spread and total picks (market-adjusted numbers) with hit chance, break-even and cushion."""
+    out = []
+    su = r.get("su_pick")
+    if _has(su):
+        price = r.get("home_ml") if su == r["home_team"] else r.get("away_ml")
+        out.append({"bet": "Moneyline", "pick": f"{short(r, su)} {odds(price)}".strip(), "p": _num(r.get("su_prob")),
+                    "be": breakeven(price), "value": truthy(r.get("value_ml")) and r.get("ml_pick") == su})
+    if _has(r.get("ats_pick")):
+        out.append({"bet": "Spread", "pick": team_line(short(r, r["ats_pick"]), r.get("ats_line")),
+                    "p": _num(r.get("ats_prob_np")), "be": breakeven(r.get("ats_odds")) or breakeven(-110),
+                    "value": truthy(r.get("value_ats"))})
+    tl = _num(r.get("total_line"))
+    if _has(r.get("tot_pick")) and tl is not None:
+        out.append({"bet": "Total", "pick": f"{'Over' if r['tot_pick'] == 'OVER' else 'Under'} {tl:.1f}",
+                    "p": _num(r.get("tot_prob_np")), "be": breakeven(r.get("tot_odds")) or breakeven(-110),
+                    "value": truthy(r.get("value_tot"))})
+    for b in out:
+        b["cushion"] = None if b["p"] is None or b["be"] is None else b["p"] - b["be"]
+    return [b for b in out if b["p"] is not None]
+
+
+def confidence_html(r) -> str:
+    bets = confidence(r)
+    if not bets:
+        return ""
+    likely = max(bets, key=lambda b: b["p"])
+    priced = [b for b in bets if b["cushion"] is not None]
+    # "best bet" only for picks that clear the site's value bar (+2% expected profit); otherwise it's a lean
+    flagged = [b for b in priced if b["value"]]
+    best = max(flagged, key=lambda b: b["cushion"]) if flagged else None
+    closest = max(priced, key=lambda b: b["cushion"]) if priced else None
+    rows = []
+    for b in bets:
+        cush = "" if b["cushion"] is None else f'<span class="cu {"up" if b["cushion"] > 0 else "dn"}">{b["cushion"] * 100:+.1f}</span>'
+        need = "—" if b["be"] is None else pct(b["be"], 1)
+        tags = ("<em>likeliest</em>" if b is likely else "") + ("<em class=best>best bet</em>" if b is best else "")
+        tick = "" if b["be"] is None else f'<s style="left:{b["be"] * 100:.1f}%"></s>'     # break-even marker
+        rows.append(f'<div class="cf"><span class="cb">{b["bet"]}</span><span class="cp">{escape(b["pick"])}{tags}</span>'
+                    f'<span class="cm"><span class="meter"><i style="width:{b["p"] * 100:.0f}%"></i>{tick}</span>'
+                    f'<b>{pct(b["p"])}</b></span><span class="cn">needs {need}</span>{cush}</div>')
+    if best is not None:
+        verdict = f'Best bet: <b>{best["bet"]} {escape(best["pick"])}</b>, {best["cushion"] * 100:.1f} pts above break-even.'
+    elif closest is not None and closest["cushion"] > 0:
+        verdict = (f'No value bet. Closest: {closest["bet"]} {escape(closest["pick"])} at {closest["cushion"] * 100:+.1f} pts, '
+                   "too thin to beat the sportsbook's margin reliably: a lean.")
+    else:
+        verdict = "No value bet: every pick is below break-even at these prices, so treat them as leans."
+    return (f'<div class="conf v-mktonly"><div class="conf-h"><span class="lbl">Confidence</span>'
+            f'<span class="lbl">hit chance · needs to break even · cushion</span></div>{"".join(rows)}'
+            f'<p class="verdict">{verdict}</p></div>')
+
+
 def cell(label, value, cls="") -> str:
     return f'<div class="cell {cls}"><span class="lbl">{label}</span><span class="val">{value}</span></div>'
 
@@ -337,6 +398,7 @@ def game_row(r) -> str:
     <div class="pickrow"><span class="lbl">Total pick</span><span class="val">{both(pick('', 'tot'), pick('mo_', 'tot'))}</span></div>
     {ml_value}
   </div>
+  {confidence_html(r)}
   {detail}
 </article>"""
 
@@ -550,6 +612,11 @@ $spotlight
       <div><h4>Model pick and total pick</h4><p>The side to take against the spread and on the total, with the model's chance of winning the bet (pushes ignored). In Model only view the gray number is how many points the model disagrees with the book instead, because its raw percentages ran too high in testing.</p></div></div>
     <div class="lg"><div class="ex"><span class="mono"><b>DET −2.5</b><span class="tag">Value</span></span></div>
       <div><h4>Value bet</h4><p>Only shown when a pick is expected to earn at least +2% at the listed price. Open <b>Details</b> on a game for the exact value and a suggested stake. Without the tag, a pick is a lean and the stake says pass.</p></div></div>
+    <div class="lg"><div class="ex" style="width:100%"><div class="cf" style="grid-template-columns:1fr 70px"><span class="cm"><span class="meter"><i style="width:69%"></i><s style="left:65.5%"></s></span><b>69%</b></span><span class="cu up">+3.5</span></div></div>
+      <div><h4>Confidence</h4><p>For the moneyline, spread and total picks: the model's <b>hit chance</b> (the dark bar), the win rate the price
+      <b>needs</b> just to break even (the orange tick), and the <b>cushion</b> between them. <b>Likeliest</b> marks the bet most likely to
+      win, usually the moneyline, which pays least. <b>Best bet</b> marks the pick with the biggest cushion, but only when it
+      clears the value bar (+2% expected profit). A tiny cushion is within noise, so that game says it's a lean. In testing these percentages were honest: 65% moneyline picks won 65%, 75% won 75%.</p></div></div>
     <div class="lg"><div class="ex"><span><span class="mk win">✓</span> won &nbsp;<span class="mk loss">✗</span> lost &nbsp;<span class="mk push">P</span> push</span></div>
       <div><h4>Results</h4><p>After games are graded, each pick is marked. A push means the final margin landed exactly on the line, so the bet is refunded.</p></div></div>
     <div class="lg"><div class="ex"><span class="chip">in 2h 10m</span><span class="chip locked">Locked</span><span class="chip final">Final</span></div>
@@ -676,6 +743,20 @@ body:not([data-view="mod"]) .side.fav-mkt .name,body[data-view="mod"] .side.fav-
 body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,transparent)} body[data-view="mod"] .cell.mod .val{color:var(--ink)}
 .cell i,.pickrow i{font-style:normal;color:var(--muted);font-weight:400}
 .picksbox{border-top:1px solid var(--rule);padding:10px 18px;display:flex;flex-direction:column;gap:6px}
+.conf{border-top:1px solid var(--rule);padding:10px 18px 12px;display:flex;flex-direction:column;gap:7px}
+.conf-h{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.cf{display:grid;grid-template-columns:78px minmax(0,1fr) 110px 86px 44px;gap:8px;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+.cb{font-family:Inter,sans-serif;font-size:11px;color:var(--muted)}
+.cp{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cp em{font-style:normal;font-family:Inter,sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border:1px solid var(--rule);border-radius:4px;padding:1px 4px;margin-left:6px}
+.cp em.best{color:#fff;background:var(--accent);border-color:var(--accent)}
+.cm{display:flex;align-items:center;gap:6px}
+.meter{position:relative;flex:1;height:6px;border-radius:3px;background:var(--rule);overflow:visible}
+.meter i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--ink)}
+.meter s{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--accent);text-decoration:none}
+.cn{color:var(--muted);font-size:11px}
+.cu{font-size:11.5px;text-align:right} .cu.up{color:var(--win)} .cu.dn{color:var(--loss)}
+.verdict{margin:2px 0 0;font-size:12.5px;color:var(--muted)} .verdict b{color:var(--ink)}
 .pickrow{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .pickrow .val{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;text-align:right}
 .tag{font-family:Inter,sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;background:var(--accent);color:#fff;padding:2px 6px;border-radius:4px;margin-left:8px;vertical-align:2px}
@@ -722,6 +803,7 @@ body:not([data-view="mod"]) .v-mod,body[data-view="mod"] .v-mkt{display:none!imp
 footer{margin:70px 0 0;padding:22px 0 44px;border-top:1px solid var(--rule);color:var(--muted);font-size:12.5px}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:520px){.cf{grid-template-columns:62px minmax(0,1fr) 72px 40px}.cf .cn{display:none}.conf-h .lbl:last-child{display:none}}
 @media (max-width:460px){.cell{padding:9px 10px}.cell .val{font-size:12px;white-space:normal}.tn .name{font-size:15px}.sc{font-size:24px}}
 @media (max-width:640px){
   .top .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:8px;row-gap:8px}
