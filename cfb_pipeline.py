@@ -148,7 +148,8 @@ def predict(games: pd.DataFrame, season=None, week=None) -> pd.DataFrame:
     n = ledger.record(todo, now, ledger.CFB_LEDGER)
     extra = ["tv", "venue", "city", "played", "home_name", "away_name", "home_abbr", "away_abbr", "home_logo", "away_logo",
              "home_color", "away_color", "home_alt_color", "away_alt_color", "home_record", "away_record",
-             "home_rank", "away_rank", "home_conf", "away_conf", "matchup_stats"]
+             "home_rank", "away_rank", "home_conf", "away_conf", "matchup_stats", "p_home_cover", "p_spread_push",
+             "p_over", "p_total_push"]
     keep = [c for c in ledger.COLUMNS if c in wk] + [c for c in extra if c in wk]
     (OUT / f"week_{season}_{week:02d}.json").write_text(wk[keep].to_json(orient="records", indent=1))
     (OUT / "current.json").write_text(json.dumps({"season": int(season), "week": int(week)}))

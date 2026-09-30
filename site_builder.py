@@ -306,6 +306,131 @@ def confidence_html(r, pre: str = "") -> str:
             f'<p class="verdict">{verdict}</p>{note}</div>')
 
 
+def bet_rows(r, pre: str = "") -> list[dict]:
+    """Every bet on the game (both moneylines, both spread sides, over and under) with hit chance and break-even.
+
+    Market-adjusted uses the calibrated probabilities; model-only uses the TESTED hit rate of its picks."""
+    home, away = r["home_team"], r["away_team"]
+    H, A = short(r, home), short(r, away)
+    rows = []
+    lean = pre == "mo_"
+    # moneyline
+    if lean:
+        pk, hit = r.get("mo_su_pick"), _num(r.get("mo_su_hit"))
+        ph = None if hit is None or not _has(pk) else (hit if pk == home else 1 - hit)
+    else:
+        ph = _num(r.get("p_home_win"))
+    if ph is not None:
+        for team, p, o in ((A, 1 - ph, r.get("away_ml")), (H, ph, r.get("home_ml"))):
+            rows.append({"group": "Moneyline", "bet": f"{team} {odds(o)}".strip(), "p": p, "be": breakeven(o)})
+    # spread
+    s = _num(r.get("spread"))
+    if s is not None:
+        if lean:
+            pk, hit = r.get("mo_ats_pick"), _num(r.get("mo_ats_hit"))
+            phc = None if hit is None or not _has(pk) else (hit if pk == home else 1 - hit)
+        else:
+            pc, pp = _num(r.get("p_home_cover")), _num(r.get("p_spread_push")) or 0.0
+            phc = None if pc is None else pc / max(1 - pp, 1e-9)
+        if phc is not None:
+            ho, ao = r.get("home_spread_odds"), r.get("away_spread_odds")
+            rows.append({"group": "Spread", "bet": f"{team_line(A, s)} {odds(ao) or '−110'}", "p": 1 - phc,
+                         "be": breakeven(ao) or breakeven(-110)})
+            rows.append({"group": "Spread", "bet": f"{team_line(H, -s)} {odds(ho) or '−110'}", "p": phc,
+                         "be": breakeven(ho) or breakeven(-110)})
+    # total
+    tl = _num(r.get("total_line"))
+    if tl is not None:
+        if lean:
+            pk, hit = r.get("mo_tot_pick"), _num(r.get("mo_tot_hit"))
+            po = None if hit is None or not _has(pk) else (hit if pk == "OVER" else 1 - hit)
+        else:
+            p_o, pq = _num(r.get("p_over")), _num(r.get("p_total_push")) or 0.0
+            po = None if p_o is None else p_o / max(1 - pq, 1e-9)
+        if po is not None:
+            oo, uo = r.get("over_odds"), r.get("under_odds")
+            rows.append({"group": "Total", "bet": f"Over {tl:.1f} {odds(oo) or '−110'}", "p": po, "be": breakeven(oo) or breakeven(-110)})
+            rows.append({"group": "Total", "bet": f"Under {tl:.1f} {odds(uo) or '−110'}", "p": 1 - po, "be": breakeven(uo) or breakeven(-110)})
+    return rows
+
+
+def bet_chart(r, pre: str = "") -> str:
+    rows = bet_rows(r, pre)
+    if not rows:
+        return '<p class="evnote">No lines posted yet.</p>'
+    best = max((x for x in rows if x["be"] is not None), key=lambda x: x["p"] - x["be"], default=None)
+    out, group = [], None
+    for x in rows:
+        if x["group"] != group:
+            group = x["group"]
+            out.append(f'<div class="bc-g">{group}</div>')
+        cush = None if x["be"] is None else x["p"] - x["be"]
+        tick = "" if x["be"] is None else f'<s style="left:{x["be"] * 100:.1f}%"></s>'
+        cls = " top" if x is best and cush is not None and cush > 0 else ""
+        out.append(f'<div class="bc{cls}"><span class="bc-b">{escape(x["bet"])}</span>'
+                   f'<span class="meter big"><i style="width:{x["p"] * 100:.1f}%"></i>{tick}</span>'
+                   f'<b>{pct(x["p"], 1)}</b><span class="cn">needs {pct(x["be"], 1)}</span>'
+                   f'{"" if cush is None else f"""<span class="cu {"up" if cush > 0 else "dn"}">{cush * 100:+.1f}</span>"""}</div>')
+    head = ("Tested hit chance of each bet (how often picks like the pure model's actually won)" if pre
+            else "Chance of each bet hitting (pushes excluded)")
+    return f'<p class="mnote">{head}. Dark bar = hit chance, orange tick = what the price needs to break even.</p>{"".join(out)}'
+
+
+def stats_chart(r) -> str:
+    """Butterfly chart: for each stat, each team's league percentile (longer = better), with the actual value."""
+    raw = r.get("matchup_stats")
+    if not _has(raw):
+        return ""
+    try:
+        rows = json.loads(raw)
+    except (TypeError, ValueError):
+        return ""
+    A, H = short(r, r["away_team"]), short(r, r["home_team"])
+    out, group = [], None
+    for x in rows:
+        if x["group"] != group:
+            group = x["group"]
+            out.append(f'<div class="bf-g">{escape(group)}</div>')
+        ap, hp = x.get("ap"), x.get("hp")
+        wa = 0 if ap is None else max(ap, 2)
+        wh = 0 if hp is None else max(hp, 2)
+        fa = " win" if x["edge"] == "away" else " lose" if x["edge"] == "home" else ""
+        fh = " win" if x["edge"] == "home" else " lose" if x["edge"] == "away" else ""
+        tip = f'league rank: {A} {"—" if ap is None else f"{ap}th pct"} · {H} {"—" if hp is None else f"{hp}th pct"}'
+        out.append(f'<div class="bf" title="{tip}"><span class="bf-v a">{x["away"]}</span>'
+                   f'<span class="bf-l"><i class="a{fa}" style="width:{wa}%"></i></span>'
+                   f'<span class="bf-n">{escape(x["label"])}</span>'
+                   f'<span class="bf-r"><i class="h{fh}" style="width:{wh}%"></i></span>'
+                   f'<span class="bf-v h">{x["home"]}</span></div>')
+    return (f'<div class="bf-head"><span>{A}</span><span>{H}</span></div>{"".join(out)}'
+            f'<p class="mnote">Bar length = league rank (percentile) for that stat, so every stat shares one scale: longer is better, '
+            f'the middle line is league average. Numbers are the actual values; faded bar = the other team has the edge.</p>')
+
+
+def matchup_view(r) -> str:
+    """Content of the pop-up that opens when a game card is clicked."""
+    home, away = r["home_team"], r["away_team"]
+    H, A = short(r, home), short(r, away)
+    final = _num(r.get("home_score")) is not None
+    mk, md = view(r, "", final), view(r, "mo_", final)
+    k = r["kick_et"]
+
+    def team(s, abbr):
+        name = r.get(f"{s}_name")
+        name = escape(str(name)) if _has(name) else abbr
+        logo = r.get(f"{s}_logo")
+        img = f'<img src="{escape(str(logo))}" alt="">' if _has(logo) else ""
+        return (f'<div class="mt-team">{img}<span class="mt-name">{name}</span>'
+                f'<span class="mt-score">{both(mk["scores"][s], md["scores"][s])}</span></div>')
+    return f"""
+<div class="m-head">
+  <span class="when"><b>{k.strftime(F('%a %b %-d · %-I:%M %p'))} ET</b></span>
+  <div class="mt-teams">{team('away', away)}<span class="mt-at">@</span>{team('home', home)}</div>
+</div>
+<section class="m-sec"><h3>Chances of each bet hitting</h3>{both(bet_chart(r), bet_chart(r, "mo_"))}</section>
+<section class="m-sec"><h3>Team stats</h3>{stats_chart(r)}</section>"""
+
+
 def stats_html(r) -> str:
     """Team stats table (Offense / Defense / Advanced) with the better team in each stat highlighted."""
     raw = r.get("matchup_stats")
@@ -449,6 +574,8 @@ def game_row(r) -> str:
   </div>
   {both(confidence_html(r), confidence_html(r, "mo_"))}
   {stats_html(r)}
+  <button class="open-mx" type="button">Open matchup view <span aria-hidden="true">↗</span></button>
+  <template class="mx">{matchup_view(r)}</template>
   {detail}
 </article>"""
 
@@ -808,6 +935,39 @@ body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,trans
 .meter s{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--accent);text-decoration:none}
 .cn{color:var(--muted);font-size:11px}
 .said{display:block;font-family:Inter,sans-serif;font-size:10px;color:var(--muted)}
+.game{cursor:pointer}
+.open-mx{border:0;border-top:1px solid var(--rule);background:none;color:var(--accent);font:inherit;font-size:12.5px;padding:10px 18px;text-align:left;cursor:pointer}
+.open-mx:hover{background:var(--accent-soft)}
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;background:color-mix(in srgb,#000 45%,transparent);backdrop-filter:blur(4px);overflow-y:auto}
+.modal.on{display:flex;animation:rise .2s ease}
+.m-panel{position:relative;width:100%;max-width:780px;background:var(--card);border:1px solid var(--rule);border-radius:18px;box-shadow:0 30px 80px -20px rgba(0,0,0,.45);padding:22px 24px 26px}
+.m-close{position:absolute;top:12px;right:12px;border:1px solid var(--rule);background:var(--bg);color:var(--muted);border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:16px}
+.m-head{border-bottom:1px solid var(--rule);padding-bottom:14px}
+.mt-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-top:10px}
+.mt-team{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.mt-team img{width:54px;height:54px;object-fit:contain} .mt-name{font-weight:600} .mt-at{color:var(--muted)}
+.mt-score .sc{font-size:30px}
+.m-sec h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:26px;margin:22px 0 4px}
+.mnote{color:var(--muted);font-size:12px;margin:4px 0 10px}
+.bc-g,.bf-g{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);font-weight:600;margin:12px 0 4px}
+.bc{display:grid;grid-template-columns:150px 1fr 56px 90px 48px;gap:10px;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:13px;padding:4px 6px;border-radius:8px}
+.bc.top{background:var(--accent-soft)}
+.bc b{text-align:right} .meter.big{height:10px;border-radius:5px} .meter.big i{border-radius:5px}
+.bf-head{display:flex;justify-content:space-between;font-weight:600;margin:6px 0}
+.bf{display:grid;grid-template-columns:62px 1fr 150px 1fr 62px;gap:8px;align-items:center;padding:3px 0;font-size:12.5px}
+.bf-v{font-family:"IBM Plex Mono",monospace} .bf-v.h{text-align:right}
+.bf-n{text-align:center;color:var(--muted);font-size:11.5px;line-height:1.2}
+.bf-l,.bf-r{position:relative;height:12px;background:var(--rule);border-radius:6px;overflow:hidden}
+.bf-l i{position:absolute;right:0;top:0;bottom:0;background:var(--ca);border-radius:6px}
+.bf-r i{position:absolute;left:0;top:0;bottom:0;background:var(--ch);border-radius:6px}
+.bf-l::after,.bf-r::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--muted);opacity:.5}
+.bf-l::after{right:50%} .bf-r::after{left:50%}
+.bf i.lose{opacity:.35} .bf i.win{box-shadow:0 0 0 1px var(--ink) inset}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bf-l i{background:var(--ca-d)}:root:not([data-theme="light"]) .bf-r i{background:var(--ch-d)}}
+:root[data-theme="dark"] .bf-l i{background:var(--ca-d)} :root[data-theme="dark"] .bf-r i{background:var(--ch-d)}
+@media (max-width:600px){.modal{padding:0}.m-panel{border-radius:0;min-height:100%;padding:18px 14px}
+  .bc{grid-template-columns:1fr 70px 50px;}.bc .meter,.bc .cn{display:none}
+  .bf{grid-template-columns:48px 1fr 92px 1fr 48px;gap:5px;font-size:11.5px}.bf-n{font-size:10.5px}}
 .stats{border-top:1px solid var(--rule)}
 .stats>summary{list-style:none;cursor:pointer;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .stats>summary::-webkit-details-marker{display:none}
@@ -897,6 +1057,8 @@ footer{margin:70px 0 0;padding:22px 0 44px;border-top:1px solid var(--rule);colo
 </div></header>
 <div class="wrap">
 $sections
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Matchup view"><div class="m-panel">
+  <button class="m-close" id="m-close" aria-label="Close">✕</button><div id="m-body"></div></div></div>
 <footer>Research and entertainment only. No model guarantees profit; bet responsibly. Data: ESPN / DraftKings, nflverse, CollegeFootballData.com.</footer>
 </div>
 <script>
@@ -951,6 +1113,24 @@ $sections
   }
   sb.forEach(function(b){b.addEventListener('click',function(){sport(b.dataset.s);window.scrollTo(0,0)})});
   sport(load('fm-sport')||'$first');
+  // matchup view: click a game card (not its expandable sections) to open the full breakdown
+  var modal=document.getElementById('modal'),mbody=document.getElementById('m-body');
+  function openMx(card){
+    var t=card.querySelector('template.mx'); if(!t) return;
+    mbody.innerHTML=''; mbody.appendChild(t.content.cloneNode(true));
+    modal.querySelector('.m-panel').setAttribute('style',card.getAttribute('style')||'');
+    modal.classList.add('on'); document.body.style.overflow='hidden'; modal.scrollTop=0;
+  }
+  function closeMx(){modal.classList.remove('on');document.body.style.overflow='';}
+  document.querySelectorAll('.game').forEach(function(card){
+    card.addEventListener('click',function(e){
+      if(e.target.closest('details,summary,a,button:not(.open-mx)')) return;
+      openMx(card);
+    });
+  });
+  document.getElementById('m-close').addEventListener('click',closeMx);
+  modal.addEventListener('click',function(e){if(e.target===modal)closeMx()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMx()});
   var vb=document.querySelectorAll('#viewsw button');
   function view(v){body.dataset.view=v;vb.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false')});store('fm-view',v)}
   vb.forEach(function(b){b.addEventListener('click',function(){view(b.dataset.v)})});

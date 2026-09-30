@@ -109,7 +109,8 @@ def run(season=None, week=None, build_site=True):
     keep = [c for c in ledger.COLUMNS if c in log] + ["tv", "venue", "city", "home_logo", "away_logo", "home_name",
                                                        "away_name", "home_record", "away_record", "book", "played",
                                                        "home_color", "away_color", "home_alt_color", "away_alt_color",
-                                                       "matchup_stats"]
+                                                       "matchup_stats", "p_home_cover", "p_spread_push", "p_over",
+                                                       "p_total_push"]
     log[keep].to_csv(OUT / "current_predictions.csv", index=False)
     (OUT / f"week_{season}_{week:02d}.json").write_text(log[keep].to_json(orient="records", indent=1))
     (OUT / "current.json").write_text(json.dumps({"season": int(season), "week": int(week)}))

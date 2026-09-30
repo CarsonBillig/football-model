@@ -78,8 +78,17 @@ def _fmt(v, f):
     return format(v, f).replace("-", "−")
 
 
-def matchup_json(away: dict, home: dict, specs, sd: dict) -> str:
+def _percentile(v, values, higher):
+    """0-100 league rank of a value, where 100 is best (for lower-is-better stats the scale is flipped)."""
+    if v is None or values is None or len(values) == 0:
+        return None
+    p = float(((values < v).mean() + 0.5 * (values == v).mean()) * 100)
+    return round(100 - p) if higher is False else round(p)
+
+
+def matchup_json(away: dict, home: dict, specs, sd: dict, dist: dict | None = None) -> str:
     rows = []
+    dist = dist or {}
     for group, label, key, higher, f in specs:
         a, h = away.get(key), home.get(key)
         a = None if a is None or pd.isna(a) else float(a)
@@ -90,7 +99,9 @@ def matchup_json(away: dict, home: dict, specs, sd: dict) -> str:
             edge = "even" if abs(gap) <= EDGE_SD * sd.get(key, 0.0) else ("home" if gap > 0 else "away")
         if a is None and h is None:
             continue                                  # stat not available for this sport/week
-        rows.append({"group": group, "label": label, "away": _fmt(a, f), "home": _fmt(h, f), "edge": edge})
+        vals = dist.get(key)
+        rows.append({"group": group, "label": label, "away": _fmt(a, f), "home": _fmt(h, f), "edge": edge,
+                     "ap": _percentile(a, vals, higher), "hp": _percentile(h, vals, higher), "dir": higher})
     return json.dumps(rows)
 
 
@@ -115,6 +126,10 @@ def _derive(t: pd.DataFrame) -> pd.DataFrame:
     d["to_pg"], d["take_pg"] = t["turnovers"] / g, t["takeaways"] / g
     d["sacked_pg"], d["sacks_pg"] = t["sacked"] / g, t["sacks"] / g
     return d
+
+
+def _dist(table: pd.DataFrame, specs) -> dict:
+    return {k: table[k].dropna().to_numpy(float) for _, _, k, _, _ in specs if k in table}
 
 
 def _sd(table: pd.DataFrame, specs) -> dict:
@@ -158,9 +173,11 @@ def add_nfl(wk: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
         print(f"  (box-score stats unavailable: {e})")
         box = pd.DataFrame()
     cur = games[games["season"] == season]
-    adv_sd = {k: float(pd.concat([cur.get(f"h_{k}", pd.Series(dtype=float)), cur.get(f"a_{k}", pd.Series(dtype=float))]).std())
-              for _, _, k, _, _ in NFL_ADV}
+    adv_vals = {k: pd.concat([cur.get(f"h_{k}", pd.Series(dtype=float)), cur.get(f"a_{k}", pd.Series(dtype=float))]).dropna()
+                for _, _, k, _, _ in NFL_ADV}
+    adv_sd = {k: float(v.std()) for k, v in adv_vals.items()}
     sd = {**_sd(box, BOX), **adv_sd}
+    dist = {**(_dist(box, BOX) if not box.empty else {}), **{k: v.to_numpy(float) for k, v in adv_vals.items()}}
     specs = (BOX if not box.empty else []) + NFL_ADV
     out = wk.copy()
     rows = []
@@ -171,7 +188,7 @@ def add_nfl(wk: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
             vals = box.loc[t].to_dict() if t in box.index else {}
             vals.update({k: r.get(f"{'a' if s == 'away' else 'h'}_{k}") for _, _, k, _, _ in NFL_ADV})
             side[s] = vals
-        rows.append(matchup_json(side["away"], side["home"], specs, sd))
+        rows.append(matchup_json(side["away"], side["home"], specs, sd, dist))
     out["matchup_stats"] = rows
     return out
 
@@ -230,7 +247,8 @@ def add_cfb(wk: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
     table = box.join(adv, how="outer") if not box.empty else adv
     sd = _sd(table[table.index.isin(fbs)], (BOX if not box.empty else []) + CFB_ADV)
     specs = (BOX if not box.empty else []) + CFB_ADV
+    dist = _dist(table[table.index.isin(fbs)], specs)
     get = lambda team: (table.loc[team].to_dict() if team in table.index else {})
     out = wk.copy()
-    out["matchup_stats"] = [matchup_json(get(r["away_team"]), get(r["home_team"]), specs, sd) for _, r in out.iterrows()]
+    out["matchup_stats"] = [matchup_json(get(r["away_team"]), get(r["home_team"]), specs, sd, dist) for _, r in out.iterrows()]
     return out
