@@ -306,6 +306,37 @@ def confidence_html(r, pre: str = "") -> str:
             f'<p class="verdict">{verdict}</p>{note}</div>')
 
 
+def stats_html(r) -> str:
+    """Team stats table (Offense / Defense / Advanced) with the better team in each stat highlighted."""
+    raw = r.get("matchup_stats")
+    if not _has(raw):
+        return ""
+    try:
+        rows = json.loads(raw)
+    except (TypeError, ValueError):
+        return ""
+    A, H = short(r, r["away_team"]), short(r, r["home_team"])
+    n_a = sum(x["edge"] == "away" for x in rows)
+    n_h = sum(x["edge"] == "home" for x in rows)
+    n_e = sum(x["edge"] == "even" for x in rows)
+    lead = A if n_a > n_h else H if n_h > n_a else None
+    body, group = [], None
+    for x in rows:
+        if x["group"] != group:
+            group = x["group"]
+            body.append(f'<tr class="grp"><th colspan="3">{escape(group)}</th></tr>')
+        ca = ' class="better"' if x["edge"] == "away" else ""
+        ch = ' class="better"' if x["edge"] == "home" else ""
+        body.append(f'<tr><td{ca}>{x["away"]}</td><td class="st">{escape(x["label"])}</td><td{ch}>{x["home"]}</td></tr>')
+    summary = (f'Stat edges: <b>{A} {n_a}</b> · <b>{H} {n_h}</b> · even {n_e}'
+               + (f' <span class="lead">{lead} leads</span>' if lead else ""))
+    return (f'<details class="stats"><summary><span class="lbl">Team stats</span><span class="sum">{summary}</span></summary>'
+            f'<div class="stats-in"><table class="mt"><thead><tr><th>{A}</th><th></th><th>{H}</th></tr></thead>'
+            f'<tbody>{"".join(body)}</tbody></table>'
+            f'<p class="evnote">Box-score stats are season to date (last season for teams that haven&#39;t played yet). '
+            f'Highlighted = better; gaps smaller than a quarter of the league-wide spread count as even.</p></div></details>')
+
+
 def cell(label, value, cls="") -> str:
     return f'<div class="cell {cls}"><span class="lbl">{label}</span><span class="val">{value}</span></div>'
 
@@ -417,6 +448,7 @@ def game_row(r) -> str:
     {ml_value}
   </div>
   {both(confidence_html(r), confidence_html(r, "mo_"))}
+  {stats_html(r)}
   {detail}
 </article>"""
 
@@ -776,6 +808,19 @@ body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,trans
 .meter s{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--accent);text-decoration:none}
 .cn{color:var(--muted);font-size:11px}
 .said{display:block;font-family:Inter,sans-serif;font-size:10px;color:var(--muted)}
+.stats{border-top:1px solid var(--rule)}
+.stats>summary{list-style:none;cursor:pointer;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.stats>summary::-webkit-details-marker{display:none}
+.stats .sum{font-size:12.5px;color:var(--muted)} .stats .sum b{color:var(--ink);font-weight:600}
+.stats .lead{font-family:Inter,sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:1px 5px;margin-left:6px}
+.stats[open]>summary .sum::after{content:" −"} .stats:not([open])>summary .sum::after{content:" +"}
+.stats-in{padding:0 18px 14px}
+table.mt td,table.mt th{text-align:center;padding:5px 6px;white-space:nowrap}
+table.mt td:first-child,table.mt td:last-child{width:28%;font-family:"IBM Plex Mono",monospace}
+table.mt td.st{font-family:Inter,sans-serif;font-size:12px;color:var(--muted);white-space:normal}
+table.mt td.better{color:var(--accent);font-weight:600}
+table.mt td.better::after{content:" ●";font-size:8px;vertical-align:2px}
+table.mt tr.grp th{text-align:left;font-size:10px;letter-spacing:.1em;color:var(--ink);padding-top:12px;border-bottom:1px solid var(--rule)}
 .cu{font-size:11.5px;text-align:right} .cu.up{color:var(--win)} .cu.dn{color:var(--loss)}
 .verdict{margin:2px 0 0;font-size:12.5px;color:var(--muted)} .verdict b{color:var(--ink)}
 .pickrow{display:flex;justify-content:space-between;align-items:center;gap:10px}

@@ -92,6 +92,8 @@ def run(season=None, week=None, build_site=True):
                         over_odds=L["over_odds"], under_odds=L["under_odds"], home_ml=L["home_ml"],
                         away_ml=L["away_ml"]).sort_values(["kickoff", "game_id"])
     wk = add_tested_hit_rates(wk, meta.get("mo_hit_rates", {}), L["home_ml"], L["away_ml"])
+    import matchup_stats
+    wk = matchup_stats.add_nfl(wk, games)
 
     now = pd.Timestamp.now(tz="UTC")
     log = wk.rename(columns={L["spread"]: "spread", L["home_spread_odds"]: "home_spread_odds",
@@ -106,7 +108,8 @@ def run(season=None, week=None, build_site=True):
     OUT.mkdir(exist_ok=True)
     keep = [c for c in ledger.COLUMNS if c in log] + ["tv", "venue", "city", "home_logo", "away_logo", "home_name",
                                                        "away_name", "home_record", "away_record", "book", "played",
-                                                       "home_color", "away_color", "home_alt_color", "away_alt_color"]
+                                                       "home_color", "away_color", "home_alt_color", "away_alt_color",
+                                                       "matchup_stats"]
     log[keep].to_csv(OUT / "current_predictions.csv", index=False)
     (OUT / f"week_{season}_{week:02d}.json").write_text(log[keep].to_json(orient="records", indent=1))
     (OUT / "current.json").write_text(json.dumps({"season": int(season), "week": int(week)}))
