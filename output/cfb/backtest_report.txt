@@ -1,58 +1,58 @@
-college games: 11260; margin features 10, total 5
+college games: 11260; margin features 13, total 5
 out-of-sample games: 8297 (2016-2026)
 
 ==========================================================================================
 A. PROJECTION ACCURACY vs THE CLOSING LINE   (paired t > 0 = worse than market; |t| > 2 significant)
 ==========================================================================================
                 projection   RMSE    MAE  t_vs_market
-     MARKET closing spread 15.498 12.233          NaN
-        fundamentals model 16.635 13.160       15.835
-    fair blend (published) 15.484 12.246       -1.589
+     MARKET closing spread 15.497 12.232          NaN
+        fundamentals model 16.642 13.168       15.914
+    fair blend (published) 15.485 12.246       -1.525
       MARKET closing total 16.148 12.744          NaN
-fundamentals model (total) 16.448 12.970        7.215
-        fair blend (total) 16.147 12.757       -0.062
+fundamentals model (total) 16.448 12.970        7.212
+        fair blend (total) 16.147 12.757       -0.080
 
 ==========================================================================================
 B. DOES THE MODEL KNOW SOMETHING THE LINE DOESN'T?   slope of (result - market) on (model - market)
 ==========================================================================================
 slope 0 = no information beyond the line, 1 = the model is right and the line is wrong. t > 2 is evidence.
 target    period    n  slope     t
-margin 2018-2022 5356  0.022 0.622
-margin     2023+ 2941  0.085 2.153
-margin       all 8297  0.049 1.849
+margin 2018-2022 5356  0.023 0.645
+margin     2023+ 2941  0.083 2.106
+margin       all 8297  0.049 1.838
  total 2018-2022 5356  0.133 2.307
- total     2023+ 2941  0.228 2.803
- total       all 8297  0.163 3.460
+ total     2023+ 2941  0.229 2.812
+ total       all 8297  0.163 3.465
 
 ==========================================================================================
 C. WIN PROBABILITY QUALITY   (lower log loss / Brier is better)
 ==========================================================================================
                       source  accuracy  brier  log_loss
 MARKET moneyline (de-vigged)     0.735  0.173     0.516
-      fair blend (published)     0.737  0.173     0.515
+      fair blend (published)     0.736  0.173     0.515
 
 ==========================================================================================
 D. PICK RECORD - one pick per game per market, the way the site shows it (closing lines)
 ==========================================================================================
               market    period    W    L   P  win_pct  p_better
 straight up (winner) 2018-2023 4723 1498   0    0.759     0.000
-straight up (winner)     2024+ 1614  462   0    0.777     0.000
-straight up (winner)       all 6337 1960   0    0.764     0.000
-  against the spread 2018-2023 3032 3073 116    0.497     1.000
-  against the spread     2024+ 1058  981  37    0.519     0.680
-  against the spread       all 4090 4054 153    0.502     1.000
+straight up (winner)     2024+ 1612  464   0    0.776     0.000
+straight up (winner)       all 6335 1962   0    0.764     0.000
+  against the spread 2018-2023 3025 3080 116    0.495     1.000
+  against the spread     2024+ 1063  976  37    0.521     0.597
+  against the spread       all 4088 4056 153    0.502     1.000
  totals (over/under) 2018-2023 3056 3102  63    0.496     1.000
- totals (over/under)     2024+ 1067  988  21    0.519     0.670
- totals (over/under)       all 4123 4090  84    0.502     1.000
-   MODEL-ONLY winner 2018-2023 4660 1561   0    0.749     0.000
-   MODEL-ONLY winner     2024+ 1589  487   0    0.765     0.000
-   MODEL-ONLY winner       all 6249 2048   0    0.753     0.000
-   MODEL-ONLY spread 2018-2023 3035 3070 116    0.497     1.000
-   MODEL-ONLY spread     2024+ 1058  981  37    0.519     0.680
-   MODEL-ONLY spread       all 4093 4051 153    0.503     1.000
+ totals (over/under)     2024+ 1068  987  21    0.520     0.653
+ totals (over/under)       all 4124 4089  84    0.502     1.000
+   MODEL-ONLY winner 2018-2023 4663 1558   0    0.750     0.000
+   MODEL-ONLY winner     2024+ 1585  491   0    0.763     0.000
+   MODEL-ONLY winner       all 6248 2049   0    0.753     0.000
+   MODEL-ONLY spread 2018-2023 3034 3071 116    0.497     1.000
+   MODEL-ONLY spread     2024+ 1063  976  37    0.521     0.597
+   MODEL-ONLY spread       all 4097 4047 153    0.503     1.000
    MODEL-ONLY totals 2018-2023 3086 3072  63    0.501     1.000
-   MODEL-ONLY totals     2024+ 1067  988  21    0.519     0.670
-   MODEL-ONLY totals       all 4153 4060  84    0.506     1.000
+   MODEL-ONLY totals     2024+ 1068  987  21    0.520     0.653
+   MODEL-ONLY totals       all 4154 4059  84    0.506     0.999
 p_better = one-sided p-value that the true hit rate beats break-even (50% SU, 52.4% at -110).
 
 By season:
@@ -62,12 +62,12 @@ By season:
    2018 620-192 373-426-13 0.467  403-406-3   0.000   0.075
    2019 653-188 429-397-15 0.519 422-408-11   0.000   0.033
    2020 407-134 252-279-10 0.475  269-266-6   0.000   0.149
-   2021 640-209 391-444-14 0.468  416-425-8   0.021   0.163
-   2022 642-208 417-420-13 0.498 410-429-11   0.023   0.164
-   2023 668-197 435-414-16 0.512  437-419-9   0.022   0.133
-   2024 636-221 430-411-16 0.511 440-402-15   0.031   0.142
-   2025 688-200 470-401-17 0.540  453-429-6   0.035   0.162
-   2026  290-41  158-169-4 0.483  174-157-0   0.054   0.164
+   2021 640-209 397-438-14 0.475  416-425-8   0.021   0.163
+   2022 642-208 411-426-13 0.491 410-429-11   0.024   0.164
+   2023 668-197 428-421-16 0.504  437-419-9   0.023   0.133
+   2024 634-223 437-404-16 0.520 440-402-15   0.034   0.142
+   2025 687-201 463-408-17 0.532  453-429-6   0.035   0.162
+   2026  291-40  163-164-4 0.498  175-156-0   0.054   0.164
 
 ==========================================================================================
 E. VALUE BETS - only picks with EV >= 2% at the closing price
@@ -79,32 +79,32 @@ E. VALUE BETS - only picks with EV >= 2% at the closing price
     total 2018-2023   108 51 57  0 -0.098  -0.275   0.078 -1.069
     total     2024+    36 18 18  0 -0.045  -0.364   0.273 -0.282
     total       all   144 69 75  0 -0.085  -0.231   0.074 -1.069
-moneyline 2018-2023   108 38 70  0  0.017  -0.256   0.300  0.118
-moneyline     2024+    25  3 22  0 -0.548  -1.000   0.036 -2.049
-moneyline       all   133 41 92  0 -0.089  -0.333   0.174 -0.701
+moneyline 2018-2023   107 38 69  0  0.026  -0.251   0.308  0.183
+moneyline     2024+    22  3 19  0 -0.487  -1.000   0.177 -1.609
+moneyline       all   129 41 88  0 -0.061  -0.314   0.208 -0.468
 
 ==========================================================================================
 F. CALIBRATION - published win probability vs what happened
 ==========================================================================================
  games  predicted  actual
-  1043      0.152   0.148
-  1032      0.324   0.330
-  1043      0.471   0.477
-  1031      0.603   0.586
-  1037      0.719   0.725
-  1037      0.821   0.837
+  1042      0.152   0.148
+  1033      0.324   0.330
+  1045      0.472   0.478
+  1029      0.603   0.587
+  1038      0.719   0.724
+  1036      0.821   0.838
   1037      0.914   0.924
   1037      0.985   0.988
 
 ==========================================================================================
 G. OPENING LINES (2021+) - does the model predict line moves, and do picks at the OPEN win?
 ==========================================================================================
-  games: 4456. Share of (model - open) the line moves by kickoff: 0.057 (t=12.6)
+  games: 4456. Share of (model - open) the line moves by kickoff: 0.062 (t=13.4)
 
   HOLDOUT 2024+ (move share fit on 2021-2023: 0.063)
         picks at the open    n    W   L  P  win_pct  avg_CLV  beat_close  p_better
-               every game 2033 1055 954 24    0.525    0.302       0.485     0.462
-      value bets (EV>=2%)   40   28  12  0    0.700    1.244       0.725     0.018
-model 3+ pts off the open 1100  586 504 10    0.538    0.453       0.506     0.189
+               every game 2033 1053 954 26    0.525    0.330       0.477     0.479
+      value bets (EV>=2%)   39   28  11  0    0.718    1.647       0.718     0.011
+model 3+ pts off the open 1093  591 490 12    0.547    0.550       0.515     0.070
 
-College backtest 2016-2026: winners 6337-1960 (76.4%), ATS 4090-4054-153 (50.2%), model-only ATS 50.3%. Model-vs-closing-line information t=1.8.
+College backtest 2016-2026: winners 6335-1962 (76.4%), ATS 4088-4056-153 (50.2%), model-only ATS 50.3%. Model-vs-closing-line information t=1.8.

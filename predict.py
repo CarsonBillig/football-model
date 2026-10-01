@@ -78,6 +78,8 @@ def run(season=None, week=None, build_site=True):
     if wk.empty:
         raise SystemExit(f"No games for {season} week {week}.")
     wk = attach_lines(wk.reset_index(drop=True), season, week)
+    import weather
+    wk = weather.fill_forecasts(wk)                       # game-time forecast for upcoming outdoor games
     wk = pd.concat([wk, predict_models(bundle["models"], wk, features)], axis=1)
 
     L = {k: f"L_{k}" for k in LINE_MAP}
@@ -104,6 +106,8 @@ def run(season=None, week=None, build_site=True):
     log["logged_at"] = now.isoformat(timespec="seconds")
     log["kickoff"] = log["kickoff"].astype(str)
     n = ledger.record(log[log["played"].eq(False) & (pd.to_datetime(log["kickoff"], utc=True) > now)], now)
+    import snapshots
+    snapshots.save(log, OUT / "line_snapshots.csv", now)
 
     OUT.mkdir(exist_ok=True)
     keep = [c for c in ledger.COLUMNS if c in log] + ["tv", "venue", "city", "home_logo", "away_logo", "home_name",

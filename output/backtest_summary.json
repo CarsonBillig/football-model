@@ -4,18 +4,18 @@
   "games": 2175,
   "records": {
     "su": {
-      "W": 1443.0,
-      "L": 724.0,
+      "W": 1441.0,
+      "L": 726.0,
       "P": 8.0,
-      "win_pct": 0.6658975542224274,
-      "p_better": 5.792093324263447e-55
+      "win_pct": 0.6649746192893401,
+      "p_better": 2.299303482141005e-54
     },
     "ats": {
-      "W": 1092.0,
-      "L": 1028.0,
+      "W": 1113.0,
+      "L": 1007.0,
       "P": 55.0,
-      "win_pct": 0.5150943396226415,
-      "p_better": 0.7954019234881946
+      "win_pct": 0.525,
+      "p_better": 0.46507245064004754
     },
     "tot": {
       "W": 1091.0,
@@ -25,85 +25,85 @@
       "p_better": 0.9507209279029059
     },
     "mo_su": {
-      "W": 1403.0,
-      "L": 764.0,
+      "W": 1409.0,
+      "L": 758.0,
       "P": 8.0,
-      "win_pct": 0.6474388555606829,
-      "p_better": 1.1552693330652523e-43
+      "win_pct": 0.6502076603599446,
+      "p_better": 2.868816515466824e-45
     },
     "mo_ats": {
-      "W": 1084.0,
-      "L": 1036.0,
+      "W": 1082.0,
+      "L": 1038.0,
       "P": 55.0,
-      "win_pct": 0.5113207547169811,
-      "p_better": 0.8795999813649693
+      "win_pct": 0.5103773584905661,
+      "p_better": 0.8961475251752475
     },
     "mo_tot": {
-      "W": 1082.0,
-      "L": 1073.0,
+      "W": 1080.0,
+      "L": 1075.0,
       "P": 20.0,
-      "win_pct": 0.5020881670533642,
-      "p_better": 0.9793109329973378
+      "win_pct": 0.5011600928074246,
+      "p_better": 0.9832442901169232
     }
   },
   "info_margin": {
     "target": "margin",
     "period": "all",
     "n": 2175,
-    "slope": 0.05688205895243692,
-    "t": 0.5948403408728222
+    "slope": 0.06085274464213314,
+    "t": 0.6268370658157032
   },
   "info_total": {
     "target": "total",
     "period": "all",
     "n": 2175,
-    "slope": -0.08291072835157921,
-    "t": -0.7195590650134407
+    "slope": -0.03447736782784904,
+    "t": -0.29465183400422135
   },
   "opening_line_test": {
     "n": 562,
-    "move_share_spread": 0.2155122809330768,
-    "move_t_spread": 6.636970543610352,
-    "move_share_total": 0.2227902167918155,
-    "move_t_total": 5.825395720660378,
-    "beta_open_margin": 0.2155122809330768,
-    "beta_open_total": 0.2227902167918155,
+    "move_share_spread": 0.258149396876397,
+    "move_t_spread": 8.426366192600202,
+    "move_share_total": 0.2632556994193083,
+    "move_t_total": 7.0771801508299355,
+    "beta_open_margin": 0.258149396876397,
+    "beta_open_total": 0.2632556994193083,
     "holdout_ats": {
       "picks": "ATS every game",
       "n": 317,
-      "W": 140,
-      "L": 174,
+      "W": 148,
+      "L": 166,
       "P": 3,
-      "win_pct": 0.445859872611465,
-      "avg_CLV_pts": 0.5173501577287066,
-      "CLV_t": 4.362701541713438,
-      "beat_close_pct": 0.4605678233438486,
-      "p_better": 0.9976074177238106
+      "win_pct": 0.4713375796178344,
+      "avg_CLV_pts": 0.6466876971608833,
+      "CLV_t": 5.5481734972409935,
+      "beat_close_pct": 0.4889589905362776,
+      "p_better": 0.9723925825044433
     },
     "holdout_ats_value": {
       "picks": "ATS value bets (EV>=2%)",
-      "n": 7,
-      "W": 3,
-      "L": 4,
+      "n": 25,
+      "W": 9,
+      "L": 16,
       "P": 0,
-      "win_pct": 0.42857142857142855,
-      "avg_CLV_pts": 0.42857142857142855,
-      "CLV_t": 0.3110855084191275,
-      "beat_close_pct": 0.7142857142857143,
-      "p_better": 0.8106145299161058
+      "win_pct": 0.36,
+      "avg_CLV_pts": 0.72,
+      "CLV_t": 1.1054270858784676,
+      "beat_close_pct": 0.56,
+      "p_better": 0.9676443373180736
     },
     "holdout_tot": {
       "picks": "O/U every game",
       "n": 317,
-      "W": 148,
-      "L": 167,
+      "W": 156,
+      "L": 159,
       "P": 0,
-      "win_pct": 0.46984126984126984,
-      "avg_CLV_pts": 0.4,
-      "CLV_t": 3.5361596087791436,
-      "beat_close_pct": 0.43174603174603177,
-      "p_better": 0.9757628199627306
+      "win_pct": 0.49523809523809526,
+      "avg_CLV_pts": 0.5206349206349207,
+      "CLV_t": 4.667583962175493,
+      "beat_close_pct": 0.4507936507936508,
+      "p_better": 0.8580623377530268
     }
   },
-  "verdict": "Backtest 2018-2026: straight up 1443-724 (66.6%), ATS 1092-1028-55 (51.5%). ATS is below the 52.4% needed to profit at -110. Model-vs-closing-line information: t=0.6 (no reliable signal). Lines move toward the model (22% of its gap with ESPN's opener, t=6.6), but holdout picks at the open went 140-174 ATS, so that is not yet a proven, bettable edge. Picks stay market-anchored; track live CLV."
+  "verdict": "Backtest 2018-2026: straight up 1441-726 (66.5%), ATS 1113-1007-55 (52.5%). ATS is above break-even but not significant (p=0.47). Model-vs-closing-line information: t=0.6 (no reliable signal). Lines move toward the model (26% of its gap with ESPN's opener, t=8.4), but holdout picks at the open went 148-166 ATS, so that is not yet a proven, bettable edge. Picks stay market-anchored; track live CLV."
 }

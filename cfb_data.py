@@ -91,12 +91,35 @@ def talent(year: int) -> pd.DataFrame:
 
 
 def returning(year: int) -> pd.DataFrame:
+    """Share of last season's production that returns: overall and passing (a proxy for QB continuity)."""
     def fetch():
-        return pd.DataFrame(api.get("/player/returning", year=year))[["team", "percentPPA"]].rename(columns={"percentPPA": "returning"})
+        return pd.DataFrame(api.get("/player/returning", year=year))[["team", "percentPPA", "percentPassingPPA"]].rename(
+            columns={"percentPPA": "returning", "percentPassingPPA": "ret_pass"})
     try:
-        return _cached("returning", year, fetch, False)
+        return _cached("returning2", year, fetch, False)
     except Exception:
-        return pd.DataFrame(columns=["team", "returning"])
+        return pd.DataFrame(columns=["team", "returning", "ret_pass"])
+
+
+def portal(year: int) -> pd.DataFrame:
+    """Transfer portal per team: net recruiting rating of transfers in minus out, and the best incoming QB's rating."""
+    def fetch():
+        p = pd.DataFrame(api.get("/player/portal", year=year))
+        if p.empty:
+            return pd.DataFrame(columns=["team", "portal_net", "qb_in"])
+        p["rating"] = pd.to_numeric(p["rating"], errors="coerce").fillna(0.75)       # unrated transfers ~ low 3-star
+        inn = p.dropna(subset=["destination"]).groupby("destination")["rating"].sum()
+        out = p.groupby("origin")["rating"].sum()
+        qb = p[(p["position"] == "QB")].dropna(subset=["destination"]).groupby("destination")["rating"].max()
+        t = pd.DataFrame({"portal_in": inn, "portal_out": out, "qb_in": qb}).fillna(0)
+        t["portal_net"] = t["portal_in"] - t["portal_out"]
+        return t.reset_index().rename(columns={"index": "team"})[["team", "portal_net", "qb_in"]]
+    if year < 2021:                                    # the portal era: earlier years have little data
+        return pd.DataFrame(columns=["team", "portal_net", "qb_in"])
+    try:
+        return _cached("portal", year, fetch, False)
+    except Exception:
+        return pd.DataFrame(columns=["team", "portal_net", "qb_in"])
 
 
 def teams(year: int) -> pd.DataFrame:
@@ -141,10 +164,12 @@ def load_games(seasons, refresh_current=False) -> pd.DataFrame:
             for side in ("home", "away"):
                 a = adv.rename(columns={c: f"{side}_{c}" for c in adv.columns if c not in ("game_id", "team")})
                 d = d.merge(a.rename(columns={"team": f"{side}_team"}), on=["game_id", f"{side}_team"], how="left")
+        pre = [talent(yr), returning(yr), portal(yr)]
         for side in ("home", "away"):
-            for name, df in (("talent", talent(yr)), ("returning", returning(yr))):
+            for df in pre:
                 if not df.empty:
-                    d = d.merge(df.rename(columns={"team": f"{side}_team", name: f"{side}_{name}"}), on=f"{side}_team", how="left")
+                    d = d.merge(df.rename(columns={c: (f"{side}_team" if c == "team" else f"{side}_{c}") for c in df.columns}),
+                                on=f"{side}_team", how="left")
         frames.append(d)
     out = pd.concat(frames, ignore_index=True)
     for c in ("spread_line", "open_spread", "total_line", "open_total", "home_moneyline", "away_moneyline"):

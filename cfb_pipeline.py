@@ -146,6 +146,8 @@ def predict(games: pd.DataFrame, season=None, week=None) -> pd.DataFrame:
     now = pd.Timestamp.now(tz="UTC")
     todo = wk[wk["spread"].notna() & ~wk["played"] & (pd.to_datetime(wk["kickoff"], utc=True) > now)]
     n = ledger.record(todo, now, ledger.CFB_LEDGER)
+    import snapshots
+    snapshots.save(wk, OUT / "line_snapshots.csv", now)
     extra = ["tv", "venue", "city", "played", "home_name", "away_name", "home_abbr", "away_abbr", "home_logo", "away_logo",
              "home_color", "away_color", "home_alt_color", "away_alt_color", "home_record", "away_record",
              "home_rank", "away_rank", "home_conf", "away_conf", "matchup_stats", "p_home_cover", "p_spread_push",

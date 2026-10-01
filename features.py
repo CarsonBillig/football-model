@@ -1001,6 +1001,9 @@ def build_game_features(
     # ---------------------------------------------------------------
 
     g = g.copy()                                   # de-fragment after many column inserts
+    # weather for totals: strong wind and cold lower scoring (indoor games count as calm and mild)
+    g["wind_strong"] = np.clip(g["wind_mph"].fillna(g["wind_mph"].median()) - 10, 0, None)
+    g["cold"] = np.clip(40 - g["temp_f"].fillna(60), 0, None)
     g["pace_sum"] = g["h_r_plays"] + g["a_r_plays"]
     g["sr_sum"] = g["h_exp_sr"] + g["a_exp_sr"]
     g["qb_sum"] = g["h_qb_rating"] + g["a_qb_rating"]
@@ -1011,6 +1014,13 @@ def build_game_features(
     # ---------------------------------------------------------------
 
     g = add_power_ratings(g.reset_index())
+
+    # ---------------------------------------------------------------
+    # Injuries: regular starters on the official injury report
+    # ---------------------------------------------------------------
+
+    from injuries import add_injury_features
+    g = add_injury_features(g)
 
     return g, dict(FEATURES)
 
@@ -1030,10 +1040,12 @@ FEATURES = {
         "turnover_edge", "sack_edge", "qb_edge", "qb_changed_diff",
         "rest_diff", "is_neutral", "div_game",
         "res_prior", "mkt_prior",
+        "inj_off_diff", "inj_def_diff",
     ],
     "total": [
         "epa_sum", "pts_sum", "pace_sum", "sr_sum", "qb_sum", "explosive_sum",
-        "indoor", "is_neutral",
+        "indoor", "is_neutral", "wind_strong", "cold",
         "res_total_prior", "mkt_total_prior",
+        "inj_off_sum", "inj_def_sum",
     ],
 }

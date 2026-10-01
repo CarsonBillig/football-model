@@ -29,7 +29,8 @@ FIRST_SEASON, FIRST_TEST_SEASON = 2014, 2016
 
 FEATURES = {
     "margin": ["res_prior", "mkt_prior", "ppa_prior", "sr_prior", "talent_diff", "returning_diff",
-               "talent_early", "returning_early", "fcs_diff", "is_neutral"],
+               "talent_early", "returning_early", "fcs_diff", "is_neutral",
+               "ret_pass_early", "portal_early", "qb_in_early"],
     "total": ["res_total_prior", "mkt_total_prior", "ppa_total_prior", "plays_prior", "is_neutral"],
 }
 
@@ -61,6 +62,15 @@ def build_features(g: pd.DataFrame) -> pd.DataFrame:
     g["talent_early"] = g["talent_diff"] * early
     g["returning_early"] = g["returning_diff"] * early
     g["fcs_diff"] = g["home_fbs"] - g["away_fbs"]
+    # QB continuity and transfer portal: preseason information that fades as games are played
+    for c in ("ret_pass", "portal_net", "qb_in"):
+        for side in ("home", "away"):
+            if f"{side}_{c}" not in g:
+                g[f"{side}_{c}"] = np.nan
+    rp = lambda s: s.clip(0, 1.2).fillna(0.5)          # share of passing value returning (outliers capped)
+    g["ret_pass_early"] = (rp(g["home_ret_pass"]) - rp(g["away_ret_pass"])) * early
+    g["portal_early"] = (g["home_portal_net"].fillna(0) - g["away_portal_net"].fillna(0)) * early
+    g["qb_in_early"] = (g["home_qb_in"].fillna(0) - g["away_qb_in"].fillna(0)) * early
     g["is_neutral"] = (g["location"] == "Neutral").astype(int)
     return g
 
