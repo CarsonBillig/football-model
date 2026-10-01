@@ -1,16 +1,16 @@
 homeTeam,awayTeam,predicted,side,sideLine,homeScore,awayScore,margin,atsWin,valueBet,winnerPick,winnerProb,winnerResult,totalPick,totalResult,modelOnlyPredicted,modelOnlySide,modelOnlyLine,modelOnlyAtsWin,mlConfidence,spreadConfidence,totalConfidence,modelOnlyMlTested,modelOnlySpreadTested,modelOnlyTotalTested,closingLineValue,kickoff
-New Mexico State,Western Kentucky,1.74,Western Kentucky,2.5,,,,,,New Mexico State,55.7,,Under 55.5,,0.67,Western Kentucky,2.5,,55.7,50.1,50.5,56.3,49.8,49.4,,2026-10-02 00:00:00+00:00
-Tulsa,North Texas,-1.63,Tulsa,2.5,,,,,,North Texas,53.3,,Under 56.5,,1.65,Tulsa,2.5,,53.3,50.4,50.4,47.3,49.8,49.4,,2026-10-02 01:00:00+00:00
-Virginia Tech,Pittsburgh,1.98,Virginia Tech,-2.5,,,,,,Virginia Tech,56.4,,Under 54.5,,5.55,Virginia Tech,-2.5,,56.4,50.5,50.2,58.4,49.8,48.8,,2026-10-02 23:00:00+00:00
-Delaware,Liberty,-6.8,Delaware,6.5,,,,,,Liberty,66.7,,Over 50.5,,-2.12,Delaware,6.5,,66.7,50.6,50.5,70.8,50.1,49.4,,2026-10-02 23:00:00+00:00
-Northwestern,Penn State,-3.11,Penn State,-3.0,,,,,,Penn State,57.2,,Over 45.5,,-3.43,Penn State,-3.0,,57.2,50.0,50.7,57.8,49.8,50.2,,2026-10-03 00:00:00+00:00
+New Mexico State,Western Kentucky,1.74,Western Kentucky,2.5,,,,,,New Mexico State,55.7,,Under 55.5,,0.67,Western Kentucky,2.5,,55.7,50.1,50.5,55.4,49.8,49.4,,2026-10-02 00:00:00+00:00
+Tulsa,North Texas,-1.63,Tulsa,2.5,,,,,,North Texas,53.3,,Under 56.5,,1.65,Tulsa,2.5,,53.3,50.4,50.4,45.2,49.8,49.4,,2026-10-02 01:00:00+00:00
+Virginia Tech,Pittsburgh,1.98,Virginia Tech,-2.5,,,,,,Virginia Tech,56.4,,Under 54.5,,5.55,Virginia Tech,-2.5,,56.4,50.5,50.2,57.2,49.8,48.8,,2026-10-02 23:00:00+00:00
+Delaware,Liberty,-6.8,Delaware,6.5,,,,,,Liberty,66.7,,Over 49.5,,-2.12,Delaware,6.5,,66.7,50.6,50.8,70.8,50.1,50.9,,2026-10-02 23:00:00+00:00
+Northwestern,Penn State,-3.11,Penn State,-3.0,,,,,,Penn State,57.2,,Over 45.5,,-3.43,Penn State,-3.0,,57.2,50.0,50.7,58.7,49.8,50.2,,2026-10-03 00:00:00+00:00
 Mississippi State,Alabama,-6.42,Mississippi State,6.0,,,,,,Alabama,65.8,,Under 60.5,,-3.53,Mississippi State,6.0,,65.8,50.4,51.0,67.5,49.8,51.7,,2026-10-03 16:00:00+00:00
-Kansas,Middle Tennessee,18.74,Middle Tennessee,19.5,,,,,,Kansas,90.1,,Over 49.5,,13.64,Middle Tennessee,19.5,,90.1,50.7,50.5,89.8,50.7,49.4,,2026-10-03 16:00:00+00:00
+Kansas,Middle Tennessee,18.74,Middle Tennessee,19.5,,,,,,Kansas,90.1,,Over 49.5,,13.64,Middle Tennessee,19.5,,90.1,50.7,50.5,90.3,50.7,49.4,,2026-10-03 16:00:00+00:00
 Houston,UCF,12.64,Houston,-11.5,,,,,,Houston,80.9,,Over 51.5,,14.11,Houston,-11.5,,80.9,50.2,50.5,80.8,49.8,49.4,,2026-10-03 16:00:00+00:00
 Iowa State,West Virginia,3.22,Iowa State,-3.0,,,,,,Iowa State,59.6,,Under 53.5,,5.71,Iowa State,-3.0,,59.6,50.3,50.8,60.3,49.8,50.9,,2026-10-03 16:00:00+00:00
-SMU,Boston College,21.26,SMU,-21.5,,,,,,SMU,92.8,,Under 55.5,,21.59,SMU,-21.5,,92.8,50.0,52.5,92.2,49.8,52.0,,2026-10-03 16:00:00+00:00
+SMU,Boston College,21.26,SMU,-21.5,,,,,,SMU,92.8,,Under 55.5,,21.59,SMU,-21.5,,92.8,50.0,52.5,92.6,49.8,52.0,,2026-10-03 16:00:00+00:00
 North Carolina,Notre Dame,-21.25,Notre Dame,-21.5,,,,,,Notre Dame,92.2,,Over 46.5,,-21.47,Notre Dame,-21.5,,92.2,50.0,51.0,92.5,49.8,51.7,,2026-10-03 16:00:00+00:00
-Wake Forest,Stanford,13.62,Wake Forest,-13.5,,,,,,Wake Forest,82.7,,Under 53.5,,14.04,Wake Forest,-13.5,,82.7,50.1,50.4,82.7,49.8,49.4,,2026-10-03 16:00:00+00:00
+Wake Forest,Stanford,14.29,Stanford,14.0,,,,,,Wake Forest,83.8,,Under 53.5,,14.04,Stanford,14.0,,83.8,50.0,50.4,83.1,49.8,49.4,,2026-10-03 16:00:00+00:00
 UConn,Syracuse,-7.69,UConn,7.0,,,,,,Syracuse,68.9,,Over 50.5,,2.01,UConn,7.0,,68.9,51.3,50.6,32.1,51.4,49.4,,2026-10-03 16:00:00+00:00
 Minnesota,Michigan,-5.85,Minnesota,5.5,,,,,,Michigan,64.3,,Over 43.5,,-0.92,Minnesota,5.5,,64.3,50.6,50.8,67.1,50.3,50.6,,2026-10-03 16:00:00+00:00
 Air Force,Navy,4.47,Air Force,-3.5,,,,,,Air Force,62.8,,Over 46.5,,5.9,Air Force,-3.5,,62.8,50.2,52.8,61.9,49.8,52.2,,2026-10-03 16:00:00+00:00
@@ -18,43 +18,43 @@ Wisconsin,Michigan State,11.12,Michigan State,10.0,,,,,,Wisconsin,78.1,,Over 43.
 Georgia,Vanderbilt,25.01,Georgia,-25.5,,,,,,Georgia,95.6,,Over 50.5,,27.29,Georgia,-25.5,,95.6,50.3,51.2,94.5,49.8,51.7,,2026-10-03 16:45:00+00:00
 Buffalo,Western Michigan,-14.1,Buffalo,14.0,,,,,,Western Michigan,82.3,,Under 46.5,,-10.18,Buffalo,14.0,,82.3,50.6,50.5,83.5,49.8,49.4,,2026-10-03 17:00:00+00:00
 Ball State,Toledo,-19.52,Ball State,20.5,,,,,,Toledo,90.3,,Under 52.5,,-15.62,Ball State,20.5,,90.3,50.5,50.1,90.4,49.8,48.5,,2026-10-03 18:00:00+00:00
-Missouri,Florida,-5.84,Missouri,5.5,,,,,,Florida,64.3,,Under 57.5,,-0.78,Missouri,5.5,,64.3,50.7,50.1,66.5,50.4,48.5,,2026-10-03 19:30:00+00:00
+Missouri,Florida,-5.84,Missouri,5.5,,,,,,Florida,64.3,,Under 57.5,,-0.78,Missouri,5.5,,64.3,50.7,50.1,65.2,50.4,48.5,,2026-10-03 19:30:00+00:00
 Tennessee,Auburn,8.36,Tennessee,-7.0,,,,,,Tennessee,72.2,,Over 53.5,,11.59,Tennessee,-7.0,,72.2,50.4,50.6,73.3,49.8,49.4,,2026-10-03 19:30:00+00:00
 UNLV,California,1.98,UNLV,-2.5,,,,,,UNLV,56.3,,Under 53.5,,5.42,UNLV,-2.5,,56.3,50.4,50.1,58.4,49.8,48.5,,2026-10-03 19:30:00+00:00
 NC State,Louisville,-3.84,NC State,3.5,,,,,,Louisville,59.2,,Under 58.5,,6.9,NC State,3.5,,59.2,51.4,50.4,40.4,51.4,49.4,,2026-10-03 19:30:00+00:00
 Florida State,Virginia,-1.74,Florida State,2.5,,,,,,Virginia,53.6,,Over 51.5,,-0.5,Florida State,2.5,,53.6,50.2,50.5,58.1,49.8,49.4,,2026-10-03 19:30:00+00:00
 Iowa,Ohio State,-14.79,Iowa,14.5,,,,,,Ohio State,83.5,,Over 45.5,,-10.72,Iowa,14.5,,83.5,50.6,50.6,84.0,49.8,49.4,,2026-10-03 19:30:00+00:00
 Charlotte,Memphis,-19.38,Charlotte,20.5,,,,,,Memphis,90.1,,Under 52.5,,-12.82,Charlotte,20.5,,90.1,50.9,50.1,90.7,51.4,48.5,,2026-10-03 19:30:00+00:00
-UAB,Samford,29.66,UAB,-30.5,,,,,,UAB,97.9,,Over 51.5,,36.25,UAB,-30.5,,97.9,50.9,52.0,97.7,51.3,51.7,,2026-10-03 19:30:00+00:00
+UAB,Samford,29.66,UAB,-30.5,,,,,,UAB,97.9,,Over 52.5,,36.25,UAB,-30.5,,97.9,50.9,51.5,96.9,51.3,51.7,,2026-10-03 19:30:00+00:00
 North Dakota State,Wyoming,17.55,North Dakota State,-17.5,,,,,,North Dakota State,88.6,,Under 45.5,,20.7,North Dakota State,-17.5,,88.6,50.4,52.2,89.8,49.8,51.7,,2026-10-03 19:30:00+00:00
 Central Michigan,Akron,6.82,Akron,6.5,,,,,,Central Michigan,68.6,,Under 46.5,,2.41,Akron,6.5,,68.6,50.6,50.8,69.6,49.9,50.7,,2026-10-03 19:30:00+00:00
-Massachusetts,Eastern Michigan,6.13,Massachusetts,-5.5,,,,,,Massachusetts,67.0,,Under 48.5,,6.81,Massachusetts,-5.5,,67.0,50.1,50.6,67.6,49.8,49.5,,2026-10-03 19:30:00+00:00
+Massachusetts,Eastern Michigan,6.58,Massachusetts,-6.0,,,,,,Massachusetts,68.0,,Under 48.5,,6.81,Massachusetts,-6.0,,68.0,50.0,50.6,67.6,49.8,49.5,,2026-10-03 19:30:00+00:00
 Kent State,Ohio,-4.64,Ohio,-3.5,,,,,,Ohio,61.2,,Over 50.5,,-9.49,Ohio,-3.5,,61.2,50.6,50.2,63.4,50.3,48.9,,2026-10-03 19:30:00+00:00
 Miami (OH),Bowling Green,14.0,Miami (OH),-13.5,,,,,,Miami (OH),83.3,,Over 43.5,,21.77,Miami (OH),-13.5,,83.3,51.1,50.6,84.5,51.4,49.5,,2026-10-03 19:30:00+00:00
 Georgia State,Old Dominion,2.15,Georgia State,-2.5,,,,,,Georgia State,56.8,,Under 51.5,,8.96,Georgia State,-2.5,,56.8,50.9,50.2,57.9,51.4,48.5,,2026-10-03 19:30:00+00:00
-James Madison,Marshall,19.18,James Madison,-19.5,,,,,,James Madison,90.6,,Under 55.5,,22.6,James Madison,-19.5,,90.6,50.5,50.9,89.9,49.8,51.0,,2026-10-03 19:45:00+00:00
+James Madison,Marshall,18.57,James Madison,-18.5,,,,,,James Madison,89.9,,Under 56.5,,22.6,James Madison,-18.5,,89.9,50.5,51.2,89.9,49.8,51.7,,2026-10-03 19:45:00+00:00
 Nebraska,Maryland,14.86,Maryland,14.5,,,,,,Nebraska,84.7,,Under 52.5,,12.03,Maryland,14.5,,84.7,50.4,50.3,85.1,49.8,49.2,,2026-10-03 20:00:00+00:00
 New Mexico,UTEP,22.25,New Mexico,-22.5,,,,,,New Mexico,93.6,,Over 48.5,,29.19,New Mexico,-22.5,,93.6,50.9,50.9,93.7,51.4,51.3,,2026-10-03 20:00:00+00:00
-South Carolina,Kentucky,3.44,South Carolina,-3.0,,,,,,South Carolina,60.2,,Over 54.5,,10.21,South Carolina,-3.0,,60.2,50.9,50.4,61.2,51.4,49.4,,2026-10-03 20:15:00+00:00
+South Carolina,Kentucky,3.44,South Carolina,-3.0,,,,,,South Carolina,60.2,,Over 54.5,,10.21,South Carolina,-3.0,,60.2,50.9,50.4,62.1,51.4,49.4,,2026-10-03 20:15:00+00:00
 Illinois,Purdue,11.23,Illinois,-10.0,,,,,,Illinois,78.3,,Under 62.5,,12.47,Illinois,-10.0,,78.3,50.2,51.3,77.9,49.8,51.7,,2026-10-03 20:15:00+00:00
-Colorado State,Oregon State,-6.38,Colorado State,6.0,,,,,,Oregon State,65.6,,Under 61.5,,-2.57,Colorado State,6.0,,65.6,50.5,51.6,67.9,49.8,51.7,,2026-10-03 22:00:00+00:00
-Florida Atlantic,Texas Southern,44.09,Texas Southern,44.5,,,,,,Florida Atlantic,99.9,,Over 61.5,,39.96,Texas Southern,44.5,,99.9,50.5,50.8,98.1,49.8,50.5,,2026-10-03 22:00:00+00:00
+Colorado State,Oregon State,-6.83,Colorado State,6.5,,,,,,Oregon State,66.8,,Under 61.5,,-2.57,Colorado State,6.5,,66.8,50.6,51.6,67.9,49.8,51.7,,2026-10-03 22:00:00+00:00
+Florida Atlantic,Texas Southern,43.39,Texas Southern,43.5,,,,,,Florida Atlantic,99.8,,Over 61.5,,39.96,Texas Southern,43.5,,99.8,50.4,50.8,98.1,49.8,50.5,,2026-10-03 22:00:00+00:00
 Texas A&M,Arkansas,14.63,Texas A&M,-14.0,,,,,,Texas A&M,84.4,,Over 50.5,,21.12,Texas A&M,-14.0,,84.4,50.9,50.7,85.3,51.4,49.9,,2026-10-03 23:00:00+00:00
-TCU,BYU,-6.37,TCU,6.0,,,,,,BYU,65.6,,Over 47.5,,-2.35,TCU,6.0,,65.6,50.5,51.3,67.8,49.8,51.7,,2026-10-03 23:00:00+00:00
+TCU,BYU,-6.82,TCU,6.5,,,,,,BYU,66.7,,Over 47.5,,-2.35,TCU,6.5,,66.7,50.6,51.3,67.8,49.9,51.7,,2026-10-03 23:00:00+00:00
 Rice,UTSA,-12.42,Rice,11.5,,,,,,UTSA,79.2,,Under 56.5,,-9.63,Rice,11.5,,79.2,50.4,51.1,80.1,49.8,51.7,,2026-10-03 23:00:00+00:00
 Coastal Carolina,Georgia Southern,-0.93,Coastal Carolina,1.5,,,,,,Georgia Southern,51.4,,Under 53.5,,0.63,Coastal Carolina,1.5,,51.4,50.2,50.7,48.1,49.8,50.1,,2026-10-03 23:00:00+00:00
 South Alabama,UL Monroe,14.49,South Alabama,-14.0,,,,,,South Alabama,84.2,,Under 57.5,,18.23,South Alabama,-14.0,,84.2,50.5,51.4,84.9,49.8,51.7,,2026-10-03 23:00:00+00:00
-Colorado,Texas Tech,-12.98,Colorado,12.5,,,,,,Texas Tech,80.2,,Under 50.5,,-12.17,Colorado,12.5,,80.2,50.1,50.0,82.0,49.8,48.5,,2026-10-03 23:30:00+00:00
+Colorado,Texas Tech,-12.98,Colorado,12.5,,,,,,Texas Tech,80.2,,Under 50.5,,-12.17,Colorado,12.5,,80.2,50.1,50.0,82.4,49.8,48.5,,2026-10-03 23:30:00+00:00
 Clemson,Miami,-16.01,Clemson,16.5,,,,,,Miami,85.5,,Over 47.5,,-13.98,Clemson,16.5,,85.5,50.3,51.1,87.1,49.8,51.7,,2026-10-03 23:30:00+00:00
-USC,Washington,10.71,USC,-9.5,,,,,,USC,77.2,,Under 58.5,,14.94,USC,-9.5,,77.2,50.6,50.7,78.2,49.9,49.8,,2026-10-03 23:30:00+00:00
-Boise State,Utah State,19.73,Boise State,-20.5,,,,,,Boise State,91.2,,Under 51.5,,20.06,Boise State,-20.5,,91.2,50.0,50.6,91.7,49.8,49.4,,2026-10-03 23:30:00+00:00
+USC,Washington,10.34,USC,-8.5,,,,,,USC,76.5,,Under 58.5,,14.94,USC,-8.5,,76.5,50.6,50.7,77.7,50.2,49.8,,2026-10-03 23:30:00+00:00
+Boise State,Utah State,19.05,Boise State,-19.5,,,,,,Boise State,90.5,,Under 51.5,,20.06,Boise State,-19.5,,90.5,50.1,50.6,91.3,49.8,49.4,,2026-10-03 23:30:00+00:00
 South Florida,Temple,7.47,South Florida,-6.5,,,,,,South Florida,70.1,,Over 48.5,,15.71,South Florida,-6.5,,70.1,51.1,51.8,71.8,51.4,51.7,,2026-10-03 23:30:00+00:00
-Louisiana Tech,Army,-0.69,Louisiana Tech,1.5,,,,,,Army,50.8,,Over 47.5,,5.58,Louisiana Tech,1.5,,50.8,50.8,51.2,49.0,51.1,51.7,,2026-10-03 23:30:00+00:00
-LSU,McNeese,56.86,LSU,-53.5,,,,,,LSU,100.0,,Under 61.5,,60.03,LSU,-53.5,,100.0,50.3,52.5,98.1,49.8,51.9,,2026-10-03 23:45:00+00:00
+Louisiana Tech,Army,-1.44,Louisiana Tech,2.5,,,,,,Army,52.8,,Over 47.5,,5.58,Louisiana Tech,2.5,,52.8,50.9,51.2,49.0,51.4,51.7,,2026-10-03 23:30:00+00:00
+LSU,McNeese,56.86,LSU,-53.5,,,,,,LSU,100.0,,Under 62.5,,60.03,LSU,-53.5,,100.0,50.3,52.9,98.1,49.8,52.3,,2026-10-03 23:45:00+00:00
 Rutgers,Indiana,-23.54,Rutgers,24.5,,,,,,Indiana,94.2,,Over 56.5,,-15.49,Rutgers,24.5,,94.2,51.1,50.2,93.3,51.4,48.5,,2026-10-04 00:00:00+00:00
-Louisiana,Arkansas State,7.15,Louisiana,-6.5,,,,,,Louisiana,69.4,,Over 47.5,,9.31,Louisiana,-6.5,,69.4,50.3,50.7,70.7,49.8,49.7,,2026-10-04 00:00:00+00:00
+Louisiana,Arkansas State,7.15,Louisiana,-6.5,,,,,,Louisiana,69.4,,Over 47.5,,9.31,Louisiana,-6.5,,69.4,50.3,50.7,71.2,49.8,49.7,,2026-10-04 00:00:00+00:00
 Washington State,Fresno State,1.17,Washington State,-1.5,,,,,,Washington State,54.2,,Under 45.5,,4.22,Washington State,-1.5,,54.2,50.4,51.4,54.5,49.8,51.7,,2026-10-04 01:30:00+00:00
 Arizona State,Baylor,4.32,Baylor,3.5,,,,,,Arizona State,62.4,,Over 49.5,,2.98,Baylor,3.5,,62.4,50.2,50.1,63.6,49.8,48.5,,2026-10-04 02:30:00+00:00
-San Diego State,Texas State,-8.72,San Diego State,7.5,,,,,,Texas State,71.3,,Over 57.5,,3.03,San Diego State,7.5,,71.3,51.5,50.6,29.6,51.5,49.4,,2026-10-04 02:30:00+00:00
-Arizona,Cincinnati,7.4,Arizona,-6.5,,,,,,Arizona,70.0,,Over 55.5,,14.4,Arizona,-6.5,,70.0,50.9,50.3,71.6,51.4,49.1,,2026-10-04 03:00:00+00:00
+San Diego State,Texas State,-9.46,San Diego State,8.5,,,,,,Texas State,73.0,,Over 57.5,,3.03,San Diego State,8.5,,73.0,51.7,50.6,28.4,51.5,49.4,,2026-10-04 02:30:00+00:00
+Arizona,Cincinnati,7.4,Arizona,-6.5,,,,,,Arizona,70.0,,Under 56.5,,14.4,Arizona,-6.5,,70.0,50.9,50.0,71.6,51.4,48.5,,2026-10-04 03:00:00+00:00
 Hawai'i,San José State,3.43,Hawai'i,-3.0,,,,,,Hawai'i,60.1,,Under 51.5,,9.88,Hawai'i,-3.0,,60.1,50.9,50.1,61.1,51.4,48.5,,2026-10-04 03:59:00+00:00
