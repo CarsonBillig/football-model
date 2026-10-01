@@ -572,7 +572,6 @@ def game_row(r) -> str:
     <div class="pickrow"><span class="lbl">Total pick</span><span class="val">{both(pick('', 'tot'), pick('mo_', 'tot'))}</span></div>
     {ml_value}
   </div>
-  {both(confidence_html(r), confidence_html(r, "mo_"))}
   {stats_html(r)}
   <button class="open-mx" type="button">Open matchup view <span aria-hidden="true">↗</span></button>
   <template class="mx">{matchup_view(r)}</template>
@@ -789,13 +788,9 @@ $spotlight
       <div><h4>Model pick and total pick</h4><p>The side to take against the spread and on the total, with the model's chance of winning the bet (pushes ignored). In Model only view the gray number is how many points the model disagrees with the book instead, because its raw percentages ran too high in testing.</p></div></div>
     <div class="lg"><div class="ex"><span class="mono"><b>DET −2.5</b><span class="tag">Value</span></span></div>
       <div><h4>Value bet</h4><p>Only shown when a pick is expected to earn at least +2% at the listed price. Open <b>Details</b> on a game for the exact value and a suggested stake. Without the tag, a pick is a lean and the stake says pass.</p></div></div>
-    <div class="lg"><div class="ex" style="width:100%"><div class="cf" style="grid-template-columns:1fr 70px"><span class="cm"><span class="meter"><i style="width:69%"></i><s style="left:65.5%"></s></span><b>69%</b></span><span class="cu up">+3.5</span></div></div>
-      <div><h4>Confidence</h4><p>For the moneyline, spread and total picks: the model's <b>hit chance</b> (the dark bar), the win rate the price
-      <b>needs</b> just to break even (the orange tick), and the <b>cushion</b> between them. <b>Likeliest</b> marks the bet most likely to
-      win, usually the moneyline, which pays least. <b>Best bet</b> marks the pick with the biggest cushion, but only when it
-      clears the value bar (+2% expected profit). A tiny cushion is within noise, so that game says it's a lean. In testing these percentages were honest: 65% moneyline picks won 65%, 75% won 75%.
-      In <b>Model only</b> view the pure model's own claim is shown as "model said" and the bar is its <b>tested</b> hit chance:
-      how often picks like that actually won in the backtest.</p></div></div>
+    <div class="lg"><div class="ex"><span class="lbl">Open matchup view ↗</span></div>
+      <div><h4>Matchup view</h4><p>Click any game to see the chance of every bet hitting (both moneylines, both spread sides, over and under)
+      next to what each price needs to break even, plus a side-by-side graph of every team stat.</p></div></div>
     <div class="lg"><div class="ex"><span><span class="mk win">✓</span> won &nbsp;<span class="mk loss">✗</span> lost &nbsp;<span class="mk push">P</span> push</span></div>
       <div><h4>Results</h4><p>After games are graded, each pick is marked. A push means the final margin landed exactly on the line, so the bet is refunded.</p></div></div>
     <div class="lg"><div class="ex"><span class="chip">in 2h 10m</span><span class="chip locked">Locked</span><span class="chip final">Final</span></div>
