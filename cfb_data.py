@@ -122,6 +122,27 @@ def portal(year: int) -> pd.DataFrame:
         return pd.DataFrame(columns=["team", "portal_net", "qb_in"])
 
 
+def coaches() -> pd.DataFrame:
+    """Head coach per team and season, and whether it is his first season at that school (one API call, re-fetched
+    only when a new season is missing)."""
+    f = CACHE / "coaches.parquet"
+    if f.exists():
+        df = pd.read_parquet(f)
+        if df["year"].max() >= current_season():
+            return df
+    try:
+        rows = api.get("/coaches", minYear=2010, maxYear=current_season())
+    except Exception:
+        return pd.read_parquet(f) if f.exists() else pd.DataFrame(columns=["team", "year", "new_coach"])
+    co = pd.DataFrame([{"coach": f"{c.get('firstName')} {c.get('lastName')}", "team": s["school"], "year": s["year"],
+                        "games": s.get("games") or 0} for c in rows for s in c.get("seasons", [])])
+    co = co.sort_values(["team", "year", "games"]).groupby(["team", "year"]).tail(1)      # main coach that season
+    co["new_coach"] = (co["year"] == co.groupby(["coach", "team"])["year"].transform("min")).astype(int)
+    co = co[["team", "year", "new_coach"]].reset_index(drop=True)
+    co.to_parquet(f)
+    return co
+
+
 def teams(year: int) -> pd.DataFrame:
     """FBS team info for the page: abbreviation, colors, logos."""
     def fetch():
@@ -136,6 +157,7 @@ def teams(year: int) -> pd.DataFrame:
 def load_games(seasons, refresh_current=False) -> pd.DataFrame:
     """All games involving at least one FBS team, in the NFL-pipeline schema, with lines and per-game efficiency."""
     frames = []
+    co = coaches()
     for yr in seasons:
         fresh = refresh_current and yr >= current_season()
         g = games(yr, fresh)
@@ -164,7 +186,7 @@ def load_games(seasons, refresh_current=False) -> pd.DataFrame:
             for side in ("home", "away"):
                 a = adv.rename(columns={c: f"{side}_{c}" for c in adv.columns if c not in ("game_id", "team")})
                 d = d.merge(a.rename(columns={"team": f"{side}_team"}), on=["game_id", f"{side}_team"], how="left")
-        pre = [talent(yr), returning(yr), portal(yr)]
+        pre = [talent(yr), returning(yr), portal(yr), co.loc[co["year"] == yr, ["team", "new_coach"]]]
         for side in ("home", "away"):
             for df in pre:
                 if not df.empty:
