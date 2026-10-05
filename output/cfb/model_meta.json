@@ -292,7 +292,7 @@
   },
   "training_games": 10281,
   "trained_through": "2026 week 5",
-  "trained_at": "2026-10-04T12:04:09+00:00",
+  "trained_at": "2026-10-05T13:18:30+00:00",
   "verdict": "College backtest 2016-2026: winners 6335-1962 (76.4%), ATS 4082-4062-153 (50.1%), model-only ATS 50.3%. Model-vs-closing-line information t=1.9.",
   "backtest_records": {
     "su": {
