@@ -2,6 +2,9 @@
 
 One row per game. Re-running predict.py before kickoff refreshes a game's row with the latest lines; once a game
 has kicked off its row is locked, so the record only ever reflects picks you could actually have made.
+
+The FIRST spread and total pick posted for each game (early_* columns) is kept as well and never refreshed: our edge
+in testing came from betting early, so the early picks and their closing-line value are graded separately.
 """
 from __future__ import annotations
 
@@ -30,7 +33,12 @@ COLUMNS = [
     # grading
     "home_score", "away_score", "su_out", "ats_out", "tot_out", "ml_out", "mo_su_out", "mo_ats_out", "mo_tot_out",
     "ats_profit", "tot_profit", "ml_profit", "close_spread", "close_total", "ats_clv", "tot_clv",
+    # first posted picks (kept from the first run that logged the game)
+    "early_logged_at", "early_spread", "early_ats_pick", "early_total", "early_tot_pick",
+    "early_ats_out", "early_tot_out", "early_ats_clv", "early_tot_clv",
 ]
+EARLY = {"early_logged_at": "logged_at", "early_spread": "spread", "early_ats_pick": "ats_pick",
+         "early_total": "total_line", "early_tot_pick": "tot_pick"}
 
 
 CFB_LEDGER = Path("output/cfb/ledger.csv")
@@ -55,6 +63,12 @@ def record(new: pd.DataFrame, now: pd.Timestamp, path: Path | None = None):
     kick = pd.to_datetime(old["kickoff"], utc=True, errors="coerce")
     locked = old["su_out"].notna() | (kick <= now)
     keep = old[locked | ~old["game_id"].isin(new["game_id"])]
-    fresh = new[~new["game_id"].isin(keep["game_id"])]
-    save(pd.concat([keep, fresh.reindex(columns=COLUMNS)], ignore_index=True), path)
+    fresh = new[~new["game_id"].isin(keep["game_id"])].reindex(columns=COLUMNS)
+    # first posted picks: carried over from the earlier row if there is one, otherwise this run's picks
+    prev = old[~locked].drop_duplicates("game_id", keep="last").set_index("game_id")
+    for early, now_col in EARLY.items():
+        first = fresh["game_id"].map(prev[early]) if len(prev) else pd.Series(index=fresh.index, dtype=object)
+        legacy = fresh["game_id"].map(prev[now_col]) if len(prev) else first      # rows logged before early_* existed
+        fresh[early] = first.where(first.notna(), legacy).where(lambda s: s.notna(), fresh[now_col]).astype(object)
+    save(pd.concat([keep, fresh], ignore_index=True), path)
     return len(fresh)

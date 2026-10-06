@@ -54,6 +54,16 @@ def grade_ledger(df: pd.DataFrame, schedule: pd.DataFrame | None = None) -> pd.D
     # home-favored-positive: a home pick gains when the close is bigger than the number you got
     d["ats_clv"] = (d["close_spread"] - d["spread"].astype(float)) * ats_side
     d["tot_clv"] = (d["close_total"] - d["total_line"].astype(float)) * tot_side
+    # first posted picks (what you would have bet early in the week)
+    if "early_ats_pick" in d:
+        e_ats = np.where(d["early_ats_pick"] == home, 1, -1)
+        e_spread = pd.to_numeric(d["early_spread"], errors="coerce").to_numpy(float)
+        d["early_ats_out"] = np.where(d["early_ats_pick"].isna(), np.nan, np.sign((margin - e_spread) * e_ats))
+        d["early_ats_clv"] = np.where(d["early_ats_pick"].isna(), np.nan, (d["close_spread"] - e_spread) * e_ats)
+        e_tot = np.where(d["early_tot_pick"] == "OVER", 1, -1)
+        e_total = pd.to_numeric(d["early_total"], errors="coerce").to_numpy(float)
+        d["early_tot_out"] = np.where(d["early_tot_pick"].isna(), np.nan, np.sign((total - e_total) * e_tot))
+        d["early_tot_clv"] = np.where(d["early_tot_pick"].isna(), np.nan, (d["close_total"] - e_total) * e_tot)
     for c in d.columns:                             # the ledger can load all-NaN columns as float; allow mixed types
         if df[c].dtype != d[c].dtype:
             df[c] = df[c].astype(object)
@@ -76,6 +86,12 @@ def summary(df: pd.DataFrame) -> dict:
         out[f"value_{m}"] = {"W": int((o > 0).sum()), "L": int((o < 0).sum()), "P": int((o == 0).sum()),
                              "units": float(v[f"{m}_profit"].astype(float).sum()) if len(v) else 0.0}
     out["ats_clv"] = float(g["ats_clv"].astype(float).mean()) if len(g) else None
+    for m in ("ats", "tot"):
+        o = pd.to_numeric(g.get(f"early_{m}_out", pd.Series(dtype=float)), errors="coerce").dropna()
+        c = pd.to_numeric(g.get(f"early_{m}_clv", pd.Series(dtype=float)), errors="coerce").dropna()
+        out[f"early_{m}"] = {"W": int((o > 0).sum()), "L": int((o < 0).sum()), "P": int((o == 0).sum()),
+                             "clv": float(c.mean()) if len(c) else None, "beat": float((c > 0).mean()) if len(c) else None,
+                             "n_clv": int(len(c))}
     out["graded"] = int(len(g))
     return out
 
@@ -100,6 +116,11 @@ def main(path=None, schedule=None, label="NFL"):
         print(f"  value {m:4s} bets   {r['W']}-{r['L']}-{r['P']}  {r['units']:+.2f} units")
     if s["ats_clv"] is not None and not np.isnan(s["ats_clv"]):
         print(f"  avg spread CLV   {s['ats_clv']:+.2f} pts (positive = you beat the closing number)")
+    for m, name in (("ats", "spread"), ("tot", "total")):
+        r = s.get(f"early_{m}")
+        if r and r["W"] + r["L"] + r["P"]:
+            clv = f", CLV {r['clv']:+.2f} pts, beat the close {r['beat']:.0%}" if r["clv"] is not None else ""
+            print(f"  first-posted {name} picks {r['W']}-{r['L']}-{r['P']}{clv}")
     return s
 
 
