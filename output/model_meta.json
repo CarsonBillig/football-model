@@ -276,7 +276,7 @@
   },
   "training_games": 3215,
   "trained_through": "2026 week 4",
-  "trained_at": "2026-10-06T13:25:43+00:00",
+  "trained_at": "2026-10-08T13:34:33+00:00",
   "verdict": "Backtest 2018-2026: straight up 1441-726 (66.5%), ATS 1113-1007-55 (52.5%). ATS is above break-even but not significant (p=0.47). Model-vs-closing-line information: t=0.6 (no reliable signal). Lines move toward the model (26% of its gap with ESPN's opener, t=8.4), but holdout picks at the open went 148-166 ATS, so that is not yet a proven, bettable edge. Picks stay market-anchored; track live CLV.",
   "backtest_records": {
     "su": {

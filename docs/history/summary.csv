@@ -1,7 +1,7 @@
 sport,season,week,games,atsW,atsL,atsP,winnerW,winnerL,winnerP,totalW,totalL,totalP,modelOnlyAtsW,modelOnlyAtsL,modelOnlyAtsP,valueW,valueL,valueP,avgCLV,atsPct,winnerPct,totalPct,modelOnlyAtsPct,valuePct
 College,2026,5,59,23,35,1,43,16,0,25,34,0,23,35,1,0,0,0,-0.26,39.7,72.9,42.4,39.7,
-College,2026,6,58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,,,
+College,2026,6,58,2,1,0,3,0,0,2,1,0,2,1,0,0,0,0,1.0,66.7,100.0,66.7,66.7,
 NFL,2026,4,16,8,6,2,9,7,0,11,5,0,11,3,2,0,0,0,0.06,57.1,56.2,68.8,78.6,
 NFL,2026,5,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,,,
-College,2026,Season,117,23,35,1,43,16,0,25,34,0,23,35,1,0,0,0,,39.7,72.9,42.4,39.7,
+College,2026,Season,117,25,36,1,46,16,0,27,35,0,25,36,1,0,0,0,,41.0,74.2,43.5,41.0,
 NFL,2026,Season,31,8,6,2,9,7,0,11,5,0,11,3,2,0,0,0,,57.1,56.2,68.8,78.6,
