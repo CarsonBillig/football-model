@@ -30,7 +30,7 @@ FIRST_SEASON, FIRST_TEST_SEASON = 2014, 2016
 FEATURES = {
     "margin": ["res_prior", "mkt_prior", "ppa_prior", "sr_prior", "talent_diff", "returning_diff",
                "talent_early", "returning_early", "fcs_diff", "is_neutral",
-               "ret_pass_early", "portal_early", "qb_in_early", "coach_early"],
+               "ret_pass_early", "portal_early", "qb_in_early", "coach_early", "in_ppa_early"],
     "total": ["res_total_prior", "mkt_total_prior", "ppa_total_prior", "plays_prior", "is_neutral"],
 }
 
@@ -83,6 +83,11 @@ def build_features(g: pd.DataFrame, results: pd.DataFrame | None = None) -> pd.D
         if f"{side}_new_coach" not in g:
             g[f"{side}_new_coach"] = np.nan
     g["coach_early"] = (g["home_new_coach"].fillna(0) - g["away_new_coach"].fillna(0)) * early
+    # incoming transfers' production at their previous school (returning production only counts what a team loses)
+    for side in ("home", "away"):
+        if f"{side}_in_ppa" not in g:
+            g[f"{side}_in_ppa"] = np.nan
+    g["in_ppa_early"] = (g["home_in_ppa"].fillna(0) - g["away_in_ppa"].fillna(0)) * early
     g["is_neutral"] = (g["location"] == "Neutral").astype(int)
     return g
 

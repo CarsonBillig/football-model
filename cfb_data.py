@@ -172,6 +172,35 @@ def coaches() -> pd.DataFrame:
     return co
 
 
+def _player_key(first, last) -> pd.Series:
+    name = (pd.Series(first).fillna("").astype(str) + " " + pd.Series(last).fillna("").astype(str)).str.lower()
+    return name.str.replace(r"[^a-z ]", "", regex=True).str.replace(r"\b(jr|sr|ii|iii|iv)\b", "", regex=True).str.split().str.join(" ")
+
+
+def incoming_production(year: int) -> pd.DataFrame:
+    """What each team gains from incoming transfers: their offensive production (total PPA) at their previous school
+    last season, and the passing production of the best incoming QB. Returning production only counts what a team
+    loses, so this is the missing half. One cached call per season for the transfer list and for player production."""
+    empty = pd.DataFrame(columns=["team", "in_ppa", "in_qb_ppa"])
+    if year < 2021:                                    # the portal era
+        return empty
+    try:
+        moves = _cached("portal_raw", year, lambda: pd.DataFrame(api.get("/player/portal", year=year)), False)
+        prev = _cached("player_ppa", year - 1, lambda: pd.json_normalize(
+            api.get("/ppa/players/season", year=year - 1, excludeGarbageTime="true")), False)
+    except Exception:
+        return empty
+    moves = moves.dropna(subset=["destination"]).assign(key=lambda m: _player_key(m["firstName"], m["lastName"]).values)
+    prev = prev.assign(key=_player_key(prev["name"].str.split(" ", n=1).str[0], prev["name"].str.split(" ", n=1).str[1]).values)
+    prev = prev.rename(columns={"team": "origin", "totalPPA.all": "ppa", "totalPPA.pass": "ppa_pass"})
+    m = moves.merge(prev[["key", "origin", "ppa", "ppa_pass"]].drop_duplicates(["key", "origin"]), on=["key", "origin"], how="inner")
+    if m.empty:
+        return empty
+    qb = m[m["position"] == "QB"].groupby("destination")["ppa_pass"].max()
+    out = pd.DataFrame({"in_ppa": m.groupby("destination")["ppa"].sum(), "in_qb_ppa": qb}).fillna(0)
+    return out.reset_index().rename(columns={"destination": "team"})
+
+
 def teams(year: int) -> pd.DataFrame:
     """FBS team info for the page: abbreviation, colors, logos."""
     def fetch():
@@ -215,7 +244,8 @@ def load_games(seasons, refresh_current=False) -> pd.DataFrame:
             for side in ("home", "away"):
                 a = adv.rename(columns={c: f"{side}_{c}" for c in adv.columns if c not in ("game_id", "team")})
                 d = d.merge(a.rename(columns={"team": f"{side}_team"}), on=["game_id", f"{side}_team"], how="left")
-        pre = [talent(yr), returning(yr), portal(yr), co.loc[co["year"] == yr, ["team", "new_coach"]]]
+        pre = [talent(yr), returning(yr), portal(yr), co.loc[co["year"] == yr, ["team", "new_coach"]],
+               incoming_production(yr)]
         for side in ("home", "away"):
             for df in pre:
                 if not df.empty:
