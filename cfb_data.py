@@ -45,6 +45,35 @@ def games(year: int, refresh=False) -> pd.DataFrame:
     return _cached("games", year, fetch, refresh)
 
 
+def fcs_games(year: int, refresh=False) -> pd.DataFrame:
+    """Every FCS game (FCS vs FCS included), so FCS teams can be rated individually instead of as one block."""
+    def fetch():
+        rows = api.get("/games", year=year, seasonType="regular", classification="fcs") + \
+               api.get("/games", year=year, seasonType="postseason", classification="fcs")
+        return pd.json_normalize(rows)
+    return _cached("fcs_games", year, fetch, refresh)
+
+
+def all_results(seasons, refresh_current=False) -> pd.DataFrame:
+    """Final scores of every FBS and FCS game (either side), in the schema the power ratings use."""
+    frames = []
+    for yr in seasons:
+        fresh = refresh_current and yr >= current_season()
+        for g in (games(yr, fresh), fcs_games(yr, fresh)):
+            if g.empty:
+                continue
+            g = g[g["homeClassification"].isin(["fbs", "fcs"]) & g["awayClassification"].isin(["fbs", "fcs"])]
+            frames.append(pd.DataFrame({
+                "game_id": g["id"].astype(int), "season": g["season"].astype(int),
+                "week": g["week"].astype(int) + np.where(g["seasonType"] == "postseason", 20, 0),
+                "game_type": np.where(g["seasonType"] == "postseason", "POST", "REG"),
+                "home_team": g["homeTeam"], "away_team": g["awayTeam"],
+                "location": np.where(g["neutralSite"].fillna(False), "Neutral", "Home"),
+                "result": pd.to_numeric(g["homePoints"], errors="coerce") - pd.to_numeric(g["awayPoints"], errors="coerce"),
+            }))
+    return pd.concat(frames, ignore_index=True).drop_duplicates("game_id")
+
+
 def lines(year: int, refresh=False) -> pd.DataFrame:
     """One row per game: median closing/opening spread and total across books, moneyline from the preferred book."""
     def fetch():

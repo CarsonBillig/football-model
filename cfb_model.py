@@ -35,8 +35,11 @@ FEATURES = {
 }
 
 
-def build_features(g: pd.DataFrame) -> pd.DataFrame:
-    """Pre-game features for every game. Ratings only ever use games from earlier weeks."""
+def build_features(g: pd.DataFrame, results: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Pre-game features for every game. Ratings only ever use games from earlier weeks.
+
+    results: every FBS and FCS final score (cfb_data.all_results). When given, games against an FCS team use a results
+    rating in which each FCS team is rated on its own (FCS-vs-FCS games included) instead of one shared 'FCS' rating."""
     g = g.copy()
     r = g.assign(home_team=np.where(g["home_fbs"] == 1, g["home_team"], "FCS"),
                  away_team=np.where(g["away_fbs"] == 1, g["away_team"], "FCS"))
@@ -46,6 +49,10 @@ def build_features(g: pd.DataFrame) -> pd.DataFrame:
     r["plays_sum"] = g["home_off_plays"] + g["away_off_plays"]
     kw = dict(hl_weeks=8, season_carry=0.45, alpha=3.0)
     g["res_prior"] = pregame_rating(r, "result", **kw)
+    if results is not None:
+        by_id = pd.Series(pregame_rating(results, "result", **kw).values, index=results["game_id"].values)
+        fcs_game = (g["home_fbs"] + g["away_fbs"]) < 2
+        g.loc[fcs_game, "res_prior"] = g.loc[fcs_game, "game_id"].map(by_id).fillna(g.loc[fcs_game, "res_prior"])
     g["mkt_prior"] = pregame_rating(r, "spread_line", hl_weeks=4, season_carry=0.5, alpha=1.0)
     g["ppa_prior"] = pregame_rating(r, "net_ppa", **kw)
     g["sr_prior"] = pregame_rating(r, "net_sr", **kw)
@@ -81,7 +88,8 @@ def build_features(g: pd.DataFrame) -> pd.DataFrame:
 
 
 def load(refresh_current=False) -> pd.DataFrame:
-    return build_features(cfb_data.load_games(range(FIRST_SEASON, cfb_data.current_season() + 1), refresh_current))
+    seasons = range(FIRST_SEASON, cfb_data.current_season() + 1)
+    return build_features(cfb_data.load_games(seasons, refresh_current), cfb_data.all_results(seasons, refresh_current))
 
 
 # ------------------------------------------------------------------------------------------------ opening lines
