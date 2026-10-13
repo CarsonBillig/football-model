@@ -1,9 +1,9 @@
 homeTeam,awayTeam,predicted,side,sideLine,homeScore,awayScore,margin,atsWin,valueBet,winnerPick,winnerProb,winnerResult,totalPick,totalResult,modelOnlyPredicted,modelOnlySide,modelOnlyLine,modelOnlyAtsWin,mlConfidence,spreadConfidence,totalConfidence,modelOnlyMlTested,modelOnlySpreadTested,modelOnlyTotalTested,closingLineValue,kickoff
-Denver Broncos,Seattle Seahawks,-2.31,Seattle Seahawks,-2.5,,,,,,Seattle Seahawks,59.2,,Over 40.5,,-0.11,Denver Broncos,2.5,,59.2,51.1,50.4,57.8,51.3,49.8,,2026-10-16 00:15:00+00:00
+Denver Broncos,Seattle Seahawks,-2.31,Seattle Seahawks,-2.5,,,,,,Seattle Seahawks,59.2,,Over 40.5,,-0.11,Denver Broncos,2.5,,59.2,51.1,50.4,59.0,51.3,49.8,,2026-10-16 00:15:00+00:00
 Jacksonville Jaguars,Houston Texans,2.5,Houston Texans,3.0,,,,,,Jacksonville Jaguars,57.0,,Over 42.5,,2.38,Houston Texans,3.0,,57.0,52.2,51.7,57.5,50.8,49.8,,2026-10-18 13:30:00+00:00
 Cleveland Browns,Baltimore Ravens,-4.95,Cleveland Browns,4.5,,,,,,Baltimore Ravens,67.6,,Over 40.5,,-4.49,Cleveland Browns,4.5,,67.6,51.2,51.1,67.3,50.8,49.8,,2026-10-18 17:00:00+00:00
 Philadelphia Eagles,Carolina Panthers,0.88,Carolina Panthers,1.5,,,,,,Philadelphia Eagles,51.5,,Over 41.5,,2.93,Philadelphia Eagles,-1.5,,51.5,50.5,51.1,50.7,51.3,49.7,,2026-10-18 17:00:00+00:00
-Atlanta Falcons,Chicago Bears,-3.47,Chicago Bears,-3.0,,,,,,Chicago Bears,63.0,,Under 49.5,,0.57,Atlanta Falcons,3.0,,63.0,50.9,50.4,38.8,51.3,52.4,,2026-10-18 17:00:00+00:00
+Atlanta Falcons,Chicago Bears,-3.47,Chicago Bears,-3.0,,,,,,Chicago Bears,63.0,,Under 49.5,,0.57,Atlanta Falcons,3.0,,63.0,50.9,50.4,38.2,51.3,52.4,,2026-10-18 17:00:00+00:00
 New York Giants,New Orleans Saints,0.45,New Orleans Saints,1.5,,,,,,New York Giants,50.1,,Under 45.5,,1.85,New York Giants,-1.5,,50.1,51.8,50.4,49.8,50.6,50.0,,2026-10-18 17:00:00+00:00
 New England Patriots,New York Jets,8.77,New York Jets,7.5,,,,,,New England Patriots,76.2,,Over 43.5,,8.6,New York Jets,7.5,,76.2,51.1,51.1,76.2,50.2,49.8,,2026-10-18 17:00:00+00:00
 Tampa Bay Buccaneers,Pittsburgh Steelers,-2.36,Tampa Bay Buccaneers,3.0,,,,,,Pittsburgh Steelers,59.4,,Over 40.5,,0.54,Tampa Bay Buccaneers,3.0,,59.4,52.7,50.0,42.3,51.3,49.6,,2026-10-18 17:00:00+00:00

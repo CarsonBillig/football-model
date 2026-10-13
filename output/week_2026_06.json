@@ -1,6 +1,6 @@
 [
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_SEA_DEN",
@@ -19,7 +19,7 @@
   "mkt_total":41.040062281,
   "p_home_win":0.4083139049,
   "p_home_win_raw":0.4307377047,
-  "mkt_p_home_win":0.4279403644,
+  "mkt_p_home_win":0.417007359,
   "open_spread":-2.5,
   "spread":-2.5,
   "home_spread_odds":-102.0,
@@ -28,8 +28,8 @@
   "total_line":40.5,
   "over_odds":-112.0,
   "under_odds":-108.0,
-  "home_ml":124.0,
-  "away_ml":-148.0,
+  "home_ml":130.0,
+  "away_ml":-155.0,
   "su_pick":"SEA",
   "su_prob":0.5916860951,
   "ats_pick":"SEA",
@@ -48,9 +48,9 @@
   "tot_stake":0.0,
   "value_tot":false,
   "ml_pick":"SEA",
-  "ml_odds":-148.0,
-  "ml_prob":0.5819052847,
-  "ml_ev":-0.0249154689,
+  "ml_odds":-155.0,
+  "ml_prob":0.5873461772,
+  "ml_ev":-0.0337208053,
   "ml_stake":0.0,
   "value_ml":false,
   "mo_proj_home":20.710476176,
@@ -65,7 +65,7 @@
   "mo_ats_prob_np":0.5542971481,
   "mo_tot_pick":"OVER",
   "mo_tot_prob_np":0.5187175974,
-  "mo_su_hit":0.5781958011,
+  "mo_su_hit":0.5900401264,
   "mo_ats_hit":0.5132805843,
   "mo_tot_hit":0.4975704523,
   "home_score":null,
@@ -92,7 +92,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_HOU_JAX",
@@ -184,7 +184,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_BAL_CLE",
@@ -276,7 +276,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_CAR_PHI",
@@ -368,7 +368,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_CHI_ATL",
@@ -387,7 +387,7 @@
   "mkt_total":49.7912556148,
   "p_home_win":0.3704803866,
   "p_home_win_raw":0.3964129051,
-  "mkt_p_home_win":0.3962430291,
+  "mkt_p_home_win":0.3907637655,
   "open_spread":-3.0,
   "spread":-3.0,
   "home_spread_odds":100.0,
@@ -396,8 +396,8 @@
   "total_line":49.5,
   "over_odds":-108.0,
   "under_odds":-112.0,
-  "home_ml":142.0,
-  "away_ml":-170.0,
+  "home_ml":145.0,
+  "away_ml":-175.0,
   "su_pick":"CHI",
   "su_prob":0.6295196134,
   "ats_pick":"CHI",
@@ -416,9 +416,9 @@
   "tot_stake":0.0,
   "value_tot":false,
   "ml_pick":"CHI",
-  "ml_odds":-170.0,
-  "ml_prob":0.6167202226,
-  "ml_ev":-0.0205031759,
+  "ml_odds":-175.0,
+  "ml_prob":0.6194300309,
+  "ml_ev":-0.0266099515,
   "ml_stake":0.0,
   "value_ml":false,
   "mo_proj_home":22.8056809133,
@@ -433,7 +433,7 @@
   "mo_ats_prob_np":0.6181627319,
   "mo_tot_pick":"UNDER",
   "mo_tot_prob_np":0.6459969236,
-  "mo_su_hit":0.3881615474,
+  "mo_su_hit":0.38224537,
   "mo_ats_hit":0.5132805843,
   "mo_tot_hit":0.5238979118,
   "home_score":null,
@@ -460,7 +460,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_NO_NYG",
@@ -552,7 +552,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_NYJ_NE",
@@ -644,7 +644,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_PIT_TB",
@@ -736,7 +736,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_TEN_IND",
@@ -828,7 +828,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_ARI_LA",
@@ -920,7 +920,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_BUF_LV",
@@ -1012,7 +1012,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_LAC_KC",
@@ -1104,7 +1104,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_DAL_GB",
@@ -1196,7 +1196,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-13T13:46:39+00:00",
+  "logged_at":"2026-10-13T14:20:06+00:00",
   "season":2026.0,
   "week":6.0,
   "game_id":"2026_06_WAS_SF",
