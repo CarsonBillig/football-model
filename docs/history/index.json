@@ -24,7 +24,16 @@
   "file": "cfb_2026_week_07.csv",
   "tab": "College 2026 Wk 7",
   "games": 62,
-  "graded": 4
+  "graded": 62
+ },
+ {
+  "sport": "College",
+  "season": 2026,
+  "week": 8,
+  "file": "cfb_2026_week_08.csv",
+  "tab": "College 2026 Wk 8",
+  "games": 45,
+  "graded": 0
  },
  {
   "sport": "NFL",
@@ -51,6 +60,6 @@
   "file": "nfl_2026_week_06.csv",
   "tab": "NFL 2026 Wk 6",
   "games": 14,
-  "graded": 0
+  "graded": 1
  }
 ]
