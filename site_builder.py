@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import colorsys
 import json
+import math
 import os
 from datetime import datetime
 from html import escape
@@ -407,6 +408,57 @@ def stats_chart(r) -> str:
             f'the middle line is league average. Numbers are the actual values; faded bar = the other team has the edge.</p>')
 
 
+# The stats that matter most, as radar spokes: (stat label in matchup_stats, spoke label)
+KEY_STATS = {
+    "Offense": [("Points / game", "Scoring"), ("Yards / play", "Yards/play"), ("Yards / pass attempt", "Passing"),
+                ("Yards / carry", "Rushing"), ("Turnovers / game", "Ball security")],
+    "Defense": [("Points allowed / game", "Pts allowed"), ("Yards / play allowed", "Yards/play"),
+                ("Yards / pass attempt allowed", "Pass D"), ("Yards / carry allowed", "Run D"),
+                ("Takeaways / game", "Takeaways")],
+}
+KEY_LABELS = {label for spokes in KEY_STATS.values() for label, _ in spokes}
+
+
+def radar_svg(title, spokes, away, home) -> str:
+    """One radar: each spoke is a league percentile (farther out = better), away and home overlaid."""
+    cx, cy, rad = 110, 104, 62
+
+    def pt(i, v):
+        a = -math.pi / 2 + i * 2 * math.pi / len(spokes)
+        return cx + rad * v / 100 * math.cos(a), cy + rad * v / 100 * math.sin(a)
+
+    def poly(vals):
+        return " ".join(f"{x:.1f},{y:.1f}" for x, y in (pt(i, v) for i, v in enumerate(vals)))
+    out = [f'<polygon class="ring" points="{poly([k] * len(spokes))}"/>' for k in (33, 66, 100)]
+    for i, s in enumerate(spokes):
+        x, y = pt(i, 100)
+        lx, ly = pt(i, 124)
+        anchor = "middle" if abs(lx - cx) < 8 else "start" if lx > cx else "end"
+        out.append(f'<line x1="{cx}" y1="{cy}" x2="{x:.1f}" y2="{y:.1f}"/>'
+                   f'<text x="{lx:.1f}" y="{ly + 4:.1f}" text-anchor="{anchor}">{escape(s)}</text>')
+    out.append(f'<polygon class="pa" points="{poly(away)}"/><polygon class="ph" points="{poly(home)}"/>')
+    return (f'<figure class="rd"><figcaption>{title}</figcaption>'
+            f'<svg viewBox="0 0 220 208" role="img" aria-label="{title} league percentiles">{"".join(out)}</svg></figure>')
+
+
+def radar_charts(r) -> str:
+    """Offense and defense radars for both teams (league percentiles of the key stats)."""
+    raw = r.get("matchup_stats")
+    if not _has(raw):
+        return ""
+    try:
+        by = {x["label"]: x for x in json.loads(raw)}
+    except (TypeError, ValueError):
+        return ""
+    pctl = lambda label, k: 50 if by.get(label, {}).get(k) is None else by[label][k]
+    charts = "".join(radar_svg(side, [s for _, s in spokes], [pctl(lb, "ap") for lb, _ in spokes],
+                               [pctl(lb, "hp") for lb, _ in spokes]) for side, spokes in KEY_STATS.items())
+    A, H = short(r, r["away_team"]), short(r, r["home_team"])
+    return (f'<div class="rds">{charts}</div><p class="rd-key"><i class="ka"></i>{A}<i class="kh"></i>{H}</p>'
+            f'<p class="mnote">League percentile for each stat: farther out is better. Turnovers count in your favor when '
+            f'you have few, and takeaways when you force many.</p>')
+
+
 def matchup_view(r) -> str:
     """Content of the pop-up that opens when a game card is clicked."""
     home, away = r["home_team"], r["away_team"]
@@ -428,16 +480,17 @@ def matchup_view(r) -> str:
   <div class="mt-teams">{team('away', away)}<span class="mt-at">@</span>{team('home', home)}</div>
 </div>
 <section class="m-sec"><h3>Chances of each bet hitting</h3>{both(bet_chart(r), bet_chart(r, "mo_"))}</section>
-<section class="m-sec"><h3>Team stats</h3>{stats_chart(r)}</section>"""
+<section class="m-sec"><h3>How they rate</h3>{radar_charts(r)}
+<details class="allstats"><summary>All stats</summary>{stats_chart(r)}</details></section>"""
 
 
 def stats_html(r) -> str:
-    """Team stats table (Offense / Defense / Advanced) with the better team in each stat highlighted."""
+    """Team stats table (the key offense and defense stats) with the better team in each stat highlighted."""
     raw = r.get("matchup_stats")
     if not _has(raw):
         return ""
     try:
-        rows = json.loads(raw)
+        rows = [x for x in json.loads(raw) if x["label"] in KEY_LABELS]
     except (TypeError, ValueError):
         return ""
     A, H = short(r, r["away_team"]), short(r, r["home_team"])
@@ -963,6 +1016,17 @@ body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,trans
 @media (max-width:600px){.modal{padding:0}.m-panel{border-radius:0;min-height:100%;padding:18px 14px}
   .bc{grid-template-columns:1fr 70px 50px;}.bc .meter,.bc .cn{display:none}
   .bf{grid-template-columns:48px 1fr 92px 1fr 48px;gap:5px;font-size:11.5px}.bf-n{font-size:10.5px}}
+.rds{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rd{margin:0;text-align:center} .rd figcaption{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.rd svg{width:100%;max-width:300px;overflow:visible} .rd text{font-size:10.5px;fill:var(--muted)}
+.rd line,.rd .ring{stroke:var(--rule);stroke-width:1;fill:none}
+.rd .pa,.rd .ph{fill-opacity:.18;stroke-width:2} .rd .pa{fill:var(--ca);stroke:var(--ca)} .rd .ph{fill:var(--ch);stroke:var(--ch)}
+.rd-key{text-align:center;font-size:12.5px;font-weight:600;margin:4px 0} .rd-key i{display:inline-block;width:11px;height:11px;border-radius:3px;margin:0 6px 0 14px;vertical-align:-1px}
+.rd-key .ka{background:var(--ca)} .rd-key .kh{background:var(--ch)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rd .pa,:root:not([data-theme="light"]) .rd-key .ka{fill:var(--ca-d);stroke:var(--ca-d);background:var(--ca-d)}:root:not([data-theme="light"]) .rd .ph,:root:not([data-theme="light"]) .rd-key .kh{fill:var(--ch-d);stroke:var(--ch-d);background:var(--ch-d)}}
+:root[data-theme="dark"] .rd .pa,:root[data-theme="dark"] .rd-key .ka{fill:var(--ca-d);stroke:var(--ca-d);background:var(--ca-d)} :root[data-theme="dark"] .rd .ph,:root[data-theme="dark"] .rd-key .kh{fill:var(--ch-d);stroke:var(--ch-d);background:var(--ch-d)}
+@media (max-width:600px){.rds{grid-template-columns:1fr}}
+.allstats{margin-top:8px} .allstats>summary{cursor:pointer;color:var(--accent);font-size:12.5px;padding:6px 0}
 .stats{border-top:1px solid var(--rule)}
 .stats>summary{list-style:none;cursor:pointer;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .stats>summary::-webkit-details-marker{display:none}

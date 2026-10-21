@@ -9,3 +9,6 @@ __pycache__/
 # old v2 copy and share bundles
 _v2_backup/
 *.zip
+
+# local Claude Code preview config
+.claude/
