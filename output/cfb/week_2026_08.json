@@ -1,6 +1,6 @@
 [
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401871055,
@@ -97,7 +97,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401871069,
@@ -194,7 +194,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401871092,
@@ -291,7 +291,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401871070,
@@ -388,7 +388,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401869845,
@@ -485,7 +485,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401871056,
@@ -582,7 +582,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401862807,
@@ -679,7 +679,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858271,
@@ -776,7 +776,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401861965,
@@ -873,7 +873,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401862808,
@@ -970,7 +970,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401864525,
@@ -1067,7 +1067,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858272,
@@ -1164,7 +1164,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856728,
@@ -1261,7 +1261,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856840,
@@ -1358,28 +1358,28 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856841,
   "kickoff":"2026-10-24 16:00:00+00:00",
   "away_team":"West Virginia",
   "home_team":"TCU",
-  "proj_away":23.2015008302,
-  "proj_home":33.8940252353,
-  "fair_margin":10.6925244051,
+  "proj_away":22.8882812692,
+  "proj_home":34.2072447962,
+  "fair_margin":11.318963527,
   "fair_total":57.0955260654,
-  "fair_spread":9.6371589776,
+  "fair_spread":10.1092527269,
   "fair_total_line":56.3172084732,
   "fund_margin":13.6995360189,
   "fund_total":56.3424481413,
-  "mkt_margin":10.5098727386,
+  "mkt_margin":11.1743629771,
   "mkt_total":57.2397350094,
-  "p_home_win":0.7712779278,
-  "p_home_win_raw":0.749957046,
+  "p_home_win":0.7838374728,
+  "p_home_win_raw":0.7624621883,
   "mkt_p_home_win":0.7477827051,
   "open_spread":7.0,
-  "spread":9.5,
+  "spread":10.0,
   "home_spread_odds":null,
   "away_spread_odds":null,
   "open_total":58.5,
@@ -1389,13 +1389,13 @@
   "home_ml":-355.0,
   "away_ml":280.0,
   "su_pick":"TCU",
-  "su_prob":0.7712779278,
+  "su_prob":0.7838374728,
   "ats_pick":"TCU",
-  "ats_line":-9.5,
+  "ats_line":-10.0,
   "ats_odds":null,
-  "ats_prob":0.5047497521,
-  "ats_prob_np":0.5047497521,
-  "ats_ev":-0.0363868369,
+  "ats_prob":0.4865001214,
+  "ats_prob_np":0.5039096322,
+  "ats_ev":-0.0366781662,
   "ats_stake":0.0,
   "value_ats":false,
   "tot_pick":"UNDER",
@@ -1407,8 +1407,8 @@
   "value_tot":false,
   "ml_pick":"TCU",
   "ml_odds":-355.0,
-  "ml_prob":0.7597266214,
-  "ml_ev":-0.0262658796,
+  "ml_prob":0.7662929774,
+  "ml_ev":-0.0178498459,
   "ml_stake":0.0,
   "value_ml":false,
   "mo_proj_home":35.0209920801,
@@ -1419,8 +1419,8 @@
   "mo_su_pick":"TCU",
   "mo_su_prob":0.8278148121,
   "mo_ats_pick":"TCU",
-  "mo_ats_line":-9.5,
-  "mo_ats_prob_np":0.5826862335,
+  "mo_ats_line":-10.0,
+  "mo_ats_prob_np":0.568119034,
   "mo_tot_pick":"UNDER",
   "mo_tot_prob_np":0.521769102,
   "mo_su_hit":0.7711797902,
@@ -1449,13 +1449,13 @@
   "home_conf":"Big 12",
   "away_conf":"Big 12",
   "matchup_stats":"[{\"group\": \"Offense\", \"label\": \"Points \/ game\", \"away\": \"37.6\", \"home\": \"24.0\", \"edge\": \"away\", \"ap\": 87, \"hp\": 32, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Total yards \/ game\", \"away\": \"497.1\", \"home\": \"392.3\", \"edge\": \"away\", \"ap\": 95, \"hp\": 50, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ play\", \"away\": \"6.44\", \"home\": \"5.94\", \"edge\": \"away\", \"ap\": 74, \"hp\": 54, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Passing yards \/ game\", \"away\": \"224.7\", \"home\": \"282.3\", \"edge\": \"home\", \"ap\": 45, \"hp\": 86, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ pass attempt\", \"away\": \"10.56\", \"home\": \"8.73\", \"edge\": \"away\", \"ap\": 99, \"hp\": 82, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Completion %\", \"away\": \"57.7%\", \"home\": \"66.5%\", \"edge\": \"home\", \"ap\": 16, \"hp\": 70, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Rushing yards \/ game\", \"away\": \"272.4\", \"home\": \"110.0\", \"edge\": \"away\", \"ap\": 97, \"hp\": 10, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ carry\", \"away\": \"4.88\", \"home\": \"3.27\", \"edge\": \"away\", \"ap\": 70, \"hp\": 5, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Third-down conversion %\", \"away\": \"49.5%\", \"home\": \"41.5%\", \"edge\": \"away\", \"ap\": 87, \"hp\": 53, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Turnovers \/ game\", \"away\": \"1.00\", \"home\": \"1.50\", \"edge\": \"away\", \"ap\": 66, \"hp\": 27, \"dir\": false}, {\"group\": \"Offense\", \"label\": \"Sacks allowed \/ game\", \"away\": \"1.71\", \"home\": \"2.83\", \"edge\": \"away\", \"ap\": 55, \"hp\": 10, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Points allowed \/ game\", \"away\": \"34.0\", \"home\": \"12.2\", \"edge\": \"home\", \"ap\": 6, \"hp\": 98, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards allowed \/ game\", \"away\": \"483.9\", \"home\": \"264.2\", \"edge\": \"home\", \"ap\": 1, \"hp\": 95, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ play allowed\", \"away\": \"7.22\", \"home\": \"4.33\", \"edge\": \"home\", \"ap\": 2, \"hp\": 93, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Passing yards allowed \/ game\", \"away\": \"310.1\", \"home\": \"172.2\", \"edge\": \"home\", \"ap\": 0, \"hp\": 84, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ pass attempt allowed\", \"away\": \"10.19\", \"home\": \"5.94\", \"edge\": \"home\", \"ap\": 0, \"hp\": 89, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Rushing yards allowed \/ game\", \"away\": \"173.7\", \"home\": \"92.0\", \"edge\": \"home\", \"ap\": 24, \"hp\": 89, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ carry allowed\", \"away\": \"4.75\", \"home\": \"2.88\", \"edge\": \"home\", \"ap\": 24, \"hp\": 91, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Third-down % allowed\", \"away\": \"38.1%\", \"home\": \"30.2%\", \"edge\": \"home\", \"ap\": 45, \"hp\": 91, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Takeaways \/ game\", \"away\": \"1.00\", \"home\": \"1.33\", \"edge\": \"home\", \"ap\": 31, \"hp\": 64, \"dir\": true}, {\"group\": \"Defense\", \"label\": \"Sacks \/ game\", \"away\": \"2.14\", \"home\": \"2.33\", \"edge\": \"home\", \"ap\": 55, \"hp\": 68, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Offense PPA \/ play\", \"away\": \"+0.270\", \"home\": \"+0.092\", \"edge\": \"away\", \"ap\": 79, \"hp\": 33, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense PPA \/ play allowed\", \"away\": \"+0.271\", \"home\": \"\\u22120.083\", \"edge\": \"home\", \"ap\": 8, \"hp\": 91, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense success rate\", \"away\": \"45.6%\", \"home\": \"41.9%\", \"edge\": \"away\", \"ap\": 65, \"hp\": 41, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense success rate allowed\", \"away\": \"47.3%\", \"home\": \"34.8%\", \"edge\": \"home\", \"ap\": 8, \"hp\": 82, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense explosiveness\", \"away\": \"1.37\", \"home\": \"1.30\", \"edge\": \"away\", \"ap\": 82, \"hp\": 67, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Explosiveness allowed\", \"away\": \"1.34\", \"home\": \"1.11\", \"edge\": \"home\", \"ap\": 23, \"hp\": 87, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Plays \/ game (pace)\", \"away\": \"73.1\", \"home\": \"64.2\", \"edge\": \"\", \"ap\": 99, \"hp\": 77, \"dir\": null}, {\"group\": \"Advanced\", \"label\": \"Roster talent (247 composite)\", \"away\": \"708\", \"home\": \"731\", \"edge\": \"even\", \"ap\": 65, \"hp\": 71, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Returning production\", \"away\": \"14.0%\", \"home\": \"22.4%\", \"edge\": \"home\", \"ap\": 18, \"hp\": 31, \"dir\": true}]",
-  "p_home_cover":0.5047497521,
-  "p_spread_push":0.0,
+  "p_home_cover":0.4865001214,
+  "p_spread_push":0.0345488747,
   "p_over":0.4964967812,
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858270,
@@ -1552,23 +1552,23 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858274,
   "kickoff":"2026-10-24 16:00:00+00:00",
   "away_team":"Pittsburgh",
   "home_team":"Miami",
-  "proj_away":15.7837826263,
-  "proj_home":34.8181825139,
+  "proj_away":15.3422377609,
+  "proj_home":34.3766376484,
   "fair_margin":19.0343998875,
-  "fair_total":50.6019651402,
+  "fair_total":49.7188754094,
   "fair_spread":19.5707922989,
-  "fair_total_line":50.522352914,
+  "fair_total_line":49.3828728816,
   "fund_margin":19.8611091724,
   "fund_total":54.5714187298,
   "mkt_margin":18.9841839762,
-  "mkt_total":49.841843655,
+  "mkt_total":48.789648665,
   "p_home_win":0.9041641896,
   "p_home_win_raw":0.8868945812,
   "mkt_p_home_win":0.9082568807,
@@ -1577,7 +1577,7 @@
   "home_spread_odds":null,
   "away_spread_odds":null,
   "open_total":53.5,
-  "total_line":49.5,
+  "total_line":48.5,
   "over_odds":null,
   "under_odds":null,
   "home_ml":-1650.0,
@@ -1593,10 +1593,10 @@
   "ats_stake":0.0,
   "value_ats":false,
   "tot_pick":"OVER",
-  "tot_prob":0.5180784806,
-  "tot_prob_np":0.5180784806,
+  "tot_prob":0.522034441,
+  "tot_prob_np":0.522034441,
   "tot_odds":null,
-  "tot_ev":-0.0109410826,
+  "tot_ev":-0.0033887944,
   "tot_stake":0.0,
   "value_tot":false,
   "ml_pick":"Pittsburgh",
@@ -1616,10 +1616,10 @@
   "mo_ats_line":-19.5,
   "mo_ats_prob_np":0.523355863,
   "mo_tot_pick":"OVER",
-  "mo_tot_prob_np":0.6114621231,
+  "mo_tot_prob_np":0.6351060882,
   "mo_su_hit":0.9248126575,
   "mo_ats_hit":0.5073348205,
-  "mo_tot_hit":0.5166179223,
+  "mo_tot_hit":0.5171753545,
   "home_score":null,
   "away_score":null,
   "tv":"ESPN \/ Disney+",
@@ -1645,11 +1645,11 @@
   "matchup_stats":"[{\"group\": \"Offense\", \"label\": \"Points \/ game\", \"away\": \"32.9\", \"home\": \"48.5\", \"edge\": \"home\", \"ap\": 68, \"hp\": 100, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Total yards \/ game\", \"away\": \"450.1\", \"home\": \"559.5\", \"edge\": \"home\", \"ap\": 80, \"hp\": 99, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ play\", \"away\": \"6.30\", \"home\": \"8.07\", \"edge\": \"home\", \"ap\": 66, \"hp\": 100, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Passing yards \/ game\", \"away\": \"284.6\", \"home\": \"333.0\", \"edge\": \"home\", \"ap\": 89, \"hp\": 98, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ pass attempt\", \"away\": \"8.03\", \"home\": \"10.35\", \"edge\": \"home\", \"ap\": 66, \"hp\": 98, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Completion %\", \"away\": \"63.7%\", \"home\": \"80.3%\", \"edge\": \"home\", \"ap\": 50, \"hp\": 100, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Rushing yards \/ game\", \"away\": \"165.6\", \"home\": \"226.5\", \"edge\": \"home\", \"ap\": 59, \"hp\": 91, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ carry\", \"away\": \"4.60\", \"home\": \"6.09\", \"edge\": \"home\", \"ap\": 55, \"hp\": 97, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Third-down conversion %\", \"away\": \"42.9%\", \"home\": \"51.6%\", \"edge\": \"home\", \"ap\": 64, \"hp\": 90, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Turnovers \/ game\", \"away\": \"1.00\", \"home\": \"0.67\", \"edge\": \"home\", \"ap\": 66, \"hp\": 84, \"dir\": false}, {\"group\": \"Offense\", \"label\": \"Sacks allowed \/ game\", \"away\": \"1.14\", \"home\": \"1.00\", \"edge\": \"even\", \"ap\": 79, \"hp\": 85, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Points allowed \/ game\", \"away\": \"16.4\", \"home\": \"14.0\", \"edge\": \"home\", \"ap\": 84, \"hp\": 95, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards allowed \/ game\", \"away\": \"306.3\", \"home\": \"281.8\", \"edge\": \"home\", \"ap\": 80, \"hp\": 89, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ play allowed\", \"away\": \"5.04\", \"home\": \"4.65\", \"edge\": \"home\", \"ap\": 70, \"hp\": 84, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Passing yards allowed \/ game\", \"away\": \"247.9\", \"home\": \"223.3\", \"edge\": \"home\", \"ap\": 17, \"hp\": 34, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ pass attempt allowed\", \"away\": \"7.78\", \"home\": \"6.26\", \"edge\": \"home\", \"ap\": 24, \"hp\": 76, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Rushing yards allowed \/ game\", \"away\": \"58.4\", \"home\": \"58.5\", \"edge\": \"even\", \"ap\": 100, \"hp\": 99, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ carry allowed\", \"away\": \"2.02\", \"home\": \"2.34\", \"edge\": \"away\", \"ap\": 100, \"hp\": 98, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Third-down % allowed\", \"away\": \"33.3%\", \"home\": \"34.1%\", \"edge\": \"even\", \"ap\": 75, \"hp\": 71, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Takeaways \/ game\", \"away\": \"1.57\", \"home\": \"1.33\", \"edge\": \"away\", \"ap\": 79, \"hp\": 64, \"dir\": true}, {\"group\": \"Defense\", \"label\": \"Sacks \/ game\", \"away\": \"2.14\", \"home\": \"3.00\", \"edge\": \"home\", \"ap\": 55, \"hp\": 90, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Offense PPA \/ play\", \"away\": \"+0.184\", \"home\": \"+0.545\", \"edge\": \"home\", \"ap\": 57, \"hp\": 100, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense PPA \/ play allowed\", \"away\": \"\\u22120.034\", \"home\": \"\\u22120.044\", \"edge\": \"even\", \"ap\": 79, \"hp\": 82, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense success rate\", \"away\": \"44.2%\", \"home\": \"59.2%\", \"edge\": \"home\", \"ap\": 56, \"hp\": 100, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense success rate allowed\", \"away\": \"32.3%\", \"home\": \"34.6%\", \"edge\": \"away\", \"ap\": 95, \"hp\": 83, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense explosiveness\", \"away\": \"1.24\", \"home\": \"1.29\", \"edge\": \"home\", \"ap\": 42, \"hp\": 64, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Explosiveness allowed\", \"away\": \"1.47\", \"home\": \"1.17\", \"edge\": \"home\", \"ap\": 5, \"hp\": 74, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Plays \/ game (pace)\", \"away\": \"63.0\", \"home\": \"53.8\", \"edge\": \"\", \"ap\": 73, \"hp\": 11, \"dir\": null}, {\"group\": \"Advanced\", \"label\": \"Roster talent (247 composite)\", \"away\": \"675\", \"home\": \"886\", \"edge\": \"home\", \"ap\": 54, \"hp\": 92, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Returning production\", \"away\": \"39.7%\", \"home\": \"36.9%\", \"edge\": \"even\", \"ap\": 51, \"hp\": 45, \"dir\": true}]",
   "p_home_cover":0.501338206,
   "p_spread_push":0.0,
-  "p_over":0.5180784806,
+  "p_over":0.522034441,
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858496,
@@ -1746,7 +1746,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858498,
@@ -1843,7 +1843,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401862809,
@@ -1940,7 +1940,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401866450,
@@ -2037,7 +2037,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856834,
@@ -2134,7 +2134,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401866446,
@@ -2231,7 +2231,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401866476,
@@ -2328,7 +2328,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858495,
@@ -2425,7 +2425,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856727,
@@ -2522,7 +2522,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856730,
@@ -2619,7 +2619,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856731,
@@ -2716,7 +2716,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856835,
@@ -2813,7 +2813,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858273,
@@ -2910,7 +2910,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858497,
@@ -2964,7 +2964,7 @@
   "ml_stake":0.0,
   "value_ml":false,
   "mo_proj_home":18.6054622498,
-  "mo_proj_away":23.8191124463,
+  "mo_proj_away":23.8191124464,
   "mo_fair_spread":-4.3031789973,
   "mo_fair_total_line":42.8019828521,
   "mo_p_home_win":0.3722064598,
@@ -3007,7 +3007,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858499,
@@ -3104,7 +3104,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401862810,
@@ -3201,7 +3201,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401864526,
@@ -3298,7 +3298,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401866447,
@@ -3395,7 +3395,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401866448,
@@ -3492,7 +3492,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856839,
@@ -3589,7 +3589,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401866449,
@@ -3686,7 +3686,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401871094,
@@ -3783,7 +3783,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401864528,
@@ -3880,7 +3880,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401869967,
@@ -3977,7 +3977,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401871093,
@@ -4074,7 +4074,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401860907,
@@ -4171,7 +4171,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401860905,
@@ -4268,7 +4268,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856836,
@@ -4365,7 +4365,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858276,
@@ -4462,7 +4462,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401869935,
@@ -4559,7 +4559,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856729,
@@ -4656,7 +4656,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856732,
@@ -4753,7 +4753,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856838,
@@ -4850,23 +4850,23 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858275,
   "kickoff":"2026-10-24 23:30:00+00:00",
   "away_team":"Syracuse",
   "home_team":"North Carolina",
-  "proj_away":18.7526853978,
-  "proj_home":27.9603506393,
+  "proj_away":19.162482668,
+  "proj_home":28.3701479095,
   "fair_margin":9.2076652414,
-  "fair_total":46.7130360371,
+  "fair_total":47.5326305775,
   "fair_spread":7.442660697,
-  "fair_total_line":46.7642454267,
+  "fair_total_line":47.5744751899,
   "fund_margin":7.0987265044,
   "fund_total":48.0613665343,
   "mkt_margin":9.3357662348,
-  "mkt_total":46.4548405558,
+  "mkt_total":47.4313814882,
   "p_home_win":0.7399510807,
   "p_home_win_raw":0.7190490941,
   "mkt_p_home_win":0.7335423197,
@@ -4875,7 +4875,7 @@
   "home_spread_odds":null,
   "away_spread_odds":null,
   "open_total":44.5,
-  "total_line":46.5,
+  "total_line":47.5,
   "over_odds":null,
   "under_odds":null,
   "home_ml":-325.0,
@@ -4891,10 +4891,10 @@
   "ats_stake":0.0,
   "value_ats":false,
   "tot_pick":"OVER",
-  "tot_prob":0.5060910597,
-  "tot_prob_np":0.5060910597,
+  "tot_prob":0.5023928328,
+  "tot_prob_np":0.5023928328,
   "tot_odds":null,
-  "tot_ev":-0.0338261588,
+  "tot_ev":-0.04088641,
   "tot_stake":0.0,
   "value_tot":false,
   "ml_pick":"North Carolina",
@@ -4914,10 +4914,10 @@
   "mo_ats_line":7.5,
   "mo_ats_prob_np":0.5571683325,
   "mo_tot_pick":"OVER",
-  "mo_tot_prob_np":0.5378877057,
+  "mo_tot_prob_np":0.5148920177,
   "mo_su_hit":0.7396361529,
   "mo_ats_hit":0.5073348205,
-  "mo_tot_hit":0.4933517031,
+  "mo_tot_hit":0.4892294606,
   "home_score":null,
   "away_score":null,
   "tv":"ACC Network",
@@ -4943,11 +4943,11 @@
   "matchup_stats":"[{\"group\": \"Offense\", \"label\": \"Points \/ game\", \"away\": \"31.7\", \"home\": \"23.5\", \"edge\": \"away\", \"ap\": 62, \"hp\": 28, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Total yards \/ game\", \"away\": \"449.5\", \"home\": \"329.7\", \"edge\": \"away\", \"ap\": 79, \"hp\": 16, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ play\", \"away\": \"5.58\", \"home\": \"5.73\", \"edge\": \"even\", \"ap\": 32, \"hp\": 41, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Passing yards \/ game\", \"away\": \"289.8\", \"home\": \"213.5\", \"edge\": \"away\", \"ap\": 90, \"hp\": 36, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ pass attempt\", \"away\": \"7.50\", \"home\": \"7.86\", \"edge\": \"home\", \"ap\": 48, \"hp\": 61, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Completion %\", \"away\": \"60.8%\", \"home\": \"59.5%\", \"edge\": \"even\", \"ap\": 33, \"hp\": 25, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Rushing yards \/ game\", \"away\": \"159.7\", \"home\": \"116.2\", \"edge\": \"away\", \"ap\": 53, \"hp\": 13, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ carry\", \"away\": \"3.82\", \"home\": \"3.83\", \"edge\": \"even\", \"ap\": 20, \"hp\": 21, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Third-down conversion %\", \"away\": \"42.7%\", \"home\": \"37.3%\", \"edge\": \"away\", \"ap\": 62, \"hp\": 37, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Turnovers \/ game\", \"away\": \"1.67\", \"home\": \"1.67\", \"edge\": \"even\", \"ap\": 16, \"hp\": 16, \"dir\": false}, {\"group\": \"Offense\", \"label\": \"Sacks allowed \/ game\", \"away\": \"2.50\", \"home\": \"2.17\", \"edge\": \"home\", \"ap\": 20, \"hp\": 29, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Points allowed \/ game\", \"away\": \"25.7\", \"home\": \"19.2\", \"edge\": \"home\", \"ap\": 36, \"hp\": 76, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards allowed \/ game\", \"away\": \"331.3\", \"home\": \"359.0\", \"edge\": \"away\", \"ap\": 67, \"hp\": 46, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ play allowed\", \"away\": \"5.37\", \"home\": \"4.96\", \"edge\": \"home\", \"ap\": 53, \"hp\": 75, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Passing yards allowed \/ game\", \"away\": \"191.8\", \"home\": \"211.7\", \"edge\": \"away\", \"ap\": 69, \"hp\": 50, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ pass attempt allowed\", \"away\": \"6.81\", \"home\": \"6.11\", \"edge\": \"home\", \"ap\": 58, \"hp\": 82, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Rushing yards allowed \/ game\", \"away\": \"139.5\", \"home\": \"147.3\", \"edge\": \"even\", \"ap\": 54, \"hp\": 42, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ carry allowed\", \"away\": \"4.16\", \"home\": \"3.91\", \"edge\": \"home\", \"ap\": 43, \"hp\": 55, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Third-down % allowed\", \"away\": \"35.7%\", \"home\": \"43.3%\", \"edge\": \"away\", \"ap\": 63, \"hp\": 18, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Takeaways \/ game\", \"away\": \"1.33\", \"home\": \"1.33\", \"edge\": \"even\", \"ap\": 64, \"hp\": 64, \"dir\": true}, {\"group\": \"Defense\", \"label\": \"Sacks \/ game\", \"away\": \"2.50\", \"home\": \"2.17\", \"edge\": \"away\", \"ap\": 77, \"hp\": 60, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Offense PPA \/ play\", \"away\": \"+0.099\", \"home\": \"+0.135\", \"edge\": \"home\", \"ap\": 37, \"hp\": 44, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense PPA \/ play allowed\", \"away\": \"+0.040\", \"home\": \"+0.012\", \"edge\": \"even\", \"ap\": 59, \"hp\": 69, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense success rate\", \"away\": \"43.5%\", \"home\": \"46.3%\", \"edge\": \"home\", \"ap\": 48, \"hp\": 68, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense success rate allowed\", \"away\": \"40.5%\", \"home\": \"42.5%\", \"edge\": \"away\", \"ap\": 49, \"hp\": 33, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense explosiveness\", \"away\": \"1.30\", \"home\": \"1.13\", \"edge\": \"away\", \"ap\": 67, \"hp\": 14, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Explosiveness allowed\", \"away\": \"1.17\", \"home\": \"1.03\", \"edge\": \"home\", \"ap\": 72, \"hp\": 97, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Plays \/ game (pace)\", \"away\": \"76.7\", \"home\": \"55.7\", \"edge\": \"\", \"ap\": 100, \"hp\": 19, \"dir\": null}, {\"group\": \"Advanced\", \"label\": \"Roster talent (247 composite)\", \"away\": \"746\", \"home\": \"768\", \"edge\": \"even\", \"ap\": 75, \"hp\": 80, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Returning production\", \"away\": \"35.0%\", \"home\": \"27.8%\", \"edge\": \"away\", \"ap\": 41, \"hp\": 34, \"dir\": true}]",
   "p_home_cover":0.4967050796,
   "p_spread_push":0.0,
-  "p_over":0.5060910597,
+  "p_over":0.5023928328,
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401858500,
@@ -5044,23 +5044,23 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401860906,
   "kickoff":"2026-10-24 23:30:00+00:00",
   "away_team":"Utah State",
   "home_team":"Texas State",
-  "proj_away":23.5053736064,
-  "proj_home":37.2027143388,
+  "proj_away":23.9345253653,
+  "proj_home":37.6318660977,
   "fair_margin":13.6973407324,
-  "fair_total":60.7080879451,
+  "fair_total":61.566391463,
   "fair_spread":13.569611996,
-  "fair_total_line":59.672837767,
+  "fair_total_line":60.904527704,
   "fund_margin":15.290472762,
   "fund_total":58.3887271231,
   "mkt_margin":13.6005708301,
-  "mkt_total":61.1522286695,
+  "mkt_total":62.174891067,
   "p_home_win":0.8277770581,
   "p_home_win_raw":0.8068135191,
   "mkt_p_home_win":0.8042929293,
@@ -5069,7 +5069,7 @@
   "home_spread_odds":null,
   "away_spread_odds":null,
   "open_total":58.5,
-  "total_line":60.5,
+  "total_line":61.5,
   "over_odds":null,
   "under_odds":null,
   "home_ml":-520.0,
@@ -5085,10 +5085,10 @@
   "ats_stake":0.0,
   "value_ats":false,
   "tot_pick":"UNDER",
-  "tot_prob":0.5109417274,
-  "tot_prob_np":0.5109417274,
+  "tot_prob":0.5150335251,
+  "tot_prob_np":0.5150335251,
   "tot_odds":null,
-  "tot_ev":-0.0245657932,
+  "tot_ev":-0.0167541794,
   "tot_stake":0.0,
   "value_tot":false,
   "ml_pick":"Texas State",
@@ -5108,7 +5108,7 @@
   "mo_ats_line":-13.5,
   "mo_ats_prob_np":0.544753037,
   "mo_tot_pick":"UNDER",
-  "mo_tot_prob_np":0.5675900482,
+  "mo_tot_prob_np":0.5923987431,
   "mo_su_hit":0.8268226347,
   "mo_ats_hit":0.5073348205,
   "mo_tot_hit":0.5166179223,
@@ -5137,11 +5137,11 @@
   "matchup_stats":"[{\"group\": \"Offense\", \"label\": \"Points \/ game\", \"away\": \"14.5\", \"home\": \"40.0\", \"edge\": \"home\", \"ap\": 2, \"hp\": 94, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Total yards \/ game\", \"away\": \"310.0\", \"home\": \"562.3\", \"edge\": \"home\", \"ap\": 7, \"hp\": 100, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ play\", \"away\": \"4.99\", \"home\": \"7.24\", \"edge\": \"home\", \"ap\": 12, \"hp\": 95, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Passing yards \/ game\", \"away\": \"189.8\", \"home\": \"258.8\", \"edge\": \"home\", \"ap\": 21, \"hp\": 71, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ pass attempt\", \"away\": \"6.29\", \"home\": \"9.30\", \"edge\": \"home\", \"ap\": 12, \"hp\": 91, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Completion %\", \"away\": \"52.5%\", \"home\": \"68.3%\", \"edge\": \"home\", \"ap\": 3, \"hp\": 86, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Rushing yards \/ game\", \"away\": \"120.2\", \"home\": \"303.5\", \"edge\": \"home\", \"ap\": 16, \"hp\": 98, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Yards \/ carry\", \"away\": \"3.76\", \"home\": \"6.09\", \"edge\": \"home\", \"ap\": 18, \"hp\": 97, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Third-down conversion %\", \"away\": \"37.5%\", \"home\": \"55.4%\", \"edge\": \"home\", \"ap\": 38, \"hp\": 97, \"dir\": true}, {\"group\": \"Offense\", \"label\": \"Turnovers \/ game\", \"away\": \"2.00\", \"home\": \"1.67\", \"edge\": \"home\", \"ap\": 4, \"hp\": 16, \"dir\": false}, {\"group\": \"Offense\", \"label\": \"Sacks allowed \/ game\", \"away\": \"3.17\", \"home\": \"1.00\", \"edge\": \"home\", \"ap\": 3, \"hp\": 85, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Points allowed \/ game\", \"away\": \"23.5\", \"home\": \"32.2\", \"edge\": \"away\", \"ap\": 52, \"hp\": 12, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards allowed \/ game\", \"away\": \"359.7\", \"home\": \"418.8\", \"edge\": \"away\", \"ap\": 45, \"hp\": 12, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ play allowed\", \"away\": \"5.13\", \"home\": \"5.65\", \"edge\": \"away\", \"ap\": 63, \"hp\": 35, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Passing yards allowed \/ game\", \"away\": \"218.8\", \"home\": \"297.0\", \"edge\": \"away\", \"ap\": 39, \"hp\": 1, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ pass attempt allowed\", \"away\": \"6.05\", \"home\": \"7.10\", \"edge\": \"away\", \"ap\": 84, \"hp\": 49, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Rushing yards allowed \/ game\", \"away\": \"140.8\", \"home\": \"121.8\", \"edge\": \"home\", \"ap\": 51, \"hp\": 69, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Yards \/ carry allowed\", \"away\": \"4.14\", \"home\": \"3.77\", \"edge\": \"home\", \"ap\": 46, \"hp\": 61, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Third-down % allowed\", \"away\": \"40.4%\", \"home\": \"38.9%\", \"edge\": \"even\", \"ap\": 33, \"hp\": 38, \"dir\": false}, {\"group\": \"Defense\", \"label\": \"Takeaways \/ game\", \"away\": \"1.17\", \"home\": \"0.83\", \"edge\": \"away\", \"ap\": 48, \"hp\": 14, \"dir\": true}, {\"group\": \"Defense\", \"label\": \"Sacks \/ game\", \"away\": \"1.50\", \"home\": \"1.00\", \"edge\": \"away\", \"ap\": 26, \"hp\": 6, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Offense PPA \/ play\", \"away\": \"\\u22120.067\", \"home\": \"+0.398\", \"edge\": \"home\", \"ap\": 5, \"hp\": 96, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense PPA \/ play allowed\", \"away\": \"+0.079\", \"home\": \"+0.162\", \"edge\": \"away\", \"ap\": 44, \"hp\": 23, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense success rate\", \"away\": \"34.1%\", \"home\": \"52.2%\", \"edge\": \"home\", \"ap\": 5, \"hp\": 94, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Defense success rate allowed\", \"away\": \"39.6%\", \"home\": \"43.9%\", \"edge\": \"away\", \"ap\": 57, \"hp\": 23, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Offense explosiveness\", \"away\": \"1.40\", \"home\": \"1.40\", \"edge\": \"even\", \"ap\": 90, \"hp\": 89, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Explosiveness allowed\", \"away\": \"1.20\", \"home\": \"1.30\", \"edge\": \"away\", \"ap\": 64, \"hp\": 35, \"dir\": false}, {\"group\": \"Advanced\", \"label\": \"Plays \/ game (pace)\", \"away\": \"60.3\", \"home\": \"65.3\", \"edge\": \"\", \"ap\": 55, \"hp\": 85, \"dir\": null}, {\"group\": \"Advanced\", \"label\": \"Roster talent (247 composite)\", \"away\": \"544\", \"home\": \"625\", \"edge\": \"home\", \"ap\": 11, \"hp\": 41, \"dir\": true}, {\"group\": \"Advanced\", \"label\": \"Returning production\", \"away\": \"65.2%\", \"home\": \"76.0%\", \"edge\": \"home\", \"ap\": 77, \"hp\": 89, \"dir\": true}]",
   "p_home_cover":0.5025640762,
   "p_spread_push":0.0,
-  "p_over":0.4890582726,
+  "p_over":0.4849664749,
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401862811,
@@ -5238,7 +5238,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401864527,
@@ -5335,7 +5335,7 @@
   "p_total_push":0.0
  },
  {
-  "logged_at":"2026-10-21T18:18:32+00:00",
+  "logged_at":"2026-10-21T19:31:12+00:00",
   "season":2026,
   "week":8,
   "game_id":401856837,
