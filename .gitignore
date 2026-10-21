@@ -12,3 +12,8 @@ _v2_backup/
 
 # local Claude Code preview config
 .claude/
+
+# player-prop lines downloaded from ESPN and backtest files (rebuilt on this computer when missing)
+cache/props/
+cache/props_graded.parquet
+cache/*.log
