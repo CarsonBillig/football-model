@@ -30,6 +30,14 @@ def main(run_backtest=False, season=None, week=None, college=True):
         if run_backtest or not Path("output/cfb/oos_predictions.csv").exists():
             print("\n### College backtest"); cfb_model.main()
         print("\n### College: grade, train, predict"); cfb_pipeline.run()
+    print("\n### NFL player props (experiment, paper trade)")
+    try:
+        import json
+        import props_live
+        cur = json.loads(Path("output/current.json").read_text())
+        props_live.run(cur["season"], cur["week"])
+    except Exception as e:                       # the experiment must never stop the weekly picks
+        print(f"  (prop experiment skipped: {e})")
     print("\n### website"); print(f"site: {site_builder.build().resolve()}")
     import sheets_export
     print(f"pick history for Google Sheets: {sheets_export.export().resolve()}")

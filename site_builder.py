@@ -474,14 +474,56 @@ def matchup_view(r) -> str:
         img = f'<img src="{escape(str(logo))}" alt="">' if _has(logo) else ""
         return (f'<div class="mt-team">{img}<span class="mt-name">{name}</span>'
                 f'<span class="mt-score">{both(mk["scores"][s], md["scores"][s])}</span></div>')
-    return f"""
+    head = f"""
 <div class="m-head">
   <span class="when"><b>{k.strftime(F('%a %b %-d · %-I:%M %p'))} ET</b></span>
   <div class="mt-teams">{team('away', away)}<span class="mt-at">@</span>{team('home', home)}</div>
-</div>
+</div>"""
+    matchup = f"""
 <section class="m-sec"><h3>Chances of each bet hitting</h3>{both(bet_chart(r), bet_chart(r, "mo_"))}</section>
 <section class="m-sec"><h3>How they rate</h3>{radar_charts(r)}
 <details class="allstats"><summary>All stats</summary>{stats_chart(r)}</details></section>"""
+    props = r.get("props")
+    if not isinstance(props, list) or not props:
+        return head + matchup
+    return (head + '<div class="m-tabs"><button data-p="mx" aria-pressed="true">Matchup</button>'
+            '<button data-p="pp" aria-pressed="false">Player props</button></div>'
+            f'<div class="m-pane" data-p="mx">{matchup}</div><div class="m-pane hidden" data-p="pp">{props_html(props)}</div>')
+
+
+PROP_NOTE = ("Experiment, tracked as a paper trade. Rushing-yard unders where our projection is below DraftKings&#39; line. "
+             "In testing these hit 57% on 2025-26 games, mostly because rushing unders have been hitting more often "
+             "across the whole market, which may not last. DraftKings&#39; prices aren&#39;t in our data: only bet at "
+             "&minus;120 or better.")
+
+
+def props_html(props: list[dict]) -> str:
+    rows = "".join(
+        f'<div class="pp"><span class="pp-n"><b>{escape(str(p["player"]))}</b> <em>{escape(str(p["team"]))}</em></span>'
+        f'<span class="pp-b">Rushing yards <b>UNDER {p["line"]:.1f}</b></span>'
+        f'<span class="pp-x">our projection {p["proj"]:.1f} · {pct(p["p_side"])} chance</span></div>' for p in props)
+    return f'<section class="m-sec"><h3>Player props</h3><p class="mnote">{PROP_NOTE}</p>{rows}</section>'
+
+
+def props_history_html(pl: pd.DataFrame) -> str:
+    g = pl[pl["result"].isin(["Win", "Loss", "Push"])] if not pl.empty else pl
+    if g.empty:
+        return ('<div class="empty"><b>No graded prop picks yet.</b><p>Prop picks lock at kickoff and are graded here after '
+                f'the games: ✓ won, ✗ lost, P push. {PROP_NOTE}</p></div>')
+    w, l = int((g.result == "Win").sum()), int((g.result == "Loss").sum())
+    units = w * (100 / 110) - l
+    out = [f'<p class="lede">Rushing-yard unders: <b>{w}-{l}</b> ({w / max(w + l, 1):.1%}) · {units:+.1f} units at &minus;110 · '
+           f'break-even is 52.4%. {PROP_NOTE}</p>']
+    for (season, week), wk in sorted(g.groupby(["season", "week"]), key=lambda x: x[0], reverse=True):
+        mk = {"Win": "✓", "Loss": "✗", "Push": "P"}
+        rows = "".join(f'<tr><td>{r.away} <span class=at>@</span> {r.home}</td><td>{escape(str(r.player))}</td>'
+                       f'<td>Under {r.line:.1f}</td><td class=n>{r.actual:.0f}</td><td>{mk[r.result]}</td></tr>'
+                       for r in wk.sort_values(["kickoff", "player"]).itertuples())
+        ww, ll = int((wk.result == "Win").sum()), int((wk.result == "Loss").sum())
+        out.append(f'<section class="wk"><header><h3>Week {int(week)} <span>{int(season)}</span></h3><p>{ww}-{ll}</p></header>'
+                   f'<div class="scroll"><table><thead><tr><th>Game</th><th>Player</th><th>Bet</th><th>Rushing yds</th><th></th></tr>'
+                   f'</thead><tbody>{rows}</tbody></table></div></section>')
+    return "".join(out)
 
 
 def stats_html(r) -> str:
@@ -759,6 +801,16 @@ def section(sport: str, cfg: dict) -> str | None:
     bt = meta.get("backtest_records", {})
     first, last = wk["kick_et"].iloc[0], wk["kick_et"].iloc[-1]
     span = first.strftime(F("%b %-d")) + ("" if first.date() == last.date() else " – " + last.strftime(F("%b %-d")))
+    # player-prop experiment (NFL only): this week's picks go into each game's view, graded picks into Prop history
+    props_tab = props_hist = ""
+    if sport == "nfl":
+        import props_live
+        pl = props_live.load()
+        cur_picks = pl[(pl["season"] == season) & (pl["week"] == week)]
+        wk["props"] = wk["game_id"].map({gid: g.to_dict("records") for gid, g in cur_picks.groupby("game_id")})
+        n_props = int(pl["result"].isin(["Win", "Loss", "Push"]).sum())
+        props_tab = f'<button data-t="props" aria-pressed="false">Prop history<sup>{n_props}</sup></button>'
+        props_hist = f'<div class="props-hist hidden">{props_history_html(pl)}</div>'
     rows = []
     for _, grp in wk.groupby(wk["kick_et"].dt.date, sort=True):
         rows.append(f'<h2 class="day"><span>{grp["kick_et"].iloc[0].strftime(F("%A"))}</span> '
@@ -771,6 +823,7 @@ def section(sport: str, cfg: dict) -> str | None:
         sport=sport, label=cfg["label"], season=season, week=week, span=span, n_games=len(wk), n_value=n_value, top_tab=top_tab,
         updated=datetime.now(ET).strftime(F("%a %b %-d, %-I:%M %p ET")), trained=escape(meta.get("trained_through", "")),
         ribbon=ribbons(live, bt, meta), spotlight=spotlight(wk), rows="".join(rows), history=history_html(led),
+        props_tab=props_tab, props_hist=props_hist,
         n_hist=int(led["su_out"].notna().sum()) if not led.empty else 0, beta=f"{meta.get('beta_margin', 0.0):.0%}",
         bt_ats=(lambda r: f"{r['win_pct'] * 100:.1f}%" if r else "—")(bt.get("ats")),
         bt_mo_ats=(lambda r: f"{r['win_pct'] * 100:.1f}%" if r else "—")(bt.get("mo_ats")),
@@ -809,6 +862,7 @@ $spotlight
   $top_tab
   <button data-t="value" aria-pressed="false">Value bets<sup>$n_value</sup></button>
   <button data-t="history" aria-pressed="false">Pick history<sup>$n_hist</sup></button>
+  $props_tab
   <button data-t="key" aria-pressed="false">Key</button>
 </nav>
 <main>
@@ -817,6 +871,7 @@ $spotlight
   Most weeks the sportsbook line is close to right, so passing is the normal outcome. Each game's leans are still under All games.</p></div>
 </div>
 <div class="history hidden">$history</div>
+$props_hist
 <div class="key hidden">
   <h2>Reading the board</h2>
   <p class="lede">Each game card shows the sportsbook's numbers on the top row and the model's on the highlighted row beneath, then the model's picks. The switch at the top changes every model number on the page between the two views.</p>
@@ -1027,6 +1082,11 @@ body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,trans
 :root[data-theme="dark"] .rd .pa,:root[data-theme="dark"] .rd-key .ka{fill:var(--ca-d);stroke:var(--ca-d);background:var(--ca-d)} :root[data-theme="dark"] .rd .ph,:root[data-theme="dark"] .rd-key .kh{fill:var(--ch-d);stroke:var(--ch-d);background:var(--ch-d)}
 @media (max-width:600px){.rds{grid-template-columns:1fr}}
 .allstats{margin-top:8px} .allstats>summary{cursor:pointer;color:var(--accent);font-size:12.5px;padding:6px 0}
+.m-tabs{display:flex;gap:6px;margin:14px 0 0} .m-tabs button{border:1px solid var(--rule);background:none;color:var(--muted);font:inherit;font-size:13px;padding:6px 14px;border-radius:999px;cursor:pointer}
+.m-tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pp{display:grid;grid-template-columns:1.2fr 1.2fr 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--rule);font-size:13.5px}
+.pp-n em{font-style:normal;color:var(--muted);font-size:12px} .pp-b b{font-family:"IBM Plex Mono",monospace} .pp-x{color:var(--muted);font-size:12.5px;text-align:right}
+@media (max-width:600px){.pp{grid-template-columns:1fr;gap:2px}.pp-x{text-align:left}}
 .stats{border-top:1px solid var(--rule)}
 .stats>summary{list-style:none;cursor:pointer;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .stats>summary::-webkit-details-marker{display:none}
@@ -1130,12 +1190,14 @@ $sections
   var sections=[].slice.call(document.querySelectorAll('.sport'));
   sections.forEach(function(sec){
     var sp=sec.dataset.sport,tabs=sec.querySelectorAll('.tabs button'),board=sec.querySelector('.board'),
-        hist=sec.querySelector('.history'),key=sec.querySelector('.key'),none=sec.querySelector('.novalue');
+        hist=sec.querySelector('.history'),key=sec.querySelector('.key'),none=sec.querySelector('.novalue'),
+        props=sec.querySelector('.props-hist');
     function tab(t){
       if(![].some.call(tabs,function(b){return b.dataset.t===t}))t='all';
       tabs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.t===t?'true':'false')});
       board.classList.toggle('hidden',!(t==='all'||t==='value'||t==='top'));
       hist.classList.toggle('hidden',t!=='history'); key.classList.toggle('hidden',t!=='key');
+      if(props) props.classList.toggle('hidden',t!=='props');
       var shown=0;
       board.querySelectorAll('.game').forEach(function(g){
         var h=(t==='value'&&g.dataset.value!=='1')||(t==='top'&&g.dataset.top!=='1');g.classList.toggle('hidden',h);if(!h)shown++});
@@ -1188,6 +1250,11 @@ $sections
     });
   });
   document.getElementById('m-close').addEventListener('click',closeMx);
+  mbody.addEventListener('click',function(e){
+    var b=e.target.closest('.m-tabs button'); if(!b) return;
+    mbody.querySelectorAll('.m-tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    mbody.querySelectorAll('.m-pane').forEach(function(p){p.classList.toggle('hidden',p.dataset.p!==b.dataset.p)});
+  });
   modal.addEventListener('click',function(e){if(e.target===modal)closeMx()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMx()});
   var vb=document.querySelectorAll('#viewsw button');
