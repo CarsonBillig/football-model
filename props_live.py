@@ -4,10 +4,10 @@ Only rushing-yards unders. In the 2024-26 backtest our player projections did no
 rushing-yards unders made money on 2025-26 (561 bets, 55.8%), mostly because rushing unders hit more often
 market-wide (50.7% in 2024, 54.7% in 2025, 58.3% in 2026). This tracks whether that holds up live.
 
-Each run: grade finished picks, then pick up to 3 unders per game for the coming week from DraftKings' lines
-(ESPN feed) where our projection is below the line and our calibrated chance of the under beats an even-money line
-by 2%+ (in the backtest, requiring our projection to agree did better in 2024, the tuning season, and in 2025:
-57.1% on 317 bets in 2025-26). Picks lock at kickoff.
+Each run: grade finished picks, then list every game's top 3 rushing unders for the coming week from DraftKings'
+lines (ESPN feed), ranked by our calibrated chance of the under, which is shown as the confidence. A "pick" is an under
+where our projection is below the line; a "lean" is riskier: our projection is at or above it. Backtest, 2025-26:
+picks 57.3% (309 bets), leans 55.0% (320 bets); both about 51% in 2024. Picks lock at kickoff.
 Ledger: output/props_ledger.csv. DraftKings' prices aren't in the feed: picks assume -110.
 """
 from __future__ import annotations
@@ -23,11 +23,10 @@ import props_data
 import props_model as pm
 
 MARKET = "rush_yds"
-MIN_EDGE = 0.02             # the threshold the 2024 tuning season picked
 PER_GAME = 3
 LEDGER = Path("output/props_ledger.csv")
 COLS = ["logged_at", "season", "week", "game_id", "kickoff", "away", "home", "player_id", "player", "team", "market",
-        "side", "line", "open_line", "proj", "p_side", "edge", "actual", "result"]
+        "side", "tier", "line", "open_line", "proj", "p_side", "edge", "actual", "result"]
 
 
 def load() -> pd.DataFrame:
@@ -84,12 +83,13 @@ def make_picks(season: int, week: int) -> pd.DataFrame:
     x = x[(x["proj"] / x["line"] - 1).abs() <= pb.MAX_GAP].assign(over_odds=-110.0, under_odds=-110.0)
     x["p_side"] = 1 - calibration().predict_proba(pb.calib_features(x))[:, 1]
     x["edge"] = x["p_side"] - 0.5                       # an even -110 / -110 line: no-margin chance 50%
-    x = x[(x["edge"] >= MIN_EDGE) & (x["proj"] < x["line"])]
+    x["tier"] = np.where(x["proj"] < x["line"], "pick", "lean")
     x = x.sort_values("edge", ascending=False).groupby("game_id").head(PER_GAME)
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     return pd.DataFrame({"logged_at": now, "season": season, "week": week, "game_id": x["game_id"], "kickoff": x["kickoff"],
                          "away": x["away_team"], "home": x["home_team"], "player_id": x["player_id"],
                          "player": x["player_display_name"], "team": x["team"], "market": MARKET, "side": "under",
+                         "tier": x["tier"],
                          "line": x["line"], "open_line": x["open_line"], "proj": x["proj"].round(1),
                          "p_side": x["p_side"].round(3), "edge": x["edge"].round(3)}).reindex(columns=COLS)
 
@@ -129,7 +129,9 @@ def grade():
 def run(season: int, week: int):
     led = grade()
     g = led[led["result"].isin(["Win", "Loss"])]
-    print(f"Prop experiment (rushing-yards unders, paper trade): {int((g.result == 'Win').sum())}-{int((g.result == 'Loss').sum())} graded")
+    for tier in ("pick", "lean"):
+        t = g[g["tier"] == tier]
+        print(f"Prop experiment, rushing-yard unders ({tier}s, paper trade): {int((t.result == 'Win').sum())}-{int((t.result == 'Loss').sum())}")
     picks = make_picks(season, week)
     record(picks)
     print(f"{len(picks)} prop picks for {season} week {week} logged to {LEDGER}")

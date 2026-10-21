@@ -484,24 +484,31 @@ def matchup_view(r) -> str:
 <section class="m-sec"><h3>How they rate</h3>{radar_charts(r)}
 <details class="allstats"><summary>All stats</summary>{stats_chart(r)}</details></section>"""
     props = r.get("props")
-    if not isinstance(props, list) or not props:
+    if props is None or (not isinstance(props, list) and pd.isna(props)):
         return head + matchup
     return (head + '<div class="m-tabs"><button data-p="mx" aria-pressed="true">Matchup</button>'
             '<button data-p="pp" aria-pressed="false">Player props</button></div>'
             f'<div class="m-pane" data-p="mx">{matchup}</div><div class="m-pane hidden" data-p="pp">{props_html(props)}</div>')
 
 
-PROP_NOTE = ("Experiment, tracked as a paper trade. Rushing-yard unders where our projection is below DraftKings&#39; line. "
-             "In testing these hit 57% on 2025-26 games, mostly because rushing unders have been hitting more often "
-             "across the whole market, which may not last. DraftKings&#39; prices aren&#39;t in our data: only bet at "
-             "&minus;120 or better.")
+PROP_NOTE = ("Experiment, tracked as a paper trade: each game&#39;s top 3 rushing-yard unders against DraftKings&#39; line, "
+             "with our chance of each hitting. Pick = our projection is below the line (57% on 2025-26 games in testing); "
+             "lean = riskier, our projection is at or above it (55%). Both were about 51% in 2024. "
+             "Much of it comes from rushing unders hitting more often across the whole market, which may not last. "
+             "DraftKings&#39; prices aren&#39;t in our data: only bet at &minus;120 or better.")
 
 
 def props_html(props: list[dict]) -> str:
+    if not props:
+        return (f'<section class="m-sec"><h3>Player props</h3><p class="mnote">{PROP_NOTE}</p>'
+                '<p class="evnote">No pick for this game yet. Either DraftKings hasn&#39;t posted its rushing lines, or the '
+                'lines are for players our model can&#39;t project reliably right now (a recent role change, or a '
+                'quarterback who rarely runs). More lines post closer to kickoff and each run checks again.</p></section>')
     rows = "".join(
-        f'<div class="pp"><span class="pp-n"><b>{escape(str(p["player"]))}</b> <em>{escape(str(p["team"]))}</em></span>'
+        f'<div class="pp"><span class="pp-n"><b>{escape(str(p["player"]))}</b> <em>{escape(str(p["team"]))}</em> '
+        f'<i class="tier {p.get("tier")}">{"Pick" if p.get("tier") == "pick" else "Lean · riskier"}</i></span>'
         f'<span class="pp-b">Rushing yards <b>UNDER {p["line"]:.1f}</b></span>'
-        f'<span class="pp-x">our projection {p["proj"]:.1f} · {pct(p["p_side"])} chance</span></div>' for p in props)
+        f'<span class="pp-x"><b>{pct(p["p_side"])}</b> chance · our projection {p["proj"]:.1f}</span></div>' for p in props)
     return f'<section class="m-sec"><h3>Player props</h3><p class="mnote">{PROP_NOTE}</p>{rows}</section>'
 
 
@@ -510,14 +517,16 @@ def props_history_html(pl: pd.DataFrame) -> str:
     if g.empty:
         return ('<div class="empty"><b>No graded prop picks yet.</b><p>Prop picks lock at kickoff and are graded here after '
                 f'the games: ✓ won, ✗ lost, P push. {PROP_NOTE}</p></div>')
-    w, l = int((g.result == "Win").sum()), int((g.result == "Loss").sum())
-    units = w * (100 / 110) - l
-    out = [f'<p class="lede">Rushing-yard unders: <b>{w}-{l}</b> ({w / max(w + l, 1):.1%}) · {units:+.1f} units at &minus;110 · '
+    def tally(t):
+        w, l = int((t.result == "Win").sum()), int((t.result == "Loss").sum())
+        return f'<b>{w}-{l}</b> ({w / max(w + l, 1):.1%}, {w * (100 / 110) - l:+.1f} units at &minus;110)'
+    out = [f'<p class="lede">Rushing-yard unders: picks {tally(g[g.tier == "pick"])} · leans {tally(g[g.tier == "lean"])} · '
            f'break-even is 52.4%. {PROP_NOTE}</p>']
     for (season, week), wk in sorted(g.groupby(["season", "week"]), key=lambda x: x[0], reverse=True):
         mk = {"Win": "✓", "Loss": "✗", "Push": "P"}
         rows = "".join(f'<tr><td>{r.away} <span class=at>@</span> {r.home}</td><td>{escape(str(r.player))}</td>'
-                       f'<td>Under {r.line:.1f}</td><td class=n>{r.actual:.0f}</td><td>{mk[r.result]}</td></tr>'
+                       f'<td>Under {r.line:.1f} <span class="tier {r.tier}">{"pick" if r.tier == "pick" else "lean"}</span></td>'
+                       f'<td class=n>{r.actual:.0f}</td><td>{mk[r.result]}</td></tr>'
                        for r in wk.sort_values(["kickoff", "player"]).itertuples())
         ww, ll = int((wk.result == "Win").sum()), int((wk.result == "Loss").sum())
         out.append(f'<section class="wk"><header><h3>Week {int(week)} <span>{int(season)}</span></h3><p>{ww}-{ll}</p></header>'
@@ -807,7 +816,8 @@ def section(sport: str, cfg: dict) -> str | None:
         import props_live
         pl = props_live.load()
         cur_picks = pl[(pl["season"] == season) & (pl["week"] == week)]
-        wk["props"] = wk["game_id"].map({gid: g.to_dict("records") for gid, g in cur_picks.groupby("game_id")})
+        by_game = {gid: g.sort_values("p_side", ascending=False).to_dict("records") for gid, g in cur_picks.groupby("game_id")}
+        wk["props"] = [by_game.get(gid, []) for gid in wk["game_id"]]       # every NFL game gets the tab
         n_props = int(pl["result"].isin(["Win", "Loss", "Push"]).sum())
         props_tab = f'<button data-t="props" aria-pressed="false">Prop history<sup>{n_props}</sup></button>'
         props_hist = f'<div class="props-hist hidden">{props_history_html(pl)}</div>'
@@ -1085,7 +1095,9 @@ body[data-view="mod"] .cell.mod{background:color-mix(in srgb,var(--ink) 5%,trans
 .m-tabs{display:flex;gap:6px;margin:14px 0 0} .m-tabs button{border:1px solid var(--rule);background:none;color:var(--muted);font:inherit;font-size:13px;padding:6px 14px;border-radius:999px;cursor:pointer}
 .m-tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 .pp{display:grid;grid-template-columns:1.2fr 1.2fr 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--rule);font-size:13.5px}
-.pp-n em{font-style:normal;color:var(--muted);font-size:12px} .pp-b b{font-family:"IBM Plex Mono",monospace} .pp-x{color:var(--muted);font-size:12.5px;text-align:right}
+.pp-n em{font-style:normal;color:var(--muted);font-size:12px}
+.tier{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.06em;border-radius:4px;padding:1px 5px;margin-left:4px;border:1px solid var(--rule);color:var(--muted)}
+.tier.pick{color:var(--accent);border-color:var(--accent)} .pp-b b{font-family:"IBM Plex Mono",monospace} .pp-x{color:var(--muted);font-size:12.5px;text-align:right}
 @media (max-width:600px){.pp{grid-template-columns:1fr;gap:2px}.pp-x{text-align:left}}
 .stats{border-top:1px solid var(--rule)}
 .stats>summary{list-style:none;cursor:pointer;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}

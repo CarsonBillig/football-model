@@ -19,6 +19,7 @@ Every idea tested, with the result and the decision, so nothing failed gets trie
 | 2026-10-13 | Market bias: bet against brand-name teams | college 47.2% / 52.3%; NFL 46.1% / 49.0% | no edge |
 | 2026-10-21 | NFL: inexperienced QBs start from backup level (ramp over 500 dropbacks) | holdout QB-change error 14.188 -> 14.093, but holdout ATS 49.8% -> 49.3% and tuning-years error slightly worse | not shipped |
 | 2026-10-21 | NFL player props (pass/rush/rec yards, receptions) vs ESPN BET / DraftKings lines 2024-26 | book lines more accurate than our projections in every market; passing yards looked good on 2024 but failed 2025-26 (open +1.3% on 217 bets, later -8.5% on 179); top 3 per game about break-even (858 bets, -1.1% / +0.8%); rushing unders passed (561 bets, 55.8%) but all unders, tracking a market-wide trend (unders hit 50.7% / 54.7% / 58.3% in 2024/25/26); requiring our projection below the line: 57.1% on 317 bets in 2025-26 | rushing unders shipped as a labeled paper trade only |
+| 2026-10-21 | Props: every game's top 3 rushing unders, labeled pick (projection below line) or lean (at/above) | 2025-26: picks 57.3% on 309 bets (+7.9%), leans 55.0% on 320 (+4.0%); both about 51% in 2024; covers every game with usable lines | shipped as the paper trade, confidence shown per prop |
 
 ## Not finished
 
