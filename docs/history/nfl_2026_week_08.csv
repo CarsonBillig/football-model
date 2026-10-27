@@ -1,0 +1,15 @@
+homeTeam,awayTeam,predicted,side,sideLine,homeScore,awayScore,margin,atsWin,valueBet,winnerPick,winnerProb,winnerResult,totalPick,totalResult,modelOnlyPredicted,modelOnlySide,modelOnlyLine,modelOnlyAtsWin,mlConfidence,spreadConfidence,totalConfidence,modelOnlyMlTested,modelOnlySpreadTested,modelOnlyTotalTested,closingLineValue,kickoff
+Green Bay Packers,Carolina Panthers,4.45,Green Bay Packers,-3.5,,,,,,Green Bay Packers,63.2,,Over 47.5,,4.53,Green Bay Packers,-3.5,,63.2,50.0,51.7,62.5,50.2,49.9,,2026-10-30 00:15:00+00:00
+Dallas Cowboys,Arizona Cardinals,7.21,Dallas Cowboys,-6.0,,,,,,Dallas Cowboys,71.6,,Under 54.5,,9.29,Dallas Cowboys,-6.0,,71.6,51.1,50.4,70.9,51.3,52.2,,2026-11-01 18:00:00+00:00
+Tampa Bay Buccaneers,Atlanta Falcons,1.46,Atlanta Falcons,2.5,,,,,,Tampa Bay Buccaneers,53.3,,Under 46.5,,0.29,Atlanta Falcons,2.5,,53.3,51.4,50.4,44.5,51.3,49.9,,2026-11-01 18:00:00+00:00
+Buffalo Bills,Baltimore Ravens,3.99,Baltimore Ravens,3.5,,,,,,Buffalo Bills,61.7,,Over 53.5,,6.85,Buffalo Bills,-3.5,,61.7,51.4,50.4,61.9,51.3,49.9,,2026-11-01 18:00:00+00:00
+Pittsburgh Steelers,Cleveland Browns,4.59,Pittsburgh Steelers,-3.5,,,,,,Pittsburgh Steelers,63.6,,Under 39.5,,4.62,Pittsburgh Steelers,-3.5,,63.6,50.4,50.4,61.8,50.2,49.7,,2026-11-01 18:00:00+00:00
+Jacksonville Jaguars,Indianapolis Colts,9.18,Jacksonville Jaguars,-7.5,,,,,,Jacksonville Jaguars,77.0,,Over 46.5,,8.01,Indianapolis Colts,7.5,,77.0,50.1,50.0,77.2,51.2,49.7,,2026-11-01 18:00:00+00:00
+New York Jets,Las Vegas Raiders,0.04,New York Jets,1.5,,,,,,Las Vegas Raiders,51.5,,Over 45.5,,-0.15,New York Jets,1.5,,51.5,53.2,50.0,50.0,50.8,49.9,,2026-11-01 18:00:00+00:00
+Detroit Lions,Minnesota Vikings,3.23,Detroit Lions,-3.0,,,,,,Detroit Lions,59.2,,Over 46.5,,2.19,Minnesota Vikings,3.0,,59.2,50.1,50.0,60.5,51.2,49.8,,2026-11-01 18:00:00+00:00
+Cincinnati Bengals,Tennessee Titans,11.28,Cincinnati Bengals,-10.0,,,,,,Cincinnati Bengals,82.1,,Over 46.5,,12.1,Cincinnati Bengals,-10.0,,82.1,50.7,51.1,83.1,51.2,49.9,,2026-11-01 18:00:00+00:00
+Los Angeles Rams,Los Angeles Chargers,8.08,Los Angeles Rams,-6.5,,,,,,Los Angeles Rams,74.1,,Under 44.5,,7.88,Los Angeles Rams,-6.5,,74.1,51.7,51.7,71.6,50.2,49.8,,2026-11-01 21:05:00+00:00
+Denver Broncos,Kansas City Chiefs,-0.92,Denver Broncos,1.5,,,,,,Kansas City Chiefs,54.7,,Under 41.5,,0.18,Denver Broncos,1.5,,54.7,50.3,51.1,53.6,51.2,49.7,,2026-11-01 21:25:00+00:00
+Miami Dolphins,New England Patriots,-8.73,Miami Dolphins,7.5,,,,,,New England Patriots,78.1,,Under 44.5,,-8.01,Miami Dolphins,7.5,,78.1,51.3,50.4,77.1,51.2,49.8,,2026-11-01 21:25:00+00:00
+Washington Commanders,Philadelphia Eagles,4.77,Philadelphia Eagles,4.5,,,,,,Washington Commanders,64.2,,Over 40.5,,0.15,Philadelphia Eagles,4.5,,64.2,51.7,51.1,34.4,51.3,49.9,,2026-11-02 01:20:00+00:00
+Seattle Seahawks,Chicago Bears,3.95,Chicago Bears,3.5,,,,,,Seattle Seahawks,61.6,,Over 46.5,,4.84,Seattle Seahawks,-3.5,,61.6,51.5,50.0,60.4,50.2,49.8,,2026-11-03 01:15:00+00:00
