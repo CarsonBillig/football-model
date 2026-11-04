@@ -22,6 +22,8 @@ Every change, test and answer is judged by that.
   hold out 2023+; college: hold out 2024+; NHL: test 2022+).
 - **Ship only real gains:** a change goes in only if it beats the current model on the holdout, on the same games.
   Otherwise revert it.
+- **Judge the picks we bet, not just the model's error.** Every test's preset rule includes the record of the site's
+  (market-adjusted) picks on the same games; lower error alone isn't a gain (NFL special teams, 2026-11-04).
 - **Decide the metric and threshold before running the test.** Never pick a threshold after seeing the results.
 - **Keep a record of what failed**, so it isn't tried again by accident (see git history and backtest reports).
 

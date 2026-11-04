@@ -23,10 +23,10 @@ Every idea tested, with the result and the decision, so nothing failed gets trie
 | 2026-11-04 | Line moved 2+ pts against our side since the open (skip those picks) | NFL: those picks 47.2% (2024, 36 games) and 43.7% (2025-26, 71); dropping them 48.6% -> 50.0% on 2025-26. College: 44.5% (2021-23) but 51.0% (2024-26) | NFL: use as guidance when giving picks (small sample, no site flag); college: no edge |
 | 2026-11-04 | College: do picks do better in low-attention games (weeknight non-power-conference, FCS)? | low-attention 50.4% vs 50.5% (2016-23), 48.4% vs 52.6% (2024-26) | no edge |
 | 2026-11-04 | College: rest days, bye weeks, away travel distance, time zones crossed | holdout 2024-26 error vs Vegas +0.830 -> +0.813, ATS 51.7% -> 51.8%; 2016-23 error +0.774 -> +0.769; full backtest ATS vs close 50.8% -> 51.0%, model-vs-close information t 1.9 -> 2.1 | shipped |
+| 2026-11-04 | NFL: turnover luck (fumbles lost vs the league's 43.7% recovery share; INTs vs 19.3% of defended passes) | holdout 2023+ error vs Vegas +0.338 -> +0.338 (fumbles) / +0.345 (fumbles + INTs); 2018-22 slightly worse | not shipped (market and ratings already discount it) |
+| 2026-11-04 | College: havoc rate (TFLs, sacks, forced fumbles, INTs, breakups per play; API data usable from 2016) | holdout 2024-26 error vs Vegas +0.813 -> +0.813; 2016-23 +0.769 -> +0.774 | not shipped |
+| 2026-11-04 | NFL: special teams, net EPA on punts and kickoffs (field goals and extra points too noisy: all special teams made 2018-22 slightly worse) | passed the preset test: holdout 2023+ error vs Vegas +0.338 -> +0.320, model-only ATS 49.2% -> 49.6%; 2018-22 +0.169 -> +0.159. But the site's market-adjusted picks got worse on the same games: 2018-22 691-587 (54.1%) -> 675-603 (52.8%), 2023+ 453-459 (49.7%) -> 450-462 (49.3%) | not shipped (no gain in the picks we bet) |
 
 ## Queued
 
-- NFL and college: turnover luck (fumble recoveries, interception luck)
-- NFL: special teams efficiency
-- College: havoc rate
 - College: detect quarterback changes from who threw the passes
