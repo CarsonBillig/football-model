@@ -201,6 +201,22 @@ def incoming_production(year: int) -> pd.DataFrame:
     return out.reset_index().rename(columns={"destination": "team"})
 
 
+def team_locations() -> pd.DataFrame:
+    """Every team's home stadium coordinates and time zone (one API call, cached)."""
+    f = CACHE / "team_locations.parquet"
+    if f.exists():
+        return pd.read_parquet(f)
+    try:
+        rows = api.get("/teams")
+    except Exception:
+        return pd.DataFrame(columns=["team", "lat", "lon", "tz"])
+    loc = pd.DataFrame([{"team": t["school"], "classification": t.get("classification"),
+                         "lat": (t.get("location") or {}).get("latitude"), "lon": (t.get("location") or {}).get("longitude"),
+                         "tz": (t.get("location") or {}).get("timezone")} for t in rows])
+    loc.to_parquet(f)
+    return loc
+
+
 def teams(year: int) -> pd.DataFrame:
     """FBS team info for the page: abbreviation, colors, logos."""
     def fetch():

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
@@ -30,7 +31,8 @@ FIRST_SEASON, FIRST_TEST_SEASON = 2014, 2016
 FEATURES = {
     "margin": ["res_prior", "mkt_prior", "ppa_prior", "sr_prior", "talent_diff", "returning_diff",
                "talent_early", "returning_early", "fcs_diff", "is_neutral",
-               "ret_pass_early", "portal_early", "qb_in_early", "coach_early", "in_ppa_early"],
+               "ret_pass_early", "portal_early", "qb_in_early", "coach_early", "in_ppa_early",
+               "rest_diff", "bye_diff", "away_travel", "tz_shift"],
     "total": ["res_total_prior", "mkt_total_prior", "ppa_total_prior", "plays_prior", "is_neutral"],
 }
 
@@ -89,6 +91,41 @@ def build_features(g: pd.DataFrame, results: pd.DataFrame | None = None) -> pd.D
             g[f"{side}_in_ppa"] = np.nan
     g["in_ppa_early"] = (g["home_in_ppa"].fillna(0) - g["away_in_ppa"].fillna(0)) * early
     g["is_neutral"] = (g["location"] == "Neutral").astype(int)
+    return add_rest_travel(g)
+
+
+def add_rest_travel(g: pd.DataFrame) -> pd.DataFrame:
+    """Days of rest (capped 4-14; a team's first game counts as rested), bye weeks (12+ days), and for the away team
+    the distance travelled (thousands of km) and time zones crossed. Neutral sites count as no travel."""
+    t = pd.to_datetime(g["kickoff"], utc=True)
+    long = pd.concat([pd.DataFrame({"game_id": g["game_id"], "season": g["season"], "t": t, "team": g[s]})
+                      for s in ("home_team", "away_team")]).sort_values("t")
+    long["rest"] = long.groupby(["team", "season"])["t"].diff().dt.total_seconds() / 86400
+    rest = long.set_index(["game_id", "team"])["rest"]
+    cap = lambda s: pd.Series(s, index=g.index, dtype=float).fillna(14).clip(4, 14)
+    hr = cap([rest.get((i, x)) for i, x in zip(g["game_id"], g["home_team"])])
+    ar = cap([rest.get((i, x)) for i, x in zip(g["game_id"], g["away_team"])])
+    g["rest_diff"] = hr - ar
+    g["bye_diff"] = (hr >= 12).astype(int) - (ar >= 12).astype(int)
+    loc = cfb_data.team_locations().dropna(subset=["lat"]).drop_duplicates("team").set_index("team")
+
+    def dist(a, b):
+        if a not in loc.index or b not in loc.index:
+            return 0.0
+        la1, lo1, la2, lo2 = map(np.radians, (loc.at[a, "lat"], loc.at[a, "lon"], loc.at[b, "lat"], loc.at[b, "lon"]))
+        h = np.sin((la2 - la1) / 2) ** 2 + np.cos(la1) * np.cos(la2) * np.sin((lo2 - lo1) / 2) ** 2
+        return 6371 * 2 * np.arcsin(np.sqrt(h)) / 1000
+
+    def offset(team, when):
+        tz = loc.at[team, "tz"] if team in loc.index else None
+        return when.astimezone(ZoneInfo(tz)).utcoffset().total_seconds() / 3600 if isinstance(tz, str) else None
+    neutral = g["location"] == "Neutral"
+    g["away_travel"] = [0.0 if n else dist(a, h) for n, a, h in zip(neutral, g["away_team"], g["home_team"])]
+    shifts = []
+    for n, h, a, when in zip(neutral, g["home_team"], g["away_team"], t):
+        oh, oa = (None, None) if n or pd.isna(when) else (offset(h, when), offset(a, when))
+        shifts.append(abs(oh - oa) if oh is not None and oa is not None else 0.0)
+    g["tz_shift"] = shifts
     return g
 
 
